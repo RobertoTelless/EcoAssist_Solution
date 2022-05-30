@@ -59,9 +59,9 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public USUARIO GetUserById(Int32 id)
+        public USUARIO_SUGESTAO GetUserById(Int32 id)
         {
-            USUARIO item = _baseService.GetUserById(id);
+            USUARIO_SUGESTAO item = _baseService.GetUserById(id);
             return item;
         }
 
@@ -88,7 +88,7 @@ namespace ApplicationServices.Services
             return _baseService.GetAllPeriodicidade();
         }
 
-        public Int32 ExecuteFilter(Int32? tipoId, String titulo, DateTime? data, Int32 encerradas, Int32 prioridade, Int32? usuario, Int32 idAss, out List<TAREFA> objeto)
+        public Int32 ExecuteFilter(Int32? tipoId, String titulo, DateTime? data, Int32 encerradas, Int32 prioridade, Int32? usuario, out List<TAREFA> objeto)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(tipoId, titulo, data, encerradas, prioridade, usuario, idAss);
+                objeto = _baseService.ExecuteFilter(tipoId, titulo, data, encerradas, prioridade, usuario);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -109,7 +109,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateCreate(TAREFA item, USUARIO usuario)
+        public Int32 ValidateCreate(TAREFA item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -118,13 +118,9 @@ namespace ApplicationServices.Services
                 {
                     item.TIPO_TAREFA = null;
                 }
-                if (item.USUARIO != null)
+                if (item.USUARIO_SUGESTAO != null)
                 {
-                    item.USUARIO = null;
-                }
-                if (item.ASSINANTE != null)
-                {
-                    item.ASSINANTE = null;
+                    item.USUARIO_SUGESTAO = null;
                 }
                 if (item.PERIODICIDADE_TAREFA != null)
                 {
@@ -132,7 +128,7 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica existencia prévia
-                if (_baseService.CheckExist(item, usuario.ASSI_CD_ID) != null)
+                if (_baseService.CheckExist(item, usuario.USUA_CD_ID) != null)
                 {
                     return 1;
                 }
@@ -148,7 +144,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddTARE",
                     LOG_IN_ATIVO = 1,
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<TAREFA>(item)
@@ -168,7 +163,7 @@ namespace ApplicationServices.Services
         }
 
 
-        public Int32 ValidateEdit(TAREFA item, TAREFA itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(TAREFA item, TAREFA itemAntes, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -187,7 +182,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditTARE",
                     LOG_IN_ATIVO = 1,
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<TAREFA>(item),
@@ -229,7 +223,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(TAREFA item, USUARIO usuario)
+        public Int32 ValidateDelete(TAREFA item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -254,9 +248,9 @@ namespace ApplicationServices.Services
                 {
                     item.TIPO_TAREFA = null;
                 }
-                if (item.USUARIO != null)
+                if (item.USUARIO_SUGESTAO != null)
                 {
-                    item.USUARIO = null;
+                    item.USUARIO_SUGESTAO = null;
                 }
 
                 // Monta Log
@@ -264,7 +258,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelTARE",
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<TAREFA>(item)
@@ -280,7 +273,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(TAREFA item, USUARIO usuario)
+        public Int32 ValidateReativar(TAREFA item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -308,9 +301,9 @@ namespace ApplicationServices.Services
                 {
                     item.TIPO_TAREFA = null;
                 }
-                if (item.USUARIO != null)
+                if (item.USUARIO_SUGESTAO != null)
                 {
-                    item.USUARIO = null;
+                    item.USUARIO_SUGESTAO = null;
                 }
 
                 // Monta Log
@@ -318,7 +311,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatTARE",
                     //LOG_TX_REGISTRO = Serialization.SerializeJSON<TAREFA>(item)

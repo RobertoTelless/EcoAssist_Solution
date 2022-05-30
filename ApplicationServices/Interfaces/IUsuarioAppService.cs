@@ -7,41 +7,41 @@ using EntitiesServices.Model;
 
 namespace ApplicationServices.Interfaces
 {
-    public interface IUsuarioAppService : IAppServiceBase<USUARIO>
+    public interface IUsuarioAppService : IAppServiceBase<USUARIO_SUGESTAO>
     {
-        USUARIO GetByEmail(String email, Int32 idAss);
-        USUARIO GetByLogin(String login, Int32 idAss);
-        List<USUARIO> GetAllUsuariosAdm(Int32 idAss);
-        USUARIO GetItemById(Int32 id);
-        List<USUARIO> GetAllUsuarios(Int32 idAss);
-        List<USUARIO> GetAllItens(Int32 idAss);
-        List<USUARIO> GetAllItensBloqueados(Int32 idAss);
-        List<USUARIO> GetAllItensAcessoHoje(Int32 idAss);
-        List<USUARIO> GetAllTecnicos(Int32 idAss);
+        USUARIO_SUGESTAO GetByEmail(String email);
+        USUARIO_SUGESTAO GetByLogin(String login);
+        List<USUARIO_SUGESTAO> GetAllUsuariosAdm();
+        USUARIO_SUGESTAO GetItemById(Int32 id);
+        List<USUARIO_SUGESTAO> GetAllUsuarios();
+        List<USUARIO_SUGESTAO> GetAllItens();
+        List<USUARIO_SUGESTAO> GetAllItensBloqueados();
+        List<USUARIO_SUGESTAO> GetAllItensAcessoHoje();
+        List<USUARIO_SUGESTAO> GetAllTecnicos();
         USUARIO_ANEXO GetAnexoById(Int32 id);
-        List<NOTIFICACAO> GetAllItensUser(Int32 id, Int32 idAss);
-        List<NOTIFICACAO> GetNotificacaoNovas(Int32 id, Int32 idAss);
+        List<NOTIFICACAO> GetAllItensUser(Int32 id);
+        List<NOTIFICACAO> GetNotificacaoNovas(Int32 id);
 
-        Int32 ValidateCreate(USUARIO usuario, USUARIO usuarioLogado);
-        Int32 ValidateCreateAssinante(USUARIO usuario, USUARIO usuarioLogado);
-        Int32 ValidateEdit(USUARIO usuario, USUARIO usuarioAntes, USUARIO usuarioLogado);
-        Int32 ValidateEdit(USUARIO usuario, USUARIO usuarioLogado);
-        Int32 ValidateLogin(String email, String senha, out USUARIO usuario);
-        Int32 ValidateDelete(USUARIO usuario, USUARIO usuarioLogado);
-        Int32 ValidateBloqueio(USUARIO usuario, USUARIO usuarioLogado);
-        Int32 ValidateDesbloqueio(USUARIO usuario, USUARIO usuarioLogado);
-        Int32 ValidateChangePassword(USUARIO usuario);
-        Int32 ValidateReativar(USUARIO usuario, USUARIO usuarioLogado);
+        Int32 ValidateCreate(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado);
+        Int32 ValidateCreateAssinante(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado);
+        Int32 ValidateEdit(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioAntes, USUARIO_SUGESTAO usuarioLogado);
+        Int32 ValidateEdit(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado);
+        Int32 ValidateLogin(String email, String senha, out USUARIO_SUGESTAO usuario);
+        Int32 ValidateDelete(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado);
+        Int32 ValidateBloqueio(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado);
+        Int32 ValidateDesbloqueio(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado);
+        Int32 ValidateChangePassword(USUARIO_SUGESTAO usuario);
+        Int32 ValidateReativar(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado);
 
         Int32 GenerateNewPassword(String email);
         List<PERFIL> GetAllPerfis();
-        Int32 ExecuteFilter(Int32? perfilId, Int32? cargoId, String nome, String login, String email, Int32 idAss, out List<USUARIO> objeto);
-        USUARIO GetAdministrador(Int32 idAss);
-        USUARIO GetComprador(Int32 idAss);
-        USUARIO GetAprovador(Int32 idAss);
-        USUARIO GetTecnico(Int32 idAss);
-        List<CARGO> GetAllCargos(Int32 idAss);
-        List<USUARIO> GetAllSistema();
+        Int32 ExecuteFilter(Int32? perfilId, Int32? cargoId, String nome, String login, String email, out List<USUARIO_SUGESTAO> objeto);
+        USUARIO_SUGESTAO GetAdministrador();
+        USUARIO_SUGESTAO GetComprador();
+        USUARIO_SUGESTAO GetAprovador();
+        USUARIO_SUGESTAO GetTecnico();
+        List<CARGO> GetAllCargos();
+        List<USUARIO_SUGESTAO> GetAllSistema();
 
     }
 }

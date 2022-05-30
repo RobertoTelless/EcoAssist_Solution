@@ -11,7 +11,6 @@ namespace ERP_CRM_Solution.ViewModels
     {
         [Key]
         public int NOTI_CD_ID { get; set; }
-        public int ASSI_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo DESTINO obrigatorio")]
         public int USUA_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo CATEGORIA obrigatorio")]
@@ -35,10 +34,9 @@ namespace ERP_CRM_Solution.ViewModels
         public Nullable<int> NOTI_IN_ORIGEM { get; set; }
         public Nullable<int> NOTI_IN_NIVEL { get; set; }
 
-        public virtual ASSINANTE ASSINANTE { get; set; }
         public virtual CATEGORIA_NOTIFICACAO CATEGORIA_NOTIFICACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTIFICACAO_ANEXO> NOTIFICACAO_ANEXO { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual USUARIO_SUGESTAO USUARIO { get; set; }
     }
 }

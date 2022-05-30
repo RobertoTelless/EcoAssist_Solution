@@ -21,6 +21,6 @@ namespace ERP_CRM_Solution.ViewModels
         public System.DateTime TAAC_DT_ACOMPANHAMENTO { get; set; }
 
         public virtual TAREFA TAREFA { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual USUARIO_SUGESTAO USUARIO { get; set; }
     }
 }

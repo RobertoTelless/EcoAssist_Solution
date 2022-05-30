@@ -21,15 +21,15 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<NOTICIA> GetAllItens(Int32 idAss)
+        public List<NOTICIA> GetAllItens()
         {
-            List<NOTICIA> lista = _baseService.GetAllItens(idAss);
+            List<NOTICIA> lista = _baseService.GetAllItens();
             return lista;
         }
 
-        public List<NOTICIA> GetAllItensAdm(Int32 idAss)
+        public List<NOTICIA> GetAllItensAdm()
         {
-            List<NOTICIA> lista = _baseService.GetAllItensAdm(idAss);
+            List<NOTICIA> lista = _baseService.GetAllItensAdm();
             return lista;
         }
 
@@ -39,9 +39,9 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public List<NOTICIA> GetAllItensValidos(Int32 idAss)
+        public List<NOTICIA> GetAllItensValidos()
         {
-            List<NOTICIA> lista = _baseService.GetAllItensValidos(idAss);
+            List<NOTICIA> lista = _baseService.GetAllItensValidos();
             return lista;
         }
 
@@ -51,7 +51,7 @@ namespace ApplicationServices.Services
             return lista;
         }
 
-        public Int32 ExecuteFilter(String titulo, String autor, DateTime? data, String texto, String link, Int32 idAss, out List<NOTICIA> objeto)
+        public Int32 ExecuteFilter(String titulo, String autor, DateTime? data, String texto, String link, out List<NOTICIA> objeto)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(titulo, autor, data, texto, link, idAss);
+                objeto = _baseService.ExecuteFilter(titulo, autor, data, texto, link);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -72,7 +72,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateCreate(NOTICIA item, USUARIO usuario)
+        public Int32 ValidateCreate(NOTICIA item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -86,7 +86,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddNOTI",
                     LOG_IN_ATIVO = 1,
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTICIA>(item)
@@ -102,7 +101,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(NOTICIA item, NOTICIA itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(NOTICIA item, NOTICIA itemAntes, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -111,7 +110,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditNOTI",
                     LOG_IN_ATIVO = 1,
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTICIA>(item),
@@ -142,7 +140,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(NOTICIA item, USUARIO usuario)
+        public Int32 ValidateDelete(NOTICIA item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -156,7 +154,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelNOTI",
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTICIA>(item)
@@ -171,7 +168,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(NOTICIA item, USUARIO usuario)
+        public Int32 ValidateReativar(NOTICIA item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -185,7 +182,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatNOTI",
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTICIA>(item)

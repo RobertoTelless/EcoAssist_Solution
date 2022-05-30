@@ -21,7 +21,7 @@ namespace ERP_CRM_Solution.ViewModels
         public int NOCO_IN_ATIVO { get; set; }
 
         public virtual NOTICIA NOTICIA { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual USUARIO_SUGESTAO USUARIO { get; set; }
 
     }
 }

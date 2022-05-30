@@ -18,7 +18,7 @@ namespace ERP_CRM_Solution.ViewModels
         public string LOG_TX_REGISTRO_ANTES { get; set; }
         public int LOG_IN_ATIVO { get; set; }
 
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual USUARIO_SUGESTAO USUARIO { get; set; }
 
     }
 }

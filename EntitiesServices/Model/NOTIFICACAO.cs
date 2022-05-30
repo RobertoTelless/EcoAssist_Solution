@@ -30,6 +30,8 @@ namespace EntitiesServices.Model
         public Nullable<int> NOTI_IN_VISTA { get; set; }
         public Nullable<System.DateTime> NOTI_DT_VISTA { get; set; }
         public int NOTI_IN_ATIVO { get; set; }
+        public Nullable<int> NOTI_IN_STATUS { get; set; }
+        public Nullable<int> NOTI_IN_NIVEL { get; set; }
     
         public virtual CATEGORIA_NOTIFICACAO CATEGORIA_NOTIFICACAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

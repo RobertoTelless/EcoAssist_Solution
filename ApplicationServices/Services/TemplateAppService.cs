@@ -21,21 +21,21 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<TEMPLATE> GetAllItens(Int32 idAss)
+        public List<TEMPLATE> GetAllItens()
         {
-            List<TEMPLATE> lista = _baseService.GetAllItens(idAss);
+            List<TEMPLATE> lista = _baseService.GetAllItens();
             return lista;
         }
 
-        public TEMPLATE CheckExist(TEMPLATE conta, Int32 idAss)
+        public TEMPLATE CheckExist(TEMPLATE conta)
         {
-            TEMPLATE item = _baseService.CheckExist(conta, idAss);
+            TEMPLATE item = _baseService.CheckExist(conta);
             return item;
         }
 
-        public List<TEMPLATE> GetAllItensAdm(Int32 idAss)
+        public List<TEMPLATE> GetAllItensAdm()
         {
-            List<TEMPLATE> lista = _baseService.GetAllItensAdm(idAss);
+            List<TEMPLATE> lista = _baseService.GetAllItensAdm();
             return lista;
         }
 
@@ -51,7 +51,7 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public Int32 ExecuteFilter(String sigla, String nome, String conteudo, Int32 idAss, out List<TEMPLATE> objeto)
+        public Int32 ExecuteFilter(String sigla, String nome, String conteudo, out List<TEMPLATE> objeto)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(sigla, nome, conteudo, idAss);
+                objeto = _baseService.ExecuteFilter(sigla, nome, conteudo);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -72,7 +72,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateCreate(TEMPLATE item, USUARIO usuario)
+        public Int32 ValidateCreate(TEMPLATE item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -90,7 +90,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddTEMP",
                     LOG_IN_ATIVO = 1,
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE>(item)
@@ -106,7 +105,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(TEMPLATE item, TEMPLATE itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(TEMPLATE item, TEMPLATE itemAntes, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -115,7 +114,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditTEMP",
                     LOG_IN_ATIVO = 1,
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE>(item),
@@ -131,15 +129,15 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(TEMPLATE item, USUARIO usuario)
+        public Int32 ValidateDelete(TEMPLATE item, USUARIO_SUGESTAO usuario)
         {
             try
             {
                 // Checa integridade
-                if (item.MENSAGENS.Count > 0)
-                {
-                    return 1;
-                }
+                //if (item.MENSAGENS.Count > 0)
+                //{
+                //    return 1;
+                //}
 
                 // Acerta campos
                 item.TEMP_IN_ATIVO = 0;
@@ -149,7 +147,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelTEMP",
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE>(item)
@@ -164,7 +161,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(TEMPLATE item, USUARIO usuario)
+        public Int32 ValidateReativar(TEMPLATE item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -178,7 +175,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatTEMP",
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<TEMPLATE>(item)

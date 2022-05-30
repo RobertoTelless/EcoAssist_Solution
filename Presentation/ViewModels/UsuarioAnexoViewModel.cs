@@ -17,7 +17,7 @@ namespace ERP_CRM_Solution.ViewModels
         public int USAN_IN_ATIVO { get; set; }
         public string USAN_AQ_ARQUIVO { get; set; }
 
-        public virtual USUARIO USUARIO { get; set; }
+        public virtual USUARIO_SUGESTAO USUARIO { get; set; }
 
     }
 }

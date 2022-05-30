@@ -9,19 +9,19 @@ namespace ApplicationServices.Interfaces
 {
     public interface IAgendaAppService : IAppServiceBase<AGENDA>
     {
-        Int32 ValidateCreate(AGENDA perfil, USUARIO usuario);
-        Int32 ValidateEdit(AGENDA perfil, AGENDA perfilAntes, USUARIO usuario);
-        Int32 ValidateDelete(AGENDA perfil, USUARIO usuario);
-        Int32 ValidateReativar(AGENDA perfil, USUARIO usuario);
+        Int32 ValidateCreate(AGENDA perfil, USUARIO_SUGESTAO usuario);
+        Int32 ValidateEdit(AGENDA perfil, AGENDA perfilAntes, USUARIO_SUGESTAO usuario);
+        Int32 ValidateDelete(AGENDA perfil, USUARIO_SUGESTAO usuario);
+        Int32 ValidateReativar(AGENDA perfil, USUARIO_SUGESTAO usuario);
 
-        List<CATEGORIA_AGENDA> GetAllTipos(Int32 idAss);
+        List<CATEGORIA_AGENDA> GetAllTipos();
         AGENDA_ANEXO GetAnexoById(Int32 id);
 
-        List<AGENDA> GetByDate(DateTime data, Int32 idAss);
-        List<AGENDA> GetByUser(Int32 id, Int32 idAss);
-        List<AGENDA> GetAllItens(Int32 idAss);
-        List<AGENDA> GetAllItensAdm(Int32 idAss);
+        List<AGENDA> GetByDate(DateTime data);
+        List<AGENDA> GetByUser(Int32 id);
+        List<AGENDA> GetAllItens();
+        List<AGENDA> GetAllItensAdm();
         AGENDA GetItemById(Int32 id);
-        Int32 ExecuteFilter(DateTime? data, Int32? cat, String titulo, String descricao, Int32 idAss, Int32 idUser, Int32 corp, out List<AGENDA> objeto);
+        Int32 ExecuteFilter(DateTime? data, Int32? cat, String titulo, String descricao, Int32 idUser, Int32 corp, out List<AGENDA> objeto);
     }
 }

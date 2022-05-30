@@ -21,15 +21,15 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<CATEGORIA_TELEFONE> GetAllItens(Int32 idAss)
+        public List<CATEGORIA_TELEFONE> GetAllItens()
         {
-            List<CATEGORIA_TELEFONE> lista = _baseService.GetAllItens(idAss);
+            List<CATEGORIA_TELEFONE> lista = _baseService.GetAllItens();
             return lista;
         }
 
-        public List<CATEGORIA_TELEFONE> GetAllItensAdm(Int32 idAss)
+        public List<CATEGORIA_TELEFONE> GetAllItensAdm()
         {
-            List<CATEGORIA_TELEFONE> lista = _baseService.GetAllItensAdm(idAss);
+            List<CATEGORIA_TELEFONE> lista = _baseService.GetAllItensAdm();
             return lista;
         }
 
@@ -39,7 +39,7 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public Int32 ValidateCreate(CATEGORIA_TELEFONE item, USUARIO usuario)
+        public Int32 ValidateCreate(CATEGORIA_TELEFONE item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -50,7 +50,6 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddCATE",
                     LOG_IN_ATIVO = 1,
@@ -68,7 +67,7 @@ namespace ApplicationServices.Services
         }
 
 
-        public Int32 ValidateEdit(CATEGORIA_TELEFONE item, CATEGORIA_TELEFONE itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(CATEGORIA_TELEFONE item, CATEGORIA_TELEFONE itemAntes, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -76,7 +75,6 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "EditCATE",
                     LOG_IN_ATIVO = 1,
@@ -93,7 +91,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(CATEGORIA_TELEFONE item, USUARIO usuario)
+        public Int32 ValidateDelete(CATEGORIA_TELEFONE item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -110,7 +108,6 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelCATE",
@@ -126,7 +123,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(CATEGORIA_TELEFONE item, USUARIO usuario)
+        public Int32 ValidateReativar(CATEGORIA_TELEFONE item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -139,7 +136,6 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatCATE",

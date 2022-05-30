@@ -21,9 +21,9 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<TELEFONE> GetAllItens(Int32 idAss)
+        public List<TELEFONE> GetAllItens()
         {
-            List<TELEFONE> lista = _baseService.GetAllItens(idAss);
+            List<TELEFONE> lista = _baseService.GetAllItens();
             return lista;
         }
 
@@ -38,9 +38,9 @@ namespace ApplicationServices.Services
             return _baseService.GetUFbySigla(sigla);
         }
 
-        public List<TELEFONE> GetAllItensAdm(Int32 idAss)
+        public List<TELEFONE> GetAllItensAdm()
         {
-            List<TELEFONE> lista = _baseService.GetAllItensAdm(idAss);
+            List<TELEFONE> lista = _baseService.GetAllItensAdm();
             return lista;
         }
 
@@ -50,19 +50,19 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public TELEFONE CheckExist(TELEFONE conta, Int32 idAss)
+        public TELEFONE CheckExist(TELEFONE conta)
         {
-            TELEFONE item = _baseService.CheckExist(conta, idAss);
+            TELEFONE item = _baseService.CheckExist(conta);
             return item;
         }
 
-        public List<CATEGORIA_TELEFONE> GetAllTipos(Int32 idAss)
+        public List<CATEGORIA_TELEFONE> GetAllTipos()
         {
-            List<CATEGORIA_TELEFONE> lista = _baseService.GetAllTipos(idAss);
+            List<CATEGORIA_TELEFONE> lista = _baseService.GetAllTipos();
             return lista;
         }
 
-        public Int32 ExecuteFilter(Int32? catId, String nome, String telefone, String cidade, Int32? uf, String celular, String email, Int32 idAss, out List<TELEFONE> objeto)
+        public Int32 ExecuteFilter(Int32? catId, String nome, String telefone, String cidade, Int32? uf, String celular, String email, out List<TELEFONE> objeto)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(catId, nome, telefone, cidade, uf, celular, email, idAss);
+                objeto = _baseService.ExecuteFilter(catId, nome, telefone, cidade, uf, celular, email);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -83,7 +83,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateCreate(TELEFONE item, USUARIO usuario)
+        public Int32 ValidateCreate(TELEFONE item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -95,7 +95,6 @@ namespace ApplicationServices.Services
 
                 // Completa objeto
                 item.TELE_IN_ATIVO = 1;
-                item.ASSI_CD_ID = usuario.ASSI_CD_ID;
 
                 // Checa endereço
                 if (String.IsNullOrEmpty(item.TELE_NM_ENDERECO))
@@ -123,7 +122,6 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddTELE",
                     LOG_IN_ATIVO = 1,
@@ -141,7 +139,7 @@ namespace ApplicationServices.Services
         }
 
 
-        public Int32 ValidateEdit(TELEFONE item, TELEFONE itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(TELEFONE item, TELEFONE itemAntes, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -171,7 +169,6 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "EditTELE",
                     LOG_IN_ATIVO = 1,
@@ -223,7 +220,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(TELEFONE item, USUARIO usuario)
+        public Int32 ValidateDelete(TELEFONE item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -235,7 +232,6 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelTELE",
@@ -251,7 +247,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(TELEFONE item, USUARIO usuario)
+        public Int32 ValidateReativar(TELEFONE item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -264,7 +260,6 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatTELE",

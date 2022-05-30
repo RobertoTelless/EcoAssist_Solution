@@ -10,7 +10,8 @@ namespace Presentation.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "ControleAcesso");
+            Session["Close"] = false;
         }
 
         public ActionResult About()

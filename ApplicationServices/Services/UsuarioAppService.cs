@@ -15,7 +15,7 @@ using System.Web;
 
 namespace ApplicationServices.Services
 {
-    public class UsuarioAppService : AppServiceBase<USUARIO>, IUsuarioAppService
+    public class UsuarioAppService : AppServiceBase<USUARIO_SUGESTAO>, IUsuarioAppService
     {
         private readonly IUsuarioService _usuarioService;
         private readonly INotificacaoService _notiService;
@@ -26,89 +26,89 @@ namespace ApplicationServices.Services
             _notiService = notiService;
         }
 
-        public USUARIO GetByEmail(String email, Int32 idAss)
+        public USUARIO_SUGESTAO GetByEmail(String email)
         {
-            return _usuarioService.GetByEmail(email, idAss);
+            return _usuarioService.GetByEmail(email);
         }
 
-        public USUARIO GetByLogin(String login, Int32 idAss)
+        public USUARIO_SUGESTAO GetByLogin(String login)
         {
-            return _usuarioService.GetByLogin(login, idAss);
+            return _usuarioService.GetByLogin(login);
         }
 
-        public List<USUARIO> GetAllUsuariosAdm(Int32 idAss)
+        public List<USUARIO_SUGESTAO> GetAllUsuariosAdm()
         {
-            return _usuarioService.GetAllUsuariosAdm(idAss);
+            return _usuarioService.GetAllUsuariosAdm();
         }
 
-        public USUARIO GetItemById(Int32 id)
+        public USUARIO_SUGESTAO GetItemById(Int32 id)
         {
             return _usuarioService.GetItemById(id);
         }
 
-        public List<USUARIO> GetAllUsuarios(Int32 idAss)
+        public List<USUARIO_SUGESTAO> GetAllUsuarios()
         {
-            return _usuarioService.GetAllUsuarios(idAss);
+            return _usuarioService.GetAllUsuarios();
         }
 
-        public List<USUARIO> GetAllSistema()
+        public List<USUARIO_SUGESTAO> GetAllSistema()
         {
             return _usuarioService.GetAllSistema();
         }
 
-        public List<USUARIO> GetAllItens(Int32 idAss)
+        public List<USUARIO_SUGESTAO> GetAllItens()
         {
-            return _usuarioService.GetAllItens(idAss);
+            return _usuarioService.GetAllItens();
         }
 
-        public List<USUARIO> GetAllTecnicos(Int32 idAss)
+        public List<USUARIO_SUGESTAO> GetAllTecnicos()
         {
-            return _usuarioService.GetAllTecnicos(idAss);
+            return _usuarioService.GetAllTecnicos();
         }
 
-        public List<CARGO> GetAllCargos(Int32 idAss)
+        public List<CARGO> GetAllCargos()
         {
-            return _usuarioService.GetAllCargos(idAss);
+            return _usuarioService.GetAllCargos();
         }
 
-        public USUARIO GetAdministrador(Int32 idAss)
+        public USUARIO_SUGESTAO GetAdministrador()
         {
-            return _usuarioService.GetAdministrador(idAss);
+            return _usuarioService.GetAdministrador();
         }
 
-        public USUARIO GetComprador(Int32 idAss)
+        public USUARIO_SUGESTAO GetComprador()
         {
-            return _usuarioService.GetComprador(idAss);
+            return _usuarioService.GetComprador();
         }
 
-        public USUARIO GetTecnico(Int32 idAss)
+        public USUARIO_SUGESTAO GetTecnico()
         {
-            return _usuarioService.GetTecnico(idAss);
+            return _usuarioService.GetTecnico();
         }
 
-        public USUARIO GetAprovador(Int32 idAss)
+        public USUARIO_SUGESTAO GetAprovador()
         {
-            return _usuarioService.GetAprovador(idAss);
+            return _usuarioService.GetAprovador();
         }
 
-        public List<NOTIFICACAO> GetAllItensUser(Int32 id, Int32 idAss)
+        public List<NOTIFICACAO> GetAllItensUser(Int32 id)
         {
-            return _usuarioService.GetAllItensUser(id, idAss);
+            return _usuarioService.GetAllItensUser(id);
         }
 
-        public List<NOTIFICACAO> GetNotificacaoNovas(Int32 id, Int32 idAss)
+        public List<NOTIFICACAO> GetNotificacaoNovas(Int32 id)
         {
-            return _usuarioService.GetNotificacaoNovas(id, idAss);
+            return _usuarioService.GetNotificacaoNovas(id);
         }
 
-        public List<USUARIO> GetAllItensBloqueados(Int32 idAss)
+        public List<USUARIO_SUGESTAO> GetAllItensBloqueados()
         {
-            return _usuarioService.GetAllItensBloqueados(idAss);
+            return _usuarioService.GetAllItensBloqueados();
         }
 
-        public List<USUARIO> GetAllItensAcessoHoje(Int32 idAss)
+        public List<USUARIO_SUGESTAO> GetAllItensAcessoHoje()
         {
-            return _usuarioService.GetAllItensAcessoHoje(idAss);
+            return _usuarioService.GetAllItensAcessoHoje();
         }
 
         public USUARIO_ANEXO GetAnexoById(Int32 id)
@@ -116,7 +116,7 @@ namespace ApplicationServices.Services
             return _usuarioService.GetAnexoById(id);
         }
 
-        public Int32 ValidateCreate(USUARIO usuario, USUARIO usuarioLogado)
+        public Int32 ValidateCreate(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado)
         {
             try
             {
@@ -133,11 +133,11 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica existencia prévia
-                if (_usuarioService.GetByEmail(usuario.USUA_NM_EMAIL, usuarioLogado.ASSI_CD_ID) != null)
+                if (_usuarioService.GetByEmail(usuario.USUA_NM_EMAIL) != null)
                 {
                     return 3;
                 }
-                if (_usuarioService.GetByLogin(usuario.USUA_NM_LOGIN, usuarioLogado.ASSI_CD_ID) != null)
+                if (_usuarioService.GetByLogin(usuario.USUA_NM_LOGIN) != null)
                 {
                     return 4;
                 }
@@ -156,16 +156,14 @@ namespace ApplicationServices.Services
                 usuario.USUA_DT_CADASTRO = DateTime.Today.Date;
                 usuario.USUA_IN_ATIVO = 1;
                 usuario.USUA_DT_ULTIMA_FALHA = DateTime.Now;
-                usuario.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
 
                 // Monta Log
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
-                    ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO_SUGESTAO>(usuario),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -180,7 +178,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateCreateAssinante(USUARIO usuario, USUARIO usuarioLogado)
+        public Int32 ValidateCreateAssinante(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado)
         {
             try
             {
@@ -197,11 +195,11 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica existencia prévia
-                if (_usuarioService.GetByEmail(usuario.USUA_NM_EMAIL, usuarioLogado.ASSI_CD_ID) != null)
+                if (_usuarioService.GetByEmail(usuario.USUA_NM_EMAIL) != null)
                 {
                     return 3;
                 }
-                if (_usuarioService.GetByLogin(usuario.USUA_NM_LOGIN, usuarioLogado.ASSI_CD_ID) != null)
+                if (_usuarioService.GetByLogin(usuario.USUA_NM_LOGIN) != null)
                 {
                     return 4;
                 }
@@ -220,16 +218,14 @@ namespace ApplicationServices.Services
                 usuario.USUA_DT_CADASTRO = DateTime.Today.Date;
                 usuario.USUA_IN_ATIVO = 1;
                 usuario.USUA_DT_ULTIMA_FALHA = DateTime.Now;
-                usuario.ASSI_CD_ID = usuarioLogado.ASSI_CD_ID;
 
                 // Monta Log
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
-                    ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO_SUGESTAO>(usuario),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -244,7 +240,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(USUARIO usuario, USUARIO usuarioAntes, USUARIO usuarioLogado)
+        public Int32 ValidateEdit(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioAntes, USUARIO_SUGESTAO usuarioLogado)
         {
             try
             {
@@ -255,7 +251,7 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica existencia prévia
-                USUARIO usu = _usuarioService.GetByEmail(usuario.USUA_NM_EMAIL, usuarioLogado.ASSI_CD_ID);
+                USUARIO_SUGESTAO usu = _usuarioService.GetByEmail(usuario.USUA_NM_EMAIL);
                 if (usu != null)
                 {
                     if (usu.USUA_CD_ID != usuario.USUA_CD_ID)
@@ -263,7 +259,7 @@ namespace ApplicationServices.Services
                         return 2;
                     }
                 }
-                usu = _usuarioService.GetByLogin(usuario.USUA_NM_LOGIN, usuarioLogado.ASSI_CD_ID);
+                usu = _usuarioService.GetByLogin(usuario.USUA_NM_LOGIN);
                 if (usu != null)
                 {
                     if (usu.USUA_CD_ID != usuario.USUA_CD_ID)
@@ -281,10 +277,9 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
-                    ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
-                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<USUARIO>(usuarioAntes),
+                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO_SUGESTAO>(usuario),
+                    LOG_TX_REGISTRO_ANTES = Serialization.SerializeJSON<USUARIO_SUGESTAO>(usuarioAntes),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -299,7 +294,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(USUARIO usuario, USUARIO usuarioLogado)
+        public Int32 ValidateEdit(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado)
         {
             try
             {
@@ -310,7 +305,7 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica existencia prévia
-                USUARIO usu = _usuarioService.GetByEmail(usuario.USUA_NM_EMAIL, usuarioLogado.ASSI_CD_ID);
+                USUARIO_SUGESTAO usu = _usuarioService.GetByEmail(usuario.USUA_NM_EMAIL);
                 if (usu != null)
                 {
                     if (usu.USUA_CD_ID != usuario.USUA_CD_ID)
@@ -334,7 +329,7 @@ namespace ApplicationServices.Services
         }
 
 
-        public Int32 ValidateDelete(USUARIO usuario, USUARIO usuarioLogado)
+        public Int32 ValidateDelete(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado)
         {
             try
             {
@@ -364,7 +359,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(USUARIO usuario, USUARIO usuarioLogado)
+        public Int32 ValidateReativar(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado)
         {
             try
             {
@@ -394,7 +389,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateBloqueio(USUARIO usuario, USUARIO usuarioLogado)
+        public Int32 ValidateBloqueio(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado)
         {
             try
             {
@@ -407,9 +402,8 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
-                    ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "BlqUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO_SUGESTAO>(usuario),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -422,7 +416,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDesbloqueio(USUARIO usuario, USUARIO usuarioLogado)
+        public Int32 ValidateDesbloqueio(USUARIO_SUGESTAO usuario, USUARIO_SUGESTAO usuarioLogado)
         {
             try
             {
@@ -434,10 +428,9 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuarioLogado.ASSI_CD_ID,
                     USUA_CD_ID = usuarioLogado.USUA_CD_ID,
                     LOG_NM_OPERACAO = "DbqUSUA",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO_SUGESTAO>(usuario),
                     LOG_IN_ATIVO = 1
                 };
 
@@ -450,11 +443,11 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateLogin(String login, String senha, out USUARIO usuario)
+        public Int32 ValidateLogin(String login, String senha, out USUARIO_SUGESTAO usuario)
         {
             try
             {
-                usuario = new USUARIO();
+                usuario = new USUARIO_SUGESTAO();
                 // Checa preenchimemto
                 if (String.IsNullOrEmpty(login))
                 {
@@ -466,10 +459,10 @@ namespace ApplicationServices.Services
                 }
 
                 // Checa existencia
-                usuario = _usuarioService.GetByLogin(login, 1);
+                usuario = _usuarioService.GetByLogin(login);
                 if (usuario == null)
                 {
-                    usuario = new USUARIO();
+                    usuario = new USUARIO_SUGESTAO();
                     return 2;
                 }
 
@@ -509,7 +502,7 @@ namespace ApplicationServices.Services
                 Boolean retorno = _usuarioService.VerificarCredenciais(senha, usuario);
                 if (!retorno)
                 {
-                    if (usuario.USUA_NR_FALHAS <= _usuarioService.CarregaConfiguracao(usuario.ASSI_CD_ID).CONF_NR_FALHAS_DIA)
+                    if (usuario.USUA_NR_FALHAS <= _usuarioService.CarregaConfiguracao(1).CONF_NR_FALHAS_DIA)
                     {
                         if (usuario.USUA_DT_ULTIMA_FALHA != null)
                         {
@@ -530,7 +523,7 @@ namespace ApplicationServices.Services
                         }
 
                     }
-                    else if (usuario.USUA_NR_FALHAS > _usuarioService.CarregaConfiguracao(usuario.ASSI_CD_ID).CONF_NR_FALHAS_DIA)
+                    else if (usuario.USUA_NR_FALHAS > _usuarioService.CarregaConfiguracao(1).CONF_NR_FALHAS_DIA)
                     {
                         usuario.USUA_DT_BLOQUEADO = DateTime.Today.Date;
                         usuario.USUA_IN_BLOQUEADO = 1;
@@ -555,7 +548,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateChangePassword(USUARIO usuario)
+        public Int32 ValidateChangePassword(USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -597,12 +590,10 @@ namespace ApplicationServices.Services
                 usuario.USUA_DT_CADASTRO = DateTime.Now;
                 usuario.USUA_IN_ATIVO = 1;
                 usuario.USUA_DT_ULTIMA_FALHA = null;
-                usuario.ASSI_CD_ID = usuario.ASSI_CD_ID;
 
                 // Gera Notificação
                 NOTIFICACAO noti = new NOTIFICACAO();
                 noti.CANO_CD_ID = 1;
-                noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
                 noti.NOTI_DT_EMISSAO = DateTime.Today;
                 noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
                 noti.NOTI_IN_VISTA = 0;
@@ -619,10 +610,9 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "ChangePWD",
-                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO>(usuario),
+                    LOG_TX_REGISTRO = Serialization.SerializeJSON<USUARIO_SUGESTAO>(usuario),
                 };
 
                 // Persiste
@@ -641,7 +631,7 @@ namespace ApplicationServices.Services
             {
                 return 1;
             }
-            USUARIO usuario = _usuarioService.RetriveUserByEmail(email);
+            USUARIO_SUGESTAO usuario = _usuarioService.RetriveUserByEmail(email);
             if (usuario == null)
             {
                 return 2;
@@ -674,14 +664,12 @@ namespace ApplicationServices.Services
             LOG log = new LOG();
             log.LOG_DT_DATA = DateTime.Now;
             log.LOG_NM_OPERACAO = "NewPWD";
-            log.ASSI_CD_ID = usuario.ASSI_CD_ID;
             log.LOG_TX_REGISTRO = senha;
             log.LOG_IN_ATIVO = 1;
 
             // Gera Notificação
             NOTIFICACAO noti = new NOTIFICACAO();
             noti.CANO_CD_ID = 1;
-            noti.ASSI_CD_ID = usuario.ASSI_CD_ID;
             noti.NOTI_DT_EMISSAO = DateTime.Today;
             noti.NOTI_DT_VALIDADE = DateTime.Today.Date.AddDays(30);
             noti.NOTI_IN_VISTA = 0;
@@ -707,7 +695,7 @@ namespace ApplicationServices.Services
             String emailBody = header + body + data;
 
             // Prepara e-mail e enviar
-            CONFIGURACAO conf = _usuarioService.CarregaConfiguracao(usuario.ASSI_CD_ID);
+            CONFIGURACAO conf = _usuarioService.CarregaConfiguracao(1);
             Email mensagem = new Email();
             mensagem.ASSUNTO = "Geração de Nova Senha";
             mensagem.CORPO = emailBody;
@@ -731,15 +719,15 @@ namespace ApplicationServices.Services
             return 0;
         }
 
-        public Int32 ExecuteFilter(Int32? perfilId, Int32? cargoId, String nome, String login, String email, Int32 idAss, out List<USUARIO> objeto)
+        public Int32 ExecuteFilter(Int32? perfilId, Int32? cargoId, String nome, String login, String email, out List<USUARIO_SUGESTAO> objeto)
         {
             try
             {
-                objeto = new List<USUARIO>();
+                objeto = new List<USUARIO_SUGESTAO>();
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _usuarioService.ExecuteFilter(perfilId, cargoId, nome, login, email, idAss);
+                objeto = _usuarioService.ExecuteFilter(perfilId, cargoId, nome, login, email);
                 if (objeto.Count == 0)
                 {
                     volta = 1;

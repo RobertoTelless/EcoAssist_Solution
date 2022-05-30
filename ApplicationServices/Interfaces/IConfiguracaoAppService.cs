@@ -9,9 +9,9 @@ namespace ApplicationServices.Interfaces
 {
     public interface IConfiguracaoAppService : IAppServiceBase<CONFIGURACAO>
     {
-        Int32 ValidateEdit(CONFIGURACAO item, CONFIGURACAO itemAntes, USUARIO usuario);
+        Int32 ValidateEdit(CONFIGURACAO item, CONFIGURACAO itemAntes, USUARIO_SUGESTAO usuario);
         CONFIGURACAO GetItemById(Int32 id);
-        List<CONFIGURACAO> GetAllItems(Int32 idAss);
+        List<CONFIGURACAO> GetAllItems();
         Int32 ValidateCreate(CONFIGURACAO item);
     }
 }

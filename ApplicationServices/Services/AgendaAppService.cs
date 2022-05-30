@@ -21,27 +21,27 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<AGENDA> GetAllItens(Int32 idAss)
+        public List<AGENDA> GetAllItens()
         {
-            List<AGENDA> lista = _baseService.GetAllItens(idAss);
+            List<AGENDA> lista = _baseService.GetAllItens();
             return lista;
         }
 
-        public List<AGENDA> GetAllItensAdm(Int32 idAss)
+        public List<AGENDA> GetAllItensAdm()
         {
-            List<AGENDA> lista = _baseService.GetAllItensAdm(idAss);
+            List<AGENDA> lista = _baseService.GetAllItensAdm();
             return lista;
         }
 
-        public List<AGENDA> GetByDate(DateTime data, Int32 idAss)
+        public List<AGENDA> GetByDate(DateTime data)
         {
-            List<AGENDA> lista = _baseService.GetByDate(data, idAss);
+            List<AGENDA> lista = _baseService.GetByDate(data);
             return lista;
         }
 
-        public List<AGENDA> GetByUser(Int32 id, Int32 idAss)
+        public List<AGENDA> GetByUser(Int32 id)
         {
-            List<AGENDA> lista = _baseService.GetByUser(id, idAss);
+            List<AGENDA> lista = _baseService.GetByUser(id);
             return lista;
         }
 
@@ -51,9 +51,9 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public List<CATEGORIA_AGENDA> GetAllTipos(Int32 idAss)
+        public List<CATEGORIA_AGENDA> GetAllTipos()
         {
-            List<CATEGORIA_AGENDA> lista = _baseService.GetAllTipos(idAss);
+            List<CATEGORIA_AGENDA> lista = _baseService.GetAllTipos();
             return lista;
         }
 
@@ -63,7 +63,7 @@ namespace ApplicationServices.Services
             return lista;
         }
 
-        public Int32 ExecuteFilter(DateTime? data, Int32 ? cat, String titulo, String descricao, Int32 idAss, Int32 idUser, Int32 corp, out List<AGENDA> objeto)
+        public Int32 ExecuteFilter(DateTime? data, Int32 ? cat, String titulo, String descricao, Int32 idUser, Int32 corp, out List<AGENDA> objeto)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(data, cat, titulo, descricao, idAss, idUser, corp);
+                objeto = _baseService.ExecuteFilter(data, cat, titulo, descricao, idUser, corp);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -84,7 +84,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateCreate(AGENDA item, USUARIO usuario)
+        public Int32 ValidateCreate(AGENDA item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -96,7 +96,6 @@ namespace ApplicationServices.Services
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddAGEN",
                     LOG_IN_ATIVO = 1,
@@ -113,7 +112,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(AGENDA item, AGENDA itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(AGENDA item, AGENDA itemAntes, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -126,19 +125,17 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(AGENDA item, USUARIO usuario)
+        public Int32 ValidateDelete(AGENDA item, USUARIO_SUGESTAO usuario)
         {
             try
             {
                 // Acerta campos
                 item.AGEN_IN_ATIVO = 0;
-                item.ASSINANTE = null;
 
                 // Monta Log
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelAGEN",
@@ -154,7 +151,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(AGENDA item, USUARIO usuario)
+        public Int32 ValidateReativar(AGENDA item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -162,13 +159,11 @@ namespace ApplicationServices.Services
 
                 // Acerta campos
                 item.AGEN_IN_ATIVO = 1;
-                item.ASSINANTE = null;
 
                 // Monta Log
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatAGEN",

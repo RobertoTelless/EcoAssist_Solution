@@ -22,15 +22,15 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public List<NOTIFICACAO> GetAllItens(Int32 idAss)
+        public List<NOTIFICACAO> GetAllItens()
         {
-            List<NOTIFICACAO> lista = _baseService.GetAllItens(idAss);
+            List<NOTIFICACAO> lista = _baseService.GetAllItens();
             return lista;
         }
 
-        public List<NOTIFICACAO> GetAllItensAdm(Int32 idAss)
+        public List<NOTIFICACAO> GetAllItensAdm()
         {
-            List<NOTIFICACAO> lista = _baseService.GetAllItensAdm(idAss);
+            List<NOTIFICACAO> lista = _baseService.GetAllItensAdm();
             return lista;
         }
 
@@ -52,19 +52,19 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public List<NOTIFICACAO> GetAllItensUser(Int32 id, Int32 idAss)
+        public List<NOTIFICACAO> GetAllItensUser(Int32 id)
         {
-            List<NOTIFICACAO> lista = _baseService.GetAllItensUser(id, idAss);
+            List<NOTIFICACAO> lista = _baseService.GetAllItensUser(id);
             return lista;
         }
 
-        public List<NOTIFICACAO> GetNotificacaoNovas(Int32 id, Int32 idAss)
+        public List<NOTIFICACAO> GetNotificacaoNovas(Int32 id)
         {
-            List<NOTIFICACAO> lista = _baseService.GetNotificacaoNovas(id, idAss);
+            List<NOTIFICACAO> lista = _baseService.GetNotificacaoNovas(id);
             return lista;
         }
 
-        public Int32 ExecuteFilter(String titulo, DateTime? data, String texto, Int32 idAss, out List<NOTIFICACAO> objeto)
+        public Int32 ExecuteFilter(String titulo, DateTime? data, String texto, out List<NOTIFICACAO> objeto)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(titulo, data, texto, idAss);
+                objeto = _baseService.ExecuteFilter(titulo, data, texto);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
@@ -85,7 +85,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateCreate(NOTIFICACAO item, USUARIO usuario)
+        public Int32 ValidateCreate(NOTIFICACAO item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -99,7 +99,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "AddNOTI",
                     LOG_IN_ATIVO = 1,
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTIFICACAO>(item)
@@ -115,7 +114,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(NOTIFICACAO item, NOTIFICACAO itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(NOTIFICACAO item, NOTIFICACAO itemAntes, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -124,7 +123,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditNOTI",
                     LOG_IN_ATIVO = 1,
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTIFICACAO>(item),
@@ -146,7 +144,7 @@ namespace ApplicationServices.Services
             {
 
                 // Persiste
-                item.USUARIO = null;
+                item.USUARIO_SUGESTAO = null;
                 return _baseService.Edit(item);
             }
             catch (Exception ex)
@@ -155,7 +153,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(NOTIFICACAO item, USUARIO usuario)
+        public Int32 ValidateDelete(NOTIFICACAO item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -169,7 +167,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DelNOTI",
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTIFICACAO>(item)
@@ -184,7 +181,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(NOTIFICACAO item, USUARIO usuario)
+        public Int32 ValidateReativar(NOTIFICACAO item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -198,7 +195,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatNOTI",
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<NOTIFICACAO>(item)

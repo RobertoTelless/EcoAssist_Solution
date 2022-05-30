@@ -908,6 +908,8 @@
           <Property Name="NOTI_IN_VISTA" Type="int" />
           <Property Name="NOTI_DT_VISTA" Type="datetime" />
           <Property Name="NOTI_IN_ATIVO" Type="int" Nullable="false" />
+          <Property Name="NOTI_IN_STATUS" Type="int" />
+          <Property Name="NOTI_IN_NIVEL" Type="int" />
         </EntityType>
         <EntityType Name="NOTIFICACAO_ANEXO">
           <Key>
@@ -6780,6 +6782,8 @@
           <NavigationProperty Name="CATEGORIA_NOTIFICACAO" Relationship="Self.FK_NOTIFICACAO_CATEGORIA_NOTIFICACAO" FromRole="NOTIFICACAO" ToRole="CATEGORIA_NOTIFICACAO" />
           <NavigationProperty Name="NOTIFICACAO_ANEXO" Relationship="Self.FK_NOTIFICACAO_ANEXO_NOTIFICACAO" FromRole="NOTIFICACAO" ToRole="NOTIFICACAO_ANEXO" />
           <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_NOTIFICACAO_USUARIO_SUGESTAO" FromRole="NOTIFICACAO" ToRole="USUARIO_SUGESTAO" />
+          <Property Name="NOTI_IN_STATUS" Type="Int32" />
+          <Property Name="NOTI_IN_NIVEL" Type="Int32" />
         </EntityType>
         <EntityType Name="NOTIFICACAO_ANEXO">
           <Key>
@@ -12927,6 +12931,8 @@
           <EntitySetMapping Name="NOTIFICACAO">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.NOTIFICACAO">
               <MappingFragment StoreEntitySet="NOTIFICACAO">
+                <ScalarProperty Name="NOTI_IN_NIVEL" ColumnName="NOTI_IN_NIVEL" />
+                <ScalarProperty Name="NOTI_IN_STATUS" ColumnName="NOTI_IN_STATUS" />
                 <ScalarProperty Name="NOTI_CD_ID" ColumnName="NOTI_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
                 <ScalarProperty Name="CANO_CD_ID" ColumnName="CANO_CD_ID" />

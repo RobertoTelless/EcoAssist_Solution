@@ -9,11 +9,11 @@ namespace ApplicationServices.Interfaces
 {
     public interface ITipoPessoaAppService : IAppServiceBase<TIPO_PESSOA>
     {
-        Int32 ValidateCreate(TIPO_PESSOA item, USUARIO usuario);
-        Int32 ValidateEdit(TIPO_PESSOA item, TIPO_PESSOA itemAntes, USUARIO usuario);
+        Int32 ValidateCreate(TIPO_PESSOA item, USUARIO_SUGESTAO usuario);
+        Int32 ValidateEdit(TIPO_PESSOA item, TIPO_PESSOA itemAntes, USUARIO_SUGESTAO usuario);
         Int32 ValidateEdit(TIPO_PESSOA item, TIPO_PESSOA itemAntes);
-        Int32 ValidateDelete(TIPO_PESSOA item, USUARIO usuario);
-        Int32 ValidateReativar(TIPO_PESSOA item, USUARIO usuario);
+        //Int32 ValidateDelete(TIPO_PESSOA item, USUARIO_SUGESTAO usuario);
+        //Int32 ValidateReativar(TIPO_PESSOA item, USUARIO_SUGESTAO usuario);
 
         List<TIPO_PESSOA> GetAllItens();
         List<TIPO_PESSOA> GetAllItensAdm();

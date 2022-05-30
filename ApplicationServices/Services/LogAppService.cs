@@ -8,7 +8,6 @@ using EntitiesServices.Work_Classes;
 using ApplicationServices.Interfaces;
 using ModelServices.Interfaces.EntitiesServices;
 using CrossCutting;
-using System.Text.RegularExpressions;
 
 namespace ApplicationServices.Services
 {
@@ -26,33 +25,33 @@ namespace ApplicationServices.Services
             return _baseService.GetById(id);
         }
 
-        public List<LOG> GetAllItens(Int32 idAss)
+        public List<LOG> GetAllItens()
         {
-            return _baseService.GetAllItens(idAss);
+            return _baseService.GetAllItens();
         }
 
-        public List<LOG> GetAllItensDataCorrente(Int32 idAss)
+        public List<LOG> GetAllItensDataCorrente()
         {
-            return _baseService.GetAllItensDataCorrente(idAss);
+            return _baseService.GetAllItensDataCorrente();
         }
 
-        public List<LOG> GetAllItensUsuario(Int32 id, Int32 idAss)
+        public List<LOG> GetAllItensUsuario(Int32 id)
         {
-            return _baseService.GetAllItensUsuario(id, idAss);
+            return _baseService.GetAllItensUsuario(id);
         }
 
 
-        public List<LOG> GetAllItensMesCorrente(Int32 idAss)
+        public List<LOG> GetAllItensMesCorrente()
         {
-            return _baseService.GetAllItensMesCorrente(idAss);
+            return _baseService.GetAllItensMesCorrente();
         }
 
-        public List<LOG> GetAllItensMesAnterior(Int32 idAss)
+        public List<LOG> GetAllItensMesAnterior()
         {
-            return _baseService.GetAllItensMesAnterior(idAss);
+            return _baseService.GetAllItensMesAnterior();
         }
 
-        public Int32 ExecuteFilter(Int32? usuId, DateTime? data, String operacao, Int32 idAss, out List<LOG> objeto)
+        public Int32 ExecuteFilter(Int32? usuId, DateTime? data, String operacao, out List<LOG> objeto)
         {
             try
             {
@@ -60,7 +59,7 @@ namespace ApplicationServices.Services
                 Int32 volta = 0;
 
                 // Processa filtro
-                objeto = _baseService.ExecuteFilter(usuId, data, operacao, idAss);
+                objeto = _baseService.ExecuteFilter(usuId, data, operacao);
                 if (objeto.Count == 0)
                 {
                     volta = 1;
