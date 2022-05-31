@@ -163,6 +163,7 @@
     <Compile Include="Interfaces\IAppServiceBase.cs" />
     <Compile Include="Interfaces\ICategoriaTelefoneAppService.cs" />
     <Compile Include="Interfaces\IConfiguracaoAppService.cs" />
+    <Compile Include="Interfaces\IDepartamentoAppService.cs" />
     <Compile Include="Interfaces\ILogAppService.cs" />
     <Compile Include="Interfaces\INoticiaAppService.cs" />
     <Compile Include="Interfaces\INotificacaoAppService.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Services\AppServiceBase.cs" />
     <Compile Include="Services\CategoriaTelefoneAppService.cs" />
     <Compile Include="Services\ConfiguracaoAppService.cs" />
+    <Compile Include="Services\DepartamentoAppService.cs" />
     <Compile Include="Services\LogAppService.cs" />
     <Compile Include="Services\NoticiaAppService.cs" />
     <Compile Include="Services\NotificacaoAppService.cs" />

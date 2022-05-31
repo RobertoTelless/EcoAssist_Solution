@@ -16,9 +16,9 @@ namespace ModelServices.Interfaces.EntitiesServices
         Int32 Edit(DEPARTAMENTO item);
         Int32 Delete(DEPARTAMENTO item, LOG log);
 
-        DEPARTAMENTO CheckExist(DEPARTAMENTO conta, Int32 idAss);
+        DEPARTAMENTO CheckExist(DEPARTAMENTO conta);
         DEPARTAMENTO GetItemById(Int32 id);
-        List<DEPARTAMENTO> GetAllItens(Int32 idAss);
-        List<DEPARTAMENTO> GetAllItensAdm(Int32 idAss);
+        List<DEPARTAMENTO> GetAllItens();
+        List<DEPARTAMENTO> GetAllItensAdm();
     }
 }

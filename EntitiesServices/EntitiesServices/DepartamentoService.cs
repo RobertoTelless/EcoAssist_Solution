@@ -20,7 +20,7 @@ namespace ModelServices.EntitiesServices
     {
         private readonly IDepartamentoRepository _baseRepository;
         private readonly ILogRepository _logRepository;
-        protected DB_RidolfiEntities Db = new DB_RidolfiEntities();
+        protected DB_EcoBaseEntities Db = new DB_EcoBaseEntities();
 
         public DepartamentoService(IDepartamentoRepository baseRepository, ILogRepository logRepository) : base(baseRepository)
         {
@@ -28,9 +28,9 @@ namespace ModelServices.EntitiesServices
             _logRepository = logRepository;
         }
 
-        public DEPARTAMENTO CheckExist(DEPARTAMENTO conta, Int32 idAss)
+        public DEPARTAMENTO CheckExist(DEPARTAMENTO conta)
         {
-            DEPARTAMENTO item = _baseRepository.CheckExist(conta, idAss);
+            DEPARTAMENTO item = _baseRepository.CheckExist(conta);
             return item;
         }
 
@@ -40,14 +40,14 @@ namespace ModelServices.EntitiesServices
             return item;
         }
 
-        public List<DEPARTAMENTO> GetAllItens(Int32 idAss)
+        public List<DEPARTAMENTO> GetAllItens()
         {
-            return _baseRepository.GetAllItens(idAss);
+            return _baseRepository.GetAllItens();
         }
 
-        public List<DEPARTAMENTO> GetAllItensAdm(Int32 idAss)
+        public List<DEPARTAMENTO> GetAllItensAdm()
         {
-            return _baseRepository.GetAllItensAdm(idAss);
+            return _baseRepository.GetAllItensAdm();
         }
     
         public Int32 Create(DEPARTAMENTO item, LOG log)

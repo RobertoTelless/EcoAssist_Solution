@@ -168,6 +168,7 @@
     <Compile Include="EntitiesServices\AgendaService.cs" />
     <Compile Include="EntitiesServices\CategoriaTelefoneService.cs" />
     <Compile Include="EntitiesServices\ConfiguracaoService.cs" />
+    <Compile Include="EntitiesServices\DepartamentoService.cs" />
     <Compile Include="EntitiesServices\LogService.cs" />
     <Compile Include="EntitiesServices\NoticiaService.cs" />
     <Compile Include="EntitiesServices\NotificacaoService.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Interfaces\Entities\IAgendaService.cs" />
     <Compile Include="Interfaces\Entities\ICategoriaTelefoneService.cs" />
     <Compile Include="Interfaces\Entities\IConfiguracaoService.cs" />
+    <Compile Include="Interfaces\Entities\IDepartamentoService.cs" />
     <Compile Include="Interfaces\Entities\ILogService.cs" />
     <Compile Include="Interfaces\Entities\INoticiaService.cs" />
     <Compile Include="Interfaces\Entities\INotificacaoService.cs" />

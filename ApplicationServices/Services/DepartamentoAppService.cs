@@ -21,21 +21,21 @@ namespace ApplicationServices.Services
             _baseService = baseService;
         }
 
-        public DEPARTAMENTO CheckExist(DEPARTAMENTO conta, Int32 idAss)
+        public DEPARTAMENTO CheckExist(DEPARTAMENTO conta)
         {
-            DEPARTAMENTO item = _baseService.CheckExist(conta, idAss);
+            DEPARTAMENTO item = _baseService.CheckExist(conta);
             return item;
         }
 
-        public List<DEPARTAMENTO> GetAllItens(Int32 idAss)
+        public List<DEPARTAMENTO> GetAllItens()
         {
-            List<DEPARTAMENTO> lista = _baseService.GetAllItens(idAss);
+            List<DEPARTAMENTO> lista = _baseService.GetAllItens();
             return lista;
         }
 
-        public List<DEPARTAMENTO> GetAllItensAdm(Int32 idAss)
+        public List<DEPARTAMENTO> GetAllItensAdm()
         {
-            List<DEPARTAMENTO> lista = _baseService.GetAllItensAdm(idAss);
+            List<DEPARTAMENTO> lista = _baseService.GetAllItensAdm();
             return lista;
         }
 
@@ -45,7 +45,7 @@ namespace ApplicationServices.Services
             return item;
         }
 
-        public Int32 ValidateCreate(DEPARTAMENTO item, USUARIO usuario)
+        public Int32 ValidateCreate(DEPARTAMENTO item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -53,13 +53,11 @@ namespace ApplicationServices.Services
 
                 // Completa objeto
                 item.DEPT_IN_ATIVO = 1;
-                item.ASSI_CD_ID = usuario.ASSI_CD_ID;
 
                 // Monta Log
                 LOG log = new LOG
                 {
                     LOG_DT_DATA = DateTime.Now,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     USUA_CD_ID = usuario.USUA_CD_ID,
                     LOG_NM_OPERACAO = "AddDEPT",
                     LOG_IN_ATIVO = 1,
@@ -76,7 +74,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateEdit(DEPARTAMENTO item, DEPARTAMENTO itemAntes, USUARIO usuario)
+        public Int32 ValidateEdit(DEPARTAMENTO item, DEPARTAMENTO itemAntes, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -85,7 +83,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_NM_OPERACAO = "EditDEPT",
                     LOG_IN_ATIVO = 1,
                     LOG_TX_REGISTRO = Serialization.SerializeJSON<DEPARTAMENTO>(item),
@@ -114,12 +111,12 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateDelete(DEPARTAMENTO item, USUARIO usuario)
+        public Int32 ValidateDelete(DEPARTAMENTO item, USUARIO_SUGESTAO usuario)
         {
             try
             {
                 // Verifica integridade referencial
-                if (item.ATENDIMENTO.Count > 0)
+                if (item.USUARIO_SUGESTAO.Count > 0)
                 {
                     return 1;
                 }
@@ -132,7 +129,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "DeleDEPT",
                     LOG_TX_REGISTRO = "Departamento: " + item.DEPT_NM_NOME
@@ -147,7 +143,7 @@ namespace ApplicationServices.Services
             }
         }
 
-        public Int32 ValidateReativar(DEPARTAMENTO item, USUARIO usuario)
+        public Int32 ValidateReativar(DEPARTAMENTO item, USUARIO_SUGESTAO usuario)
         {
             try
             {
@@ -161,7 +157,6 @@ namespace ApplicationServices.Services
                 {
                     LOG_DT_DATA = DateTime.Now,
                     USUA_CD_ID = usuario.USUA_CD_ID,
-                    ASSI_CD_ID = usuario.ASSI_CD_ID,
                     LOG_IN_ATIVO = 1,
                     LOG_NM_OPERACAO = "ReatDEPT",
                     LOG_TX_REGISTRO = "Deparatmento: " + item.DEPT_NM_NOME
