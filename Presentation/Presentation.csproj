@@ -260,6 +260,7 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
+    <Compile Include="Controllers\ControleAcessoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Extensions\HMTLHelperExtensions.cs" />
     <Compile Include="Extensions\MVCButtonExtensions.cs" />
@@ -2980,6 +2981,10 @@
     <Content Include="Views\Shared\_TopNavbar2.cshtml" />
     <Content Include="Views\Shared\_TopNavbar_Admin.cshtml" />
     <Content Include="Views\Shared\_TopNavbar_Admin_Y.cshtml" />
+    <Content Include="Views\ControleAcesso\Login.cshtml" />
+    <Content Include="Views\ControleAcesso\TrocarSenha.cshtml" />
+    <Content Include="Views\ControleAcesso\TrocarSenhaInicio.cshtml" />
+    <Content Include="Views\ControleAcesso\GerarSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

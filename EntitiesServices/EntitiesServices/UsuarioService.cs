@@ -110,11 +110,6 @@ namespace ModelServices.EntitiesServices
             return _usuarioRepository.GetAllItens();
         }
 
-        public List<USUARIO_SUGESTAO> GetAllTecnicos()
-        {
-            return _usuarioRepository.GetAllTecnicos();
-        }
-
         public List<CARGO> GetAllCargos()
         {
             return _carRepository.GetAllItens();
@@ -128,21 +123,6 @@ namespace ModelServices.EntitiesServices
         public USUARIO_SUGESTAO GetAdministrador()
         {
             return _usuarioRepository.GetAdministrador();
-        }
-
-        public USUARIO_SUGESTAO GetComprador()
-        {
-            return _usuarioRepository.GetComprador();
-        }
-
-        public USUARIO_SUGESTAO GetTecnico()
-        {
-            return _usuarioRepository.GetTecnico();
-        }
-
-        public USUARIO_SUGESTAO GetAprovador()
-        {
-            return _usuarioRepository.GetAprovador();
         }
 
         public List<USUARIO_SUGESTAO> GetAllItensAcessoHoje()

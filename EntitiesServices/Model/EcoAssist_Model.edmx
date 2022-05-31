@@ -2049,6 +2049,8 @@
           <Property Name="USUA_IN_APROVADOR" Type="int" />
           <Property Name="USUA_IN_TECNICO" Type="int" />
           <Property Name="USUA_IN_SISTEMA" Type="int" />
+          <Property Name="USUA_NR_TELEFONE" Type="varchar" MaxLength="50" />
+          <Property Name="USUA_NR_WHATSAPP" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="VEICULO_FUNCAO">
           <Key>
@@ -5820,6 +5822,52 @@
           <Property Name="ACON_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DESTINADOR_ENVIO_PRODUTO" Relationship="Self.FKDESTINADOR349616" FromRole="ACONDICIONAMENTO" ToRole="DESTINADOR_ENVIO_PRODUTO" />
         </EntityType>
+        <EntityType Name="AGENDA">
+          <Key>
+            <PropertyRef Name="AGEN_CD_ID" />
+          </Key>
+          <Property Name="AGEN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="CAAG_CD_ID" Type="Int32" />
+          <Property Name="AGEN_DT_DATA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AGEN_HR_HORA" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="AGEN_NM_TITULO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AGEN_DS_DESCRICAO" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="AGEN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="AGEN_CD_USUARIO" Type="Int32" />
+          <Property Name="AGEN_TX_OBSERVACOES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AGEN_IN_STATUS" Type="Int32" />
+          <Property Name="AGEN_IN_CORPORATIVA" Type="Int32" />
+          <NavigationProperty Name="AGENDA_ANEXO" Relationship="Self.FK_AGENDA_ANEXO_AGENDA" FromRole="AGENDA" ToRole="AGENDA_ANEXO" />
+          <NavigationProperty Name="CATEGORIA_AGENDA" Relationship="Self.FK_AGENDA_CATEGORIA_AGENDA" FromRole="AGENDA" ToRole="CATEGORIA_AGENDA" />
+          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_AGENDA_USUARIO_SUGESTAO" FromRole="AGENDA" ToRole="USUARIO_SUGESTAO" />
+          <NavigationProperty Name="USUARIO_SUGESTAO1" Relationship="Self.FK_AGENDA_USUARIO_SUGESTAO1" FromRole="AGENDA" ToRole="USUARIO_SUGESTAO" />
+          <NavigationProperty Name="AGENDA_VINCULO" Relationship="Self.FK_AGENDA_VINCULO_AGENDA" FromRole="AGENDA" ToRole="AGENDA_VINCULO" />
+        </EntityType>
+        <EntityType Name="AGENDA_ANEXO">
+          <Key>
+            <PropertyRef Name="AGAN_CD_ID" />
+          </Key>
+          <Property Name="AGAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AGEN_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="AGAN_NM_TITULO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AGAN_DT_ANEXO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AGAN_IN_TIPO" Type="Int32" Nullable="false" />
+          <Property Name="AGAN_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AGAN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AGENDA" Relationship="Self.FK_AGENDA_ANEXO_AGENDA" FromRole="AGENDA_ANEXO" ToRole="AGENDA" />
+        </EntityType>
+        <EntityType Name="AGENDA_VINCULO">
+          <Key>
+            <PropertyRef Name="AGVI_CD_ID" />
+          </Key>
+          <Property Name="AGVI_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AGEN_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="AGVI_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AGENDA" Relationship="Self.FK_AGENDA_VINCULO_AGENDA" FromRole="AGENDA_VINCULO" ToRole="AGENDA" />
+          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_AGENDA_VINCULO_USUARIO_SUGESTAO" FromRole="AGENDA_VINCULO" ToRole="USUARIO_SUGESTAO" />
+        </EntityType>
         <EntityType Name="ATENDIMENTO_ACOMPANHAMENTO">
           <Key>
             <PropertyRef Name="ATAC_CD_ID" />
@@ -5889,6 +5937,15 @@
           <Property Name="CARG_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FKUSUARIO_SU965559" FromRole="CARGO" ToRole="USUARIO_SUGESTAO" />
         </EntityType>
+        <EntityType Name="CATEGORIA_AGENDA">
+          <Key>
+            <PropertyRef Name="CAAG_CD_ID" />
+          </Key>
+          <Property Name="CAAG_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CAAG_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CAAG_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AGENDA" Relationship="Self.FK_AGENDA_CATEGORIA_AGENDA" FromRole="CATEGORIA_AGENDA" ToRole="AGENDA" />
+        </EntityType>
         <EntityType Name="CATEGORIA_ATENDIMENTO">
           <Key>
             <PropertyRef Name="CAAT_CD_ID" />
@@ -5925,6 +5982,15 @@
           <Property Name="CAPR_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PRODUTO_COMPRA" Relationship="Self.FKPRODUTO_CO296463" FromRole="CATEGORIA_PRODUTO" ToRole="PRODUTO_COMPRA" />
           <NavigationProperty Name="SUBCATEGORIA_PRODUTO" Relationship="Self.FKSUBCATEGOR381994" FromRole="CATEGORIA_PRODUTO" ToRole="SUBCATEGORIA_PRODUTO" />
+        </EntityType>
+        <EntityType Name="CATEGORIA_TELEFONE">
+          <Key>
+            <PropertyRef Name="CATE_CD_ID" />
+          </Key>
+          <Property Name="CATE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATE_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CATE_IN_ATIVO" Type="Int32" />
+          <NavigationProperty Name="TELEFONE" Relationship="Self.FK_TELEFONE_CATEGORIA_TELEFONE" FromRole="CATEGORIA_TELEFONE" ToRole="TELEFONE" />
         </EntityType>
         <EntityType Name="CATEGORIA_USUARIO">
           <Key>
@@ -6130,6 +6196,30 @@
           <Property Name="CNCA_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CNCA_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PRESTADOR_MOTORISTA" Relationship="Self.FKPRESTADOR_361006" FromRole="CNH_CATEGORIA" ToRole="PRESTADOR_MOTORISTA" />
+        </EntityType>
+        <EntityType Name="CONFIGURACAO">
+          <Key>
+            <PropertyRef Name="CONF_CD_ID" />
+          </Key>
+          <Property Name="CONF_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CONF_NR_FALHAS_DIA" Type="Int32" />
+          <Property Name="CONF_NM_HOST_SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NM_PORTA_SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NM_EMAIL_EMISSOO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NM_SENHA_EMISSOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NR_REFRESH_DASH" Type="Int32" />
+          <Property Name="CONF_NM_ARQUIVO_ALARME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NR_REFRESH_NOTIFICACAO" Type="Int32" />
+          <Property Name="CONF_SG_LOGIN_SMS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_SG_SENHA_SMS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NM_SENDGRID_LOGIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NM_SENDGRID_PWD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_NM_SENDGRID_APIKEY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CONF_IN_RESIDUAL" Type="Int32" />
+          <Property Name="CONF_NR_DIAS_ATENDIMENTO" Type="Int32" />
+          <Property Name="CONF_NR_DIAS_ACAO" Type="Int32" />
+          <Property Name="CONF_NR_DIAS_PROPOSTA" Type="Int32" />
+          <Property Name="CONF_NR_MARGEM_ATRASO" Type="Int32" />
         </EntityType>
         <EntityType Name="CONTA_BANCO">
           <Key>
@@ -6706,6 +6796,19 @@
           <NavigationProperty Name="PARCEIRO_PRECO" Relationship="Self.FKPARCEIRO_P892883" FromRole="LINHA_PRODUTO" ToRole="PARCEIRO_PRECO" />
           <NavigationProperty Name="TIPO_PRODUTO" Relationship="Self.FKTIPO_PRODU148446" FromRole="LINHA_PRODUTO" ToRole="TIPO_PRODUTO" />
         </EntityType>
+        <EntityType Name="LOG">
+          <Key>
+            <PropertyRef Name="LOG_CD_ID" />
+          </Key>
+          <Property Name="LOG_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="LOG_DT_DATA" Type="DateTime" Precision="3" />
+          <Property Name="LOG_NM_OPERACAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LOG_TX_REGISTRO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LOG_TX_REGISTRO_ANTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LOG_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_LOG_USUARIO_SUGESTAO" FromRole="LOG" ToRole="USUARIO_SUGESTAO" />
+        </EntityType>
         <EntityType Name="MARCA_VEICULO">
           <Key>
             <PropertyRef Name="MAVE_CD_ID" />
@@ -6779,11 +6882,11 @@
           <Property Name="NOTI_IN_VISTA" Type="Int32" />
           <Property Name="NOTI_DT_VISTA" Type="DateTime" Precision="3" />
           <Property Name="NOTI_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="NOTI_IN_STATUS" Type="Int32" />
+          <Property Name="NOTI_IN_NIVEL" Type="Int32" />
           <NavigationProperty Name="CATEGORIA_NOTIFICACAO" Relationship="Self.FK_NOTIFICACAO_CATEGORIA_NOTIFICACAO" FromRole="NOTIFICACAO" ToRole="CATEGORIA_NOTIFICACAO" />
           <NavigationProperty Name="NOTIFICACAO_ANEXO" Relationship="Self.FK_NOTIFICACAO_ANEXO_NOTIFICACAO" FromRole="NOTIFICACAO" ToRole="NOTIFICACAO_ANEXO" />
           <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_NOTIFICACAO_USUARIO_SUGESTAO" FromRole="NOTIFICACAO" ToRole="USUARIO_SUGESTAO" />
-          <Property Name="NOTI_IN_STATUS" Type="Int32" />
-          <Property Name="NOTI_IN_NIVEL" Type="Int32" />
         </EntityType>
         <EntityType Name="NOTIFICACAO_ANEXO">
           <Key>
@@ -7160,6 +7263,16 @@
           <NavigationProperty Name="CLIENTE_MARKETING_ATIVO" Relationship="Self.FK_CLIENTE_MARKETING_ATIVO_PERIODICIDADE" FromRole="PERIODICIDADE" ToRole="CLIENTE_MARKETING_ATIVO" />
           <NavigationProperty Name="CONTA_PAGAR" Relationship="Self.FKCONTA_PAGA903530" FromRole="PERIODICIDADE" ToRole="CONTA_PAGAR" />
           <NavigationProperty Name="CONTA_RECEBER" Relationship="Self.FKCONTA_RECE736697" FromRole="PERIODICIDADE" ToRole="CONTA_RECEBER" />
+        </EntityType>
+        <EntityType Name="PERIODICIDADE_TAREFA">
+          <Key>
+            <PropertyRef Name="PETA_CD_ID" />
+          </Key>
+          <Property Name="PETA_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PETA_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PETA_NR_DIAS" Type="Int32" Nullable="false" />
+          <Property Name="PETA_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_PERIODICIDADE_TAREFA" FromRole="PERIODICIDADE_TAREFA" ToRole="TAREFA" />
         </EntityType>
         <EntityType Name="PERIODO">
           <Key>
@@ -7718,6 +7831,136 @@
           <NavigationProperty Name="CENTRO_CUSTO" Relationship="Self.FKCENTRO_CUS717675" FromRole="SUBGRUPO" ToRole="CENTRO_CUSTO" />
           <NavigationProperty Name="GRUPO" Relationship="Self.FKSUBGRUPO171192" FromRole="SUBGRUPO" ToRole="GRUPO" />
         </EntityType>
+        <EntityType Name="TAREFA">
+          <Key>
+            <PropertyRef Name="TARE_CD_ID" />
+          </Key>
+          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="TITR_CD_ID" Type="Int32" />
+          <Property Name="PETA_CD_ID" Type="Int32" />
+          <Property Name="TARE_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TARE_NM_TITULO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TARE_DS_DESCRICAO" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="TARE_DT_ESTIMADA" Type="DateTime" Precision="0" />
+          <Property Name="TARE_IN_STATUS" Type="Int32" Nullable="false" />
+          <Property Name="TARE_IN_PRIORIDADE" Type="Int32" Nullable="false" />
+          <Property Name="TARE_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="TARE_DT_REALIZADA" Type="DateTime" Precision="0" />
+          <Property Name="TARE_TX_OBSERVACOES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TARE_NM_LOCAL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TARE_IN_AVISA" Type="Int32" />
+          <Property Name="TARE_NR_PERIODICIDADE_QUANTIDADE" Type="Int32" />
+          <NavigationProperty Name="PERIODICIDADE_TAREFA" Relationship="Self.FK_TAREFA_PERIODICIDADE_TAREFA" FromRole="TAREFA" ToRole="PERIODICIDADE_TAREFA" />
+          <NavigationProperty Name="TAREFA_ACOMPANHAMENTO" Relationship="Self.FK_TAREFA_ACOMPANHAMENTO_TAREFA" FromRole="TAREFA" ToRole="TAREFA_ACOMPANHAMENTO" />
+          <NavigationProperty Name="TAREFA_ANEXO" Relationship="Self.FK_TAREFA_ANEXO_TAREFA" FromRole="TAREFA" ToRole="TAREFA_ANEXO" />
+          <NavigationProperty Name="TAREFA_NOTIFICACAO" Relationship="Self.FK_TAREFA_NOTIFICACAO_TAREFA" FromRole="TAREFA" ToRole="TAREFA_NOTIFICACAO" />
+          <NavigationProperty Name="TIPO_TAREFA" Relationship="Self.FK_TAREFA_TIPO_TAREFA" FromRole="TAREFA" ToRole="TIPO_TAREFA" />
+          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_TAREFA_USUARIO_SUGESTAO" FromRole="TAREFA" ToRole="USUARIO_SUGESTAO" />
+          <NavigationProperty Name="TAREFA_VINCULO" Relationship="Self.FK_TAREFA_VINCULO_TAREFA" FromRole="TAREFA" ToRole="TAREFA_VINCULO" />
+        </EntityType>
+        <EntityType Name="TAREFA_ACOMPANHAMENTO">
+          <Key>
+            <PropertyRef Name="TAAC_CD_ID" />
+          </Key>
+          <Property Name="TAAC_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="TAAC_DS_ACOMPANHAMENTO" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Name="TAAC_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="TAAC_DT_ACOMPANHAMENTO" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_ACOMPANHAMENTO_TAREFA" FromRole="TAREFA_ACOMPANHAMENTO" ToRole="TAREFA" />
+          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO" FromRole="TAREFA_ACOMPANHAMENTO" ToRole="USUARIO_SUGESTAO" />
+        </EntityType>
+        <EntityType Name="TAREFA_ANEXO">
+          <Key>
+            <PropertyRef Name="TAAN_CD_ID" />
+          </Key>
+          <Property Name="TAAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="TAAN_NM_TITULO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TAAN_DT_ANEXO" Type="DateTime" Precision="0" />
+          <Property Name="TAAN_IN_TIPO" Type="Int32" />
+          <Property Name="TAAN_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TAAN_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_ANEXO_TAREFA" FromRole="TAREFA_ANEXO" ToRole="TAREFA" />
+        </EntityType>
+        <EntityType Name="TAREFA_NOTIFICACAO">
+          <Key>
+            <PropertyRef Name="TANO_CD_ID" />
+          </Key>
+          <Property Name="TANO_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="TANO_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_NOTIFICACAO_TAREFA" FromRole="TAREFA_NOTIFICACAO" ToRole="TAREFA" />
+          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO" FromRole="TAREFA_NOTIFICACAO" ToRole="USUARIO_SUGESTAO" />
+        </EntityType>
+        <EntityType Name="TAREFA_VINCULO">
+          <Key>
+            <PropertyRef Name="TAVI_CD_ID" />
+          </Key>
+          <Property Name="TAVI_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="TAVI_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_VINCULO_TAREFA" FromRole="TAREFA_VINCULO" ToRole="TAREFA" />
+          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_TAREFA_VINCULO_USUARIO_SUGESTAO" FromRole="TAREFA_VINCULO" ToRole="USUARIO_SUGESTAO" />
+        </EntityType>
+        <EntityType Name="TELEFONE">
+          <Key>
+            <PropertyRef Name="TELE_CD_ID" />
+          </Key>
+          <Property Name="TELE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATE_CD_ID" Type="Int32" />
+          <Property Name="TELE_NM_NOME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TELE_NR_TELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELE_NR_CELULAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELE_NR_WHATSAPP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELE_NM_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TELE_IN_ATIVO" Type="Int32" />
+          <Property Name="TELE_NM_ENDERECO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELE_NM_BAIRRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELE_NM_CIDADE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UF_CD_ID" Type="Int32" />
+          <Property Name="TELE_NR_CEP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TELE_TX_OBSERVACOES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CATEGORIA_TELEFONE" Relationship="Self.FK_TELEFONE_CATEGORIA_TELEFONE" FromRole="TELEFONE" ToRole="CATEGORIA_TELEFONE" />
+          <NavigationProperty Name="UF" Relationship="Self.FK_TELEFONE_UF" FromRole="TELEFONE" ToRole="UF" />
+        </EntityType>
+        <EntityType Name="TEMPLATE">
+          <Key>
+            <PropertyRef Name="TEMP_CD_ID" />
+          </Key>
+          <Property Name="TEMP_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TEMP_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_IN_TIPO" Type="Int32" />
+          <Property Name="TEMP_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_TX_CONTEUDO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_AQ_ARQUIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_IN_ATIVO" Type="Int32" Nullable="false" />
+          <Property Name="TEMP_TX_CONTEUDO_LIMPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_TX_CABECALHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_TX_CORPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_TX_DADOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEMP_DT_CRIACAO" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="TEMPLATE_EMAIL">
+          <Key>
+            <PropertyRef Name="TEEM_CD_ID" />
+          </Key>
+          <Property Name="TEEM_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TEEM_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_LK_LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_IN_ATIVO" Type="Int32" />
+          <Property Name="TEEM_TX_CABECALHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_TX_CORPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_TX_DADOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_AQ_ARQUIVO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_TX_COMPLETO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TEEM_IN_HTML" Type="Int32" />
+        </EntityType>
         <EntityType Name="TEMPLATE_MENSAGEM">
           <Key>
             <PropertyRef Name="TEMP_CD_ID" />
@@ -7730,6 +7973,17 @@
           <Property Name="TEMP_IN_ATIVO" Type="Int32" Nullable="false" />
           <Property Name="TEMP_TX_MENSAGEM_TEXTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CLIENTE_MARKETING_ATIVO" Relationship="Self.FK_CLIENTE_MARKETING_ATIVO_TEMPLATE_MENSAGEM" FromRole="TEMPLATE_MENSAGEM" ToRole="CLIENTE_MARKETING_ATIVO" />
+        </EntityType>
+        <EntityType Name="TEMPLATE_SMS">
+          <Key>
+            <PropertyRef Name="TSMS_CD_ID" />
+          </Key>
+          <Property Name="TSMS_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TSMS_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TSMS_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TSMS_TX_CORPO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TSMS_LK_LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TSMS_IN_ATIVO" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="TICKET_ATENDIMENTO">
           <Key>
@@ -7909,6 +8163,15 @@
           <Property Name="TISE_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CONTRATO" Relationship="Self.FK_CONTRATO_TIPO_SERVICO" FromRole="TIPO_SERVICO" ToRole="CONTRATO" />
         </EntityType>
+        <EntityType Name="TIPO_TAREFA">
+          <Key>
+            <PropertyRef Name="TITR_CD_ID" />
+          </Key>
+          <Property Name="TITR_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TITR_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TITR_IN_ATIVO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_TIPO_TAREFA" FromRole="TIPO_TAREFA" ToRole="TAREFA" />
+        </EntityType>
         <EntityType Name="TIPO_VEICULO">
           <Key>
             <PropertyRef Name="TIVE_CD_ID" />
@@ -7942,7 +8205,7 @@
           <NavigationProperty Name="PRESTADOR_ENDERECO" Relationship="Self.FKPRESTADOR_649765" FromRole="UF" ToRole="PRESTADOR_ENDERECO" />
           <NavigationProperty Name="PRESTADOR_MOTORISTA" Relationship="Self.FKPRESTADOR_995951" FromRole="UF" ToRole="PRESTADOR_MOTORISTA" />
           <NavigationProperty Name="REGIAO_COBERTURA" Relationship="Self.FKREGIAO_COB317722" FromRole="UF" ToRole="REGIAO_COBERTURA" />
-          <NavigationProperty Name="TELEFONE" Relationship="DB_EcoBaseModel.FK_TELEFONE_UF" FromRole="UF" ToRole="TELEFONE" />
+          <NavigationProperty Name="TELEFONE" Relationship="Self.FK_TELEFONE_UF" FromRole="UF" ToRole="TELEFONE" />
         </EntityType>
         <EntityType Name="UNIDADE">
           <Key>
@@ -8001,6 +8264,14 @@
           <Property Name="USUA_NR_CPF" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUA_NR_RG" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USUA_TX_OBSERVACOES" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="USUA_NM_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="USUA_IN_COMPRADOR" Type="Int32" />
+          <Property Name="USUA_IN_APROVADOR" Type="Int32" />
+          <Property Name="USUA_IN_TECNICO" Type="Int32" />
+          <Property Name="USUA_IN_SISTEMA" Type="Int32" />
+          <NavigationProperty Name="AGENDA" Relationship="Self.FK_AGENDA_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="AGENDA" />
+          <NavigationProperty Name="AGENDA1" Relationship="Self.FK_AGENDA_USUARIO_SUGESTAO1" FromRole="USUARIO_SUGESTAO" ToRole="AGENDA" />
+          <NavigationProperty Name="AGENDA_VINCULO" Relationship="Self.FK_AGENDA_VINCULO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="AGENDA_VINCULO" />
           <NavigationProperty Name="ATENDIMENTO_ACOMPANHAMENTO" Relationship="Self.FKATENDIMENT641742" FromRole="USUARIO_SUGESTAO" ToRole="ATENDIMENTO_ACOMPANHAMENTO" />
           <NavigationProperty Name="AUDITORIA" Relationship="Self.FKAUDITORIA266940" FromRole="USUARIO_SUGESTAO" ToRole="AUDITORIA" />
           <NavigationProperty Name="CARGO" Relationship="Self.FKUSUARIO_SU965559" FromRole="USUARIO_SUGESTAO" ToRole="CARGO" />
@@ -8011,6 +8282,7 @@
           <NavigationProperty Name="DEPARTAMENTO" Relationship="Self.FKUSUARIO_SU678029" FromRole="USUARIO_SUGESTAO" ToRole="DEPARTAMENTO" />
           <NavigationProperty Name="DESTINADOR_ANOTACOES" Relationship="Self.FKDESTINADOR318385" FromRole="USUARIO_SUGESTAO" ToRole="DESTINADOR_ANOTACOES" />
           <NavigationProperty Name="DESTINADOR_ENVIO_ANOTACOES" Relationship="Self.FKDESTINADOR672916" FromRole="USUARIO_SUGESTAO" ToRole="DESTINADOR_ENVIO_ANOTACOES" />
+          <NavigationProperty Name="LOG" Relationship="Self.FK_LOG_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="LOG" />
           <NavigationProperty Name="NOTICIA_COMENTARIO" Relationship="Self.FK_NOTICIA_COMENTARIO_USUARIO" FromRole="USUARIO_SUGESTAO" ToRole="NOTICIA_COMENTARIO" />
           <NavigationProperty Name="NOTIFICACAO" Relationship="Self.FK_NOTIFICACAO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="NOTIFICACAO" />
           <NavigationProperty Name="ORDEM_SERVICO" Relationship="Self.FK_ORDEM_SERVICO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="ORDEM_SERVICO" />
@@ -8026,21 +8298,14 @@
           <NavigationProperty Name="PRESTADOR_ENDERECO_VERIFICACAO" Relationship="Self.FK_PRESTADOR_ENDERECO_VERIFICACAO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="PRESTADOR_ENDERECO_VERIFICACAO" />
           <NavigationProperty Name="PRESTADOR_MOTORISTA_ANOTACOES" Relationship="Self.FK_PRESTADOR_MOTORISTA_ANOTACOES_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="PRESTADOR_MOTORISTA_ANOTACOES" />
           <NavigationProperty Name="PRESTADOR_VEICULO_ANOTACOES" Relationship="Self.FK_PRESTADOR_VEICULO_ANOTACOES_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="PRESTADOR_VEICULO_ANOTACOES" />
+          <NavigationProperty Name="TAREFA" Relationship="Self.FK_TAREFA_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="TAREFA" />
+          <NavigationProperty Name="TAREFA_ACOMPANHAMENTO" Relationship="Self.FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="TAREFA_ACOMPANHAMENTO" />
+          <NavigationProperty Name="TAREFA_NOTIFICACAO" Relationship="Self.FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="TAREFA_NOTIFICACAO" />
+          <NavigationProperty Name="TAREFA_VINCULO" Relationship="Self.FK_TAREFA_VINCULO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="TAREFA_VINCULO" />
           <NavigationProperty Name="TICKET_ATENDIMENTO" Relationship="Self.FKTICKET_ATE274359" FromRole="USUARIO_SUGESTAO" ToRole="TICKET_ATENDIMENTO" />
           <NavigationProperty Name="USUARIO_ANEXO" Relationship="Self.FKUSUARIO_AN744744" FromRole="USUARIO_SUGESTAO" ToRole="USUARIO_ANEXO" />
-          <NavigationProperty Name="AGENDA" Relationship="DB_EcoBaseModel.FK_AGENDA_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="AGENDA" />
-          <NavigationProperty Name="AGENDA1" Relationship="DB_EcoBaseModel.FK_AGENDA_USUARIO_SUGESTAO1" FromRole="USUARIO_SUGESTAO" ToRole="AGENDA" />
-          <NavigationProperty Name="AGENDA_VINCULO" Relationship="DB_EcoBaseModel.FK_AGENDA_VINCULO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="AGENDA_VINCULO" />
-          <NavigationProperty Name="TAREFA" Relationship="DB_EcoBaseModel.FK_TAREFA_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="TAREFA" />
-          <NavigationProperty Name="TAREFA_ACOMPANHAMENTO" Relationship="DB_EcoBaseModel.FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="TAREFA_ACOMPANHAMENTO" />
-          <NavigationProperty Name="TAREFA_NOTIFICACAO" Relationship="DB_EcoBaseModel.FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="TAREFA_NOTIFICACAO" />
-          <NavigationProperty Name="TAREFA_VINCULO" Relationship="DB_EcoBaseModel.FK_TAREFA_VINCULO_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="TAREFA_VINCULO" />
-          <NavigationProperty Name="LOG" Relationship="DB_EcoBaseModel.FK_LOG_USUARIO_SUGESTAO" FromRole="USUARIO_SUGESTAO" ToRole="LOG" />
-          <Property Name="USUA_NM_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="USUA_IN_COMPRADOR" Type="Int32" />
-          <Property Name="USUA_IN_APROVADOR" Type="Int32" />
-          <Property Name="USUA_IN_TECNICO" Type="Int32" />
-          <Property Name="USUA_IN_SISTEMA" Type="Int32" />
+          <Property Name="USUA_NR_TELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUA_NR_WHATSAPP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VEICULO_FUNCAO">
           <Key>
@@ -8060,6 +8325,78 @@
             </Principal>
             <Dependent Role="DESTINADOR_ENVIO_PRODUTO">
               <PropertyRef Name="ACON_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENDA_ANEXO_AGENDA">
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="1" />
+          <End Role="AGENDA_ANEXO" Type="Self.AGENDA_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGENDA">
+              <PropertyRef Name="AGEN_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA_ANEXO">
+              <PropertyRef Name="AGEN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENDA_CATEGORIA_AGENDA">
+          <End Role="CATEGORIA_AGENDA" Type="Self.CATEGORIA_AGENDA" Multiplicity="0..1" />
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_AGENDA">
+              <PropertyRef Name="CAAG_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA">
+              <PropertyRef Name="CAAG_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENDA_USUARIO_SUGESTAO">
+          <End Role="USUARIO_SUGESTAO" Type="Self.USUARIO_SUGESTAO" Multiplicity="1" />
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SUGESTAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENDA_USUARIO_SUGESTAO1">
+          <End Role="USUARIO_SUGESTAO" Type="Self.USUARIO_SUGESTAO" Multiplicity="0..1" />
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SUGESTAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA">
+              <PropertyRef Name="AGEN_CD_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENDA_VINCULO_AGENDA">
+          <End Role="AGENDA" Type="Self.AGENDA" Multiplicity="1" />
+          <End Role="AGENDA_VINCULO" Type="Self.AGENDA_VINCULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AGENDA">
+              <PropertyRef Name="AGEN_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA_VINCULO">
+              <PropertyRef Name="AGEN_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AGENDA_VINCULO_USUARIO_SUGESTAO">
+          <End Role="USUARIO_SUGESTAO" Type="Self.USUARIO_SUGESTAO" Multiplicity="1" />
+          <End Role="AGENDA_VINCULO" Type="Self.AGENDA_VINCULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SUGESTAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="AGENDA_VINCULO">
+              <PropertyRef Name="USUA_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8216,6 +8553,18 @@
             </Principal>
             <Dependent Role="SUBCATEGORIA_PRODUTO">
               <PropertyRef Name="CAPR_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TELEFONE_CATEGORIA_TELEFONE">
+          <End Role="CATEGORIA_TELEFONE" Type="Self.CATEGORIA_TELEFONE" Multiplicity="0..1" />
+          <End Role="TELEFONE" Type="Self.TELEFONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_TELEFONE">
+              <PropertyRef Name="CATE_CD_ID" />
+            </Principal>
+            <Dependent Role="TELEFONE">
+              <PropertyRef Name="CATE_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9311,6 +9660,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LOG_USUARIO_SUGESTAO">
+          <End Role="USUARIO_SUGESTAO" Type="Self.USUARIO_SUGESTAO" Multiplicity="1" />
+          <End Role="LOG" Type="Self.LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SUGESTAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="LOG">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKPRESTADOR_855104">
           <End Role="MARCA_VEICULO" Type="Self.MARCA_VEICULO" Multiplicity="1" />
           <End Role="PRESTADOR_VEICULO" Type="Self.PRESTADOR_VEICULO" Multiplicity="*" />
@@ -9923,6 +10284,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TAREFA_PERIODICIDADE_TAREFA">
+          <End Role="PERIODICIDADE_TAREFA" Type="Self.PERIODICIDADE_TAREFA" Multiplicity="0..1" />
+          <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERIODICIDADE_TAREFA">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA">
+              <PropertyRef Name="PETA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKPESQUISA_I132358">
           <End Role="PESQUISA" Type="Self.PESQUISA" Multiplicity="1" />
           <End Role="PESQUISA_ITEM" Type="Self.PESQUISA_ITEM" Multiplicity="*" />
@@ -10487,6 +10860,126 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TAREFA_ACOMPANHAMENTO_TAREFA">
+          <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="1" />
+          <End Role="TAREFA_ACOMPANHAMENTO" Type="Self.TAREFA_ACOMPANHAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREFA">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA_ACOMPANHAMENTO">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAREFA_ANEXO_TAREFA">
+          <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="1" />
+          <End Role="TAREFA_ANEXO" Type="Self.TAREFA_ANEXO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREFA">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA_ANEXO">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAREFA_NOTIFICACAO_TAREFA">
+          <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="1" />
+          <End Role="TAREFA_NOTIFICACAO" Type="Self.TAREFA_NOTIFICACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREFA">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA_NOTIFICACAO">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAREFA_TIPO_TAREFA">
+          <End Role="TIPO_TAREFA" Type="Self.TIPO_TAREFA" Multiplicity="0..1" />
+          <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_TAREFA">
+              <PropertyRef Name="TITR_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA">
+              <PropertyRef Name="TITR_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAREFA_USUARIO_SUGESTAO">
+          <End Role="USUARIO_SUGESTAO" Type="Self.USUARIO_SUGESTAO" Multiplicity="1" />
+          <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SUGESTAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAREFA_VINCULO_TAREFA">
+          <End Role="TAREFA" Type="Self.TAREFA" Multiplicity="1" />
+          <End Role="TAREFA_VINCULO" Type="Self.TAREFA_VINCULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAREFA">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA_VINCULO">
+              <PropertyRef Name="TARE_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO">
+          <End Role="USUARIO_SUGESTAO" Type="Self.USUARIO_SUGESTAO" Multiplicity="1" />
+          <End Role="TAREFA_ACOMPANHAMENTO" Type="Self.TAREFA_ACOMPANHAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SUGESTAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA_ACOMPANHAMENTO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO">
+          <End Role="USUARIO_SUGESTAO" Type="Self.USUARIO_SUGESTAO" Multiplicity="1" />
+          <End Role="TAREFA_NOTIFICACAO" Type="Self.TAREFA_NOTIFICACAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SUGESTAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA_NOTIFICACAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TAREFA_VINCULO_USUARIO_SUGESTAO">
+          <End Role="USUARIO_SUGESTAO" Type="Self.USUARIO_SUGESTAO" Multiplicity="1" />
+          <End Role="TAREFA_VINCULO" Type="Self.TAREFA_VINCULO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO_SUGESTAO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Principal>
+            <Dependent Role="TAREFA_VINCULO">
+              <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TELEFONE_UF">
+          <End Role="UF" Type="Self.UF" Multiplicity="0..1" />
+          <End Role="TELEFONE" Type="Self.TELEFONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UF">
+              <PropertyRef Name="UF_CD_ID" />
+            </Principal>
+            <Dependent Role="TELEFONE">
+              <PropertyRef Name="UF_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKTICKET_ATE274359">
           <End Role="USUARIO_SUGESTAO" Type="Self.USUARIO_SUGESTAO" Multiplicity="1" />
           <End Role="TICKET_ATENDIMENTO" Type="Self.TICKET_ATENDIMENTO" Multiplicity="*" />
@@ -10513,16 +11006,21 @@
         </Association>
         <EntityContainer Name="DB_EcoBaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACONDICIONAMENTO" EntityType="Self.ACONDICIONAMENTO" />
+          <EntitySet Name="AGENDA" EntityType="Self.AGENDA" />
+          <EntitySet Name="AGENDA_ANEXO" EntityType="Self.AGENDA_ANEXO" />
+          <EntitySet Name="AGENDA_VINCULO" EntityType="Self.AGENDA_VINCULO" />
           <EntitySet Name="ATENDIMENTO_ACOMPANHAMENTO" EntityType="Self.ATENDIMENTO_ACOMPANHAMENTO" />
           <EntitySet Name="ATENDIMENTO_ANEXO" EntityType="Self.ATENDIMENTO_ANEXO" />
           <EntitySet Name="ATENDIMENTO_STATUS" EntityType="Self.ATENDIMENTO_STATUS" />
           <EntitySet Name="AUDITORIA" EntityType="Self.AUDITORIA" />
           <EntitySet Name="BANCO" EntityType="Self.BANCO" />
           <EntitySet Name="CARGO" EntityType="Self.CARGO" />
+          <EntitySet Name="CATEGORIA_AGENDA" EntityType="Self.CATEGORIA_AGENDA" />
           <EntitySet Name="CATEGORIA_ATENDIMENTO" EntityType="Self.CATEGORIA_ATENDIMENTO" />
           <EntitySet Name="CATEGORIA_FORNECEDOR" EntityType="Self.CATEGORIA_FORNECEDOR" />
           <EntitySet Name="CATEGORIA_NOTIFICACAO" EntityType="Self.CATEGORIA_NOTIFICACAO" />
           <EntitySet Name="CATEGORIA_PRODUTO" EntityType="Self.CATEGORIA_PRODUTO" />
+          <EntitySet Name="CATEGORIA_TELEFONE" EntityType="Self.CATEGORIA_TELEFONE" />
           <EntitySet Name="CATEGORIA_USUARIO" EntityType="Self.CATEGORIA_USUARIO" />
           <EntitySet Name="CENTRO_CUSTO" EntityType="Self.CENTRO_CUSTO" />
           <EntitySet Name="CLASSE" EntityType="Self.CLASSE" />
@@ -10537,6 +11035,7 @@
           <EntitySet Name="CLIENTE_PERGUNTA_OPCAO" EntityType="Self.CLIENTE_PERGUNTA_OPCAO" />
           <EntitySet Name="CLIENTE_RESPOSTA" EntityType="Self.CLIENTE_RESPOSTA" />
           <EntitySet Name="CNH_CATEGORIA" EntityType="Self.CNH_CATEGORIA" />
+          <EntitySet Name="CONFIGURACAO" EntityType="Self.CONFIGURACAO" />
           <EntitySet Name="CONTA_BANCO" EntityType="Self.CONTA_BANCO" />
           <EntitySet Name="CONTA_BANCO_ANEXO" EntityType="Self.CONTA_BANCO_ANEXO" />
           <EntitySet Name="CONTA_BANCO_CONTATO" EntityType="Self.CONTA_BANCO_CONTATO" />
@@ -10569,6 +11068,7 @@
           <EntitySet Name="LEILOEIRO_LOTE" EntityType="Self.LEILOEIRO_LOTE" />
           <EntitySet Name="LEILOEIRO_LOTE_ITENS" EntityType="Self.LEILOEIRO_LOTE_ITENS" />
           <EntitySet Name="LINHA_PRODUTO" EntityType="Self.LINHA_PRODUTO" />
+          <EntitySet Name="LOG" EntityType="Self.LOG" />
           <EntitySet Name="MARCA_VEICULO" EntityType="Self.MARCA_VEICULO" />
           <EntitySet Name="MODELO_VEICULO" EntityType="Self.MODELO_VEICULO" />
           <EntitySet Name="MOTIVO_FALHA_ORDEM_SERVICO" EntityType="Self.MOTIVO_FALHA_ORDEM_SERVICO" />
@@ -10597,6 +11097,7 @@
           <EntitySet Name="PEDIDO_COMPRA_ANEXO" EntityType="Self.PEDIDO_COMPRA_ANEXO" />
           <EntitySet Name="PERFIL" EntityType="Self.PERFIL" />
           <EntitySet Name="PERIODICIDADE" EntityType="Self.PERIODICIDADE" />
+          <EntitySet Name="PERIODICIDADE_TAREFA" EntityType="Self.PERIODICIDADE_TAREFA" />
           <EntitySet Name="PERIODO" EntityType="Self.PERIODO" />
           <EntitySet Name="PESQUISA" EntityType="Self.PESQUISA" />
           <EntitySet Name="PESQUISA_ITEM" EntityType="Self.PESQUISA_ITEM" />
@@ -10633,7 +11134,16 @@
           <EntitySet Name="STATUS_ORDEM_SERVICO" EntityType="Self.STATUS_ORDEM_SERVICO" />
           <EntitySet Name="SUBCATEGORIA_PRODUTO" EntityType="Self.SUBCATEGORIA_PRODUTO" />
           <EntitySet Name="SUBGRUPO" EntityType="Self.SUBGRUPO" />
+          <EntitySet Name="TAREFA" EntityType="Self.TAREFA" />
+          <EntitySet Name="TAREFA_ACOMPANHAMENTO" EntityType="Self.TAREFA_ACOMPANHAMENTO" />
+          <EntitySet Name="TAREFA_ANEXO" EntityType="Self.TAREFA_ANEXO" />
+          <EntitySet Name="TAREFA_NOTIFICACAO" EntityType="Self.TAREFA_NOTIFICACAO" />
+          <EntitySet Name="TAREFA_VINCULO" EntityType="Self.TAREFA_VINCULO" />
+          <EntitySet Name="TELEFONE" EntityType="Self.TELEFONE" />
+          <EntitySet Name="TEMPLATE" EntityType="Self.TEMPLATE" />
+          <EntitySet Name="TEMPLATE_EMAIL" EntityType="Self.TEMPLATE_EMAIL" />
           <EntitySet Name="TEMPLATE_MENSAGEM" EntityType="Self.TEMPLATE_MENSAGEM" />
+          <EntitySet Name="TEMPLATE_SMS" EntityType="Self.TEMPLATE_SMS" />
           <EntitySet Name="TICKET_ATENDIMENTO" EntityType="Self.TICKET_ATENDIMENTO" />
           <EntitySet Name="TIPO_CENTRO_CUSTO" EntityType="Self.TIPO_CENTRO_CUSTO" />
           <EntitySet Name="TIPO_CERTIFICADO" EntityType="Self.TIPO_CERTIFICADO" />
@@ -10650,6 +11160,7 @@
           <EntitySet Name="TIPO_RESIDENCIA" EntityType="Self.TIPO_RESIDENCIA" />
           <EntitySet Name="TIPO_RESIDUO" EntityType="Self.TIPO_RESIDUO" />
           <EntitySet Name="TIPO_SERVICO" EntityType="Self.TIPO_SERVICO" />
+          <EntitySet Name="TIPO_TAREFA" EntityType="Self.TIPO_TAREFA" />
           <EntitySet Name="TIPO_VEICULO" EntityType="Self.TIPO_VEICULO" />
           <EntitySet Name="TRATAMENTO" EntityType="Self.TRATAMENTO" />
           <EntitySet Name="UF" EntityType="Self.UF" />
@@ -10660,6 +11171,30 @@
           <AssociationSet Name="FKDESTINADOR349616" Association="Self.FKDESTINADOR349616">
             <End Role="ACONDICIONAMENTO" EntitySet="ACONDICIONAMENTO" />
             <End Role="DESTINADOR_ENVIO_PRODUTO" EntitySet="DESTINADOR_ENVIO_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_ANEXO_AGENDA" Association="Self.FK_AGENDA_ANEXO_AGENDA">
+            <End Role="AGENDA" EntitySet="AGENDA" />
+            <End Role="AGENDA_ANEXO" EntitySet="AGENDA_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_CATEGORIA_AGENDA" Association="Self.FK_AGENDA_CATEGORIA_AGENDA">
+            <End Role="CATEGORIA_AGENDA" EntitySet="CATEGORIA_AGENDA" />
+            <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_USUARIO_SUGESTAO" Association="Self.FK_AGENDA_USUARIO_SUGESTAO">
+            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
+            <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_USUARIO_SUGESTAO1" Association="Self.FK_AGENDA_USUARIO_SUGESTAO1">
+            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
+            <End Role="AGENDA" EntitySet="AGENDA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_VINCULO_AGENDA" Association="Self.FK_AGENDA_VINCULO_AGENDA">
+            <End Role="AGENDA" EntitySet="AGENDA" />
+            <End Role="AGENDA_VINCULO" EntitySet="AGENDA_VINCULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AGENDA_VINCULO_USUARIO_SUGESTAO" Association="Self.FK_AGENDA_VINCULO_USUARIO_SUGESTAO">
+            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
+            <End Role="AGENDA_VINCULO" EntitySet="AGENDA_VINCULO" />
           </AssociationSet>
           <AssociationSet Name="FKATENDIMENT641742" Association="Self.FKATENDIMENT641742">
             <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
@@ -10712,6 +11247,10 @@
           <AssociationSet Name="FKSUBCATEGOR381994" Association="Self.FKSUBCATEGOR381994">
             <End Role="CATEGORIA_PRODUTO" EntitySet="CATEGORIA_PRODUTO" />
             <End Role="SUBCATEGORIA_PRODUTO" EntitySet="SUBCATEGORIA_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TELEFONE_CATEGORIA_TELEFONE" Association="Self.FK_TELEFONE_CATEGORIA_TELEFONE">
+            <End Role="CATEGORIA_TELEFONE" EntitySet="CATEGORIA_TELEFONE" />
+            <End Role="TELEFONE" EntitySet="TELEFONE" />
           </AssociationSet>
           <AssociationSet Name="FKUSUARIO_SU287786" Association="Self.FKUSUARIO_SU287786">
             <End Role="CATEGORIA_USUARIO" EntitySet="CATEGORIA_USUARIO" />
@@ -11077,6 +11616,10 @@
             <End Role="LINHA_PRODUTO" EntitySet="LINHA_PRODUTO" />
             <End Role="TIPO_PRODUTO" EntitySet="TIPO_PRODUTO" />
           </AssociationSet>
+          <AssociationSet Name="FK_LOG_USUARIO_SUGESTAO" Association="Self.FK_LOG_USUARIO_SUGESTAO">
+            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
+            <End Role="LOG" EntitySet="LOG" />
+          </AssociationSet>
           <AssociationSet Name="FKPRESTADOR_855104" Association="Self.FKPRESTADOR_855104">
             <End Role="MARCA_VEICULO" EntitySet="MARCA_VEICULO" />
             <End Role="PRESTADOR_VEICULO" EntitySet="PRESTADOR_VEICULO" />
@@ -11281,6 +11824,10 @@
             <End Role="PERFIL" EntitySet="PERFIL" />
             <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
           </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_PERIODICIDADE_TAREFA" Association="Self.FK_TAREFA_PERIODICIDADE_TAREFA">
+            <End Role="PERIODICIDADE_TAREFA" EntitySet="PERIODICIDADE_TAREFA" />
+            <End Role="TAREFA" EntitySet="TAREFA" />
+          </AssociationSet>
           <AssociationSet Name="FKPESQUISA_I132358" Association="Self.FKPESQUISA_I132358">
             <End Role="PESQUISA" EntitySet="PESQUISA" />
             <End Role="PESQUISA_ITEM" EntitySet="PESQUISA_ITEM" />
@@ -11469,6 +12016,46 @@
             <End Role="UF" EntitySet="UF" />
             <End Role="REGIAO_COBERTURA" EntitySet="REGIAO_COBERTURA" />
           </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_ACOMPANHAMENTO_TAREFA" Association="Self.FK_TAREFA_ACOMPANHAMENTO_TAREFA">
+            <End Role="TAREFA" EntitySet="TAREFA" />
+            <End Role="TAREFA_ACOMPANHAMENTO" EntitySet="TAREFA_ACOMPANHAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_ANEXO_TAREFA" Association="Self.FK_TAREFA_ANEXO_TAREFA">
+            <End Role="TAREFA" EntitySet="TAREFA" />
+            <End Role="TAREFA_ANEXO" EntitySet="TAREFA_ANEXO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_NOTIFICACAO_TAREFA" Association="Self.FK_TAREFA_NOTIFICACAO_TAREFA">
+            <End Role="TAREFA" EntitySet="TAREFA" />
+            <End Role="TAREFA_NOTIFICACAO" EntitySet="TAREFA_NOTIFICACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_TIPO_TAREFA" Association="Self.FK_TAREFA_TIPO_TAREFA">
+            <End Role="TIPO_TAREFA" EntitySet="TIPO_TAREFA" />
+            <End Role="TAREFA" EntitySet="TAREFA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_USUARIO_SUGESTAO" Association="Self.FK_TAREFA_USUARIO_SUGESTAO">
+            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
+            <End Role="TAREFA" EntitySet="TAREFA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_VINCULO_TAREFA" Association="Self.FK_TAREFA_VINCULO_TAREFA">
+            <End Role="TAREFA" EntitySet="TAREFA" />
+            <End Role="TAREFA_VINCULO" EntitySet="TAREFA_VINCULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO" Association="Self.FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO">
+            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
+            <End Role="TAREFA_ACOMPANHAMENTO" EntitySet="TAREFA_ACOMPANHAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO" Association="Self.FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO">
+            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
+            <End Role="TAREFA_NOTIFICACAO" EntitySet="TAREFA_NOTIFICACAO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TAREFA_VINCULO_USUARIO_SUGESTAO" Association="Self.FK_TAREFA_VINCULO_USUARIO_SUGESTAO">
+            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
+            <End Role="TAREFA_VINCULO" EntitySet="TAREFA_VINCULO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TELEFONE_UF" Association="Self.FK_TELEFONE_UF">
+            <End Role="UF" EntitySet="UF" />
+            <End Role="TELEFONE" EntitySet="TELEFONE" />
+          </AssociationSet>
           <AssociationSet Name="FKTICKET_ATE274359" Association="Self.FKTICKET_ATE274359">
             <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
             <End Role="TICKET_ATENDIMENTO" EntitySet="TICKET_ATENDIMENTO" />
@@ -11477,590 +12064,7 @@
             <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
             <End Role="USUARIO_ANEXO" EntitySet="USUARIO_ANEXO" />
           </AssociationSet>
-          <EntitySet Name="AGENDA" EntityType="DB_EcoBaseModel.AGENDA" />
-          <EntitySet Name="AGENDA_ANEXO" EntityType="DB_EcoBaseModel.AGENDA_ANEXO" />
-          <EntitySet Name="AGENDA_VINCULO" EntityType="DB_EcoBaseModel.AGENDA_VINCULO" />
-          <EntitySet Name="CATEGORIA_AGENDA" EntityType="DB_EcoBaseModel.CATEGORIA_AGENDA" />
-          <EntitySet Name="CATEGORIA_TELEFONE" EntityType="DB_EcoBaseModel.CATEGORIA_TELEFONE" />
-          <EntitySet Name="PERIODICIDADE_TAREFA" EntityType="DB_EcoBaseModel.PERIODICIDADE_TAREFA" />
-          <EntitySet Name="TAREFA" EntityType="DB_EcoBaseModel.TAREFA" />
-          <EntitySet Name="TAREFA_ACOMPANHAMENTO" EntityType="DB_EcoBaseModel.TAREFA_ACOMPANHAMENTO" />
-          <EntitySet Name="TAREFA_ANEXO" EntityType="DB_EcoBaseModel.TAREFA_ANEXO" />
-          <EntitySet Name="TAREFA_NOTIFICACAO" EntityType="DB_EcoBaseModel.TAREFA_NOTIFICACAO" />
-          <EntitySet Name="TAREFA_VINCULO" EntityType="DB_EcoBaseModel.TAREFA_VINCULO" />
-          <EntitySet Name="TELEFONE" EntityType="DB_EcoBaseModel.TELEFONE" />
-          <EntitySet Name="TEMPLATE" EntityType="DB_EcoBaseModel.TEMPLATE" />
-          <EntitySet Name="TEMPLATE_EMAIL" EntityType="DB_EcoBaseModel.TEMPLATE_EMAIL" />
-          <EntitySet Name="TEMPLATE_SMS" EntityType="DB_EcoBaseModel.TEMPLATE_SMS" />
-          <EntitySet Name="TIPO_TAREFA" EntityType="DB_EcoBaseModel.TIPO_TAREFA" />
-          <AssociationSet Name="FK_AGENDA_ANEXO_AGENDA" Association="DB_EcoBaseModel.FK_AGENDA_ANEXO_AGENDA">
-            <End Role="AGENDA" EntitySet="AGENDA" />
-            <End Role="AGENDA_ANEXO" EntitySet="AGENDA_ANEXO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AGENDA_CATEGORIA_AGENDA" Association="DB_EcoBaseModel.FK_AGENDA_CATEGORIA_AGENDA">
-            <End Role="CATEGORIA_AGENDA" EntitySet="CATEGORIA_AGENDA" />
-            <End Role="AGENDA" EntitySet="AGENDA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AGENDA_USUARIO_SUGESTAO" Association="DB_EcoBaseModel.FK_AGENDA_USUARIO_SUGESTAO">
-            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
-            <End Role="AGENDA" EntitySet="AGENDA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AGENDA_USUARIO_SUGESTAO1" Association="DB_EcoBaseModel.FK_AGENDA_USUARIO_SUGESTAO1">
-            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
-            <End Role="AGENDA" EntitySet="AGENDA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AGENDA_VINCULO_AGENDA" Association="DB_EcoBaseModel.FK_AGENDA_VINCULO_AGENDA">
-            <End Role="AGENDA" EntitySet="AGENDA" />
-            <End Role="AGENDA_VINCULO" EntitySet="AGENDA_VINCULO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AGENDA_VINCULO_USUARIO_SUGESTAO" Association="DB_EcoBaseModel.FK_AGENDA_VINCULO_USUARIO_SUGESTAO">
-            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
-            <End Role="AGENDA_VINCULO" EntitySet="AGENDA_VINCULO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TELEFONE_CATEGORIA_TELEFONE" Association="DB_EcoBaseModel.FK_TELEFONE_CATEGORIA_TELEFONE">
-            <End Role="CATEGORIA_TELEFONE" EntitySet="CATEGORIA_TELEFONE" />
-            <End Role="TELEFONE" EntitySet="TELEFONE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_PERIODICIDADE_TAREFA" Association="DB_EcoBaseModel.FK_TAREFA_PERIODICIDADE_TAREFA">
-            <End Role="PERIODICIDADE_TAREFA" EntitySet="PERIODICIDADE_TAREFA" />
-            <End Role="TAREFA" EntitySet="TAREFA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_ACOMPANHAMENTO_TAREFA" Association="DB_EcoBaseModel.FK_TAREFA_ACOMPANHAMENTO_TAREFA">
-            <End Role="TAREFA" EntitySet="TAREFA" />
-            <End Role="TAREFA_ACOMPANHAMENTO" EntitySet="TAREFA_ACOMPANHAMENTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_ANEXO_TAREFA" Association="DB_EcoBaseModel.FK_TAREFA_ANEXO_TAREFA">
-            <End Role="TAREFA" EntitySet="TAREFA" />
-            <End Role="TAREFA_ANEXO" EntitySet="TAREFA_ANEXO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_NOTIFICACAO_TAREFA" Association="DB_EcoBaseModel.FK_TAREFA_NOTIFICACAO_TAREFA">
-            <End Role="TAREFA" EntitySet="TAREFA" />
-            <End Role="TAREFA_NOTIFICACAO" EntitySet="TAREFA_NOTIFICACAO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_TIPO_TAREFA" Association="DB_EcoBaseModel.FK_TAREFA_TIPO_TAREFA">
-            <End Role="TIPO_TAREFA" EntitySet="TIPO_TAREFA" />
-            <End Role="TAREFA" EntitySet="TAREFA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_USUARIO_SUGESTAO" Association="DB_EcoBaseModel.FK_TAREFA_USUARIO_SUGESTAO">
-            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
-            <End Role="TAREFA" EntitySet="TAREFA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_VINCULO_TAREFA" Association="DB_EcoBaseModel.FK_TAREFA_VINCULO_TAREFA">
-            <End Role="TAREFA" EntitySet="TAREFA" />
-            <End Role="TAREFA_VINCULO" EntitySet="TAREFA_VINCULO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO" Association="DB_EcoBaseModel.FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO">
-            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
-            <End Role="TAREFA_ACOMPANHAMENTO" EntitySet="TAREFA_ACOMPANHAMENTO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO" Association="DB_EcoBaseModel.FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO">
-            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
-            <End Role="TAREFA_NOTIFICACAO" EntitySet="TAREFA_NOTIFICACAO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TAREFA_VINCULO_USUARIO_SUGESTAO" Association="DB_EcoBaseModel.FK_TAREFA_VINCULO_USUARIO_SUGESTAO">
-            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
-            <End Role="TAREFA_VINCULO" EntitySet="TAREFA_VINCULO" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TELEFONE_UF" Association="DB_EcoBaseModel.FK_TELEFONE_UF">
-            <End Role="UF" EntitySet="UF" />
-            <End Role="TELEFONE" EntitySet="TELEFONE" />
-          </AssociationSet>
-          <EntitySet Name="CONFIGURACAO" EntityType="DB_EcoBaseModel.CONFIGURACAO" />
-          <EntitySet Name="LOG" EntityType="DB_EcoBaseModel.LOG" />
-          <AssociationSet Name="FK_LOG_USUARIO_SUGESTAO" Association="DB_EcoBaseModel.FK_LOG_USUARIO_SUGESTAO">
-            <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
-            <End Role="LOG" EntitySet="LOG" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="AGENDA">
-          <Key>
-            <PropertyRef Name="AGEN_CD_ID" />
-          </Key>
-          <Property Name="AGEN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="CAAG_CD_ID" Type="Int32" />
-          <Property Name="AGEN_DT_DATA" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="AGEN_HR_HORA" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="AGEN_NM_TITULO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="AGEN_DS_DESCRICAO" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
-          <Property Name="AGEN_IN_ATIVO" Type="Int32" Nullable="false" />
-          <Property Name="AGEN_CD_USUARIO" Type="Int32" />
-          <Property Name="AGEN_TX_OBSERVACOES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="AGEN_IN_STATUS" Type="Int32" />
-          <Property Name="AGEN_IN_CORPORATIVA" Type="Int32" />
-          <NavigationProperty Name="AGENDA_ANEXO" Relationship="DB_EcoBaseModel.FK_AGENDA_ANEXO_AGENDA" FromRole="AGENDA" ToRole="AGENDA_ANEXO" />
-          <NavigationProperty Name="CATEGORIA_AGENDA" Relationship="DB_EcoBaseModel.FK_AGENDA_CATEGORIA_AGENDA" FromRole="AGENDA" ToRole="CATEGORIA_AGENDA" />
-          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="DB_EcoBaseModel.FK_AGENDA_USUARIO_SUGESTAO" FromRole="AGENDA" ToRole="USUARIO_SUGESTAO" />
-          <NavigationProperty Name="USUARIO_SUGESTAO1" Relationship="DB_EcoBaseModel.FK_AGENDA_USUARIO_SUGESTAO1" FromRole="AGENDA" ToRole="USUARIO_SUGESTAO" />
-          <NavigationProperty Name="AGENDA_VINCULO" Relationship="DB_EcoBaseModel.FK_AGENDA_VINCULO_AGENDA" FromRole="AGENDA" ToRole="AGENDA_VINCULO" />
-        </EntityType>
-        <EntityType Name="AGENDA_ANEXO">
-          <Key>
-            <PropertyRef Name="AGAN_CD_ID" />
-          </Key>
-          <Property Name="AGAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AGEN_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="AGAN_NM_TITULO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="AGAN_DT_ANEXO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="AGAN_IN_TIPO" Type="Int32" Nullable="false" />
-          <Property Name="AGAN_AQ_ARQUIVO" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="AGAN_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AGENDA" Relationship="DB_EcoBaseModel.FK_AGENDA_ANEXO_AGENDA" FromRole="AGENDA_ANEXO" ToRole="AGENDA" />
-        </EntityType>
-        <EntityType Name="AGENDA_VINCULO">
-          <Key>
-            <PropertyRef Name="AGVI_CD_ID" />
-          </Key>
-          <Property Name="AGVI_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AGEN_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="AGVI_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AGENDA" Relationship="DB_EcoBaseModel.FK_AGENDA_VINCULO_AGENDA" FromRole="AGENDA_VINCULO" ToRole="AGENDA" />
-          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="DB_EcoBaseModel.FK_AGENDA_VINCULO_USUARIO_SUGESTAO" FromRole="AGENDA_VINCULO" ToRole="USUARIO_SUGESTAO" />
-        </EntityType>
-        <EntityType Name="CATEGORIA_AGENDA">
-          <Key>
-            <PropertyRef Name="CAAG_CD_ID" />
-          </Key>
-          <Property Name="CAAG_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CAAG_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CAAG_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AGENDA" Relationship="DB_EcoBaseModel.FK_AGENDA_CATEGORIA_AGENDA" FromRole="CATEGORIA_AGENDA" ToRole="AGENDA" />
-        </EntityType>
-        <EntityType Name="CATEGORIA_TELEFONE">
-          <Key>
-            <PropertyRef Name="CATE_CD_ID" />
-          </Key>
-          <Property Name="CATE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CATE_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CATE_IN_ATIVO" Type="Int32" />
-          <NavigationProperty Name="TELEFONE" Relationship="DB_EcoBaseModel.FK_TELEFONE_CATEGORIA_TELEFONE" FromRole="CATEGORIA_TELEFONE" ToRole="TELEFONE" />
-        </EntityType>
-        <EntityType Name="PERIODICIDADE_TAREFA">
-          <Key>
-            <PropertyRef Name="PETA_CD_ID" />
-          </Key>
-          <Property Name="PETA_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PETA_NM_NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PETA_NR_DIAS" Type="Int32" Nullable="false" />
-          <Property Name="PETA_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TAREFA" Relationship="DB_EcoBaseModel.FK_TAREFA_PERIODICIDADE_TAREFA" FromRole="PERIODICIDADE_TAREFA" ToRole="TAREFA" />
-        </EntityType>
-        <EntityType Name="TAREFA">
-          <Key>
-            <PropertyRef Name="TARE_CD_ID" />
-          </Key>
-          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="TITR_CD_ID" Type="Int32" />
-          <Property Name="PETA_CD_ID" Type="Int32" />
-          <Property Name="TARE_DT_CADASTRO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="TARE_NM_TITULO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TARE_DS_DESCRICAO" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="TARE_DT_ESTIMADA" Type="DateTime" Precision="0" />
-          <Property Name="TARE_IN_STATUS" Type="Int32" Nullable="false" />
-          <Property Name="TARE_IN_PRIORIDADE" Type="Int32" Nullable="false" />
-          <Property Name="TARE_IN_ATIVO" Type="Int32" Nullable="false" />
-          <Property Name="TARE_DT_REALIZADA" Type="DateTime" Precision="0" />
-          <Property Name="TARE_TX_OBSERVACOES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TARE_NM_LOCAL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="TARE_IN_AVISA" Type="Int32" />
-          <Property Name="TARE_NR_PERIODICIDADE_QUANTIDADE" Type="Int32" />
-          <NavigationProperty Name="PERIODICIDADE_TAREFA" Relationship="DB_EcoBaseModel.FK_TAREFA_PERIODICIDADE_TAREFA" FromRole="TAREFA" ToRole="PERIODICIDADE_TAREFA" />
-          <NavigationProperty Name="TAREFA_ACOMPANHAMENTO" Relationship="DB_EcoBaseModel.FK_TAREFA_ACOMPANHAMENTO_TAREFA" FromRole="TAREFA" ToRole="TAREFA_ACOMPANHAMENTO" />
-          <NavigationProperty Name="TAREFA_ANEXO" Relationship="DB_EcoBaseModel.FK_TAREFA_ANEXO_TAREFA" FromRole="TAREFA" ToRole="TAREFA_ANEXO" />
-          <NavigationProperty Name="TAREFA_NOTIFICACAO" Relationship="DB_EcoBaseModel.FK_TAREFA_NOTIFICACAO_TAREFA" FromRole="TAREFA" ToRole="TAREFA_NOTIFICACAO" />
-          <NavigationProperty Name="TIPO_TAREFA" Relationship="DB_EcoBaseModel.FK_TAREFA_TIPO_TAREFA" FromRole="TAREFA" ToRole="TIPO_TAREFA" />
-          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="DB_EcoBaseModel.FK_TAREFA_USUARIO_SUGESTAO" FromRole="TAREFA" ToRole="USUARIO_SUGESTAO" />
-          <NavigationProperty Name="TAREFA_VINCULO" Relationship="DB_EcoBaseModel.FK_TAREFA_VINCULO_TAREFA" FromRole="TAREFA" ToRole="TAREFA_VINCULO" />
-        </EntityType>
-        <EntityType Name="TAREFA_ACOMPANHAMENTO">
-          <Key>
-            <PropertyRef Name="TAAC_CD_ID" />
-          </Key>
-          <Property Name="TAAC_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="TAAC_DS_ACOMPANHAMENTO" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
-          <Property Name="TAAC_IN_ATIVO" Type="Int32" Nullable="false" />
-          <Property Name="TAAC_DT_ACOMPANHAMENTO" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="TAREFA" Relationship="DB_EcoBaseModel.FK_TAREFA_ACOMPANHAMENTO_TAREFA" FromRole="TAREFA_ACOMPANHAMENTO" ToRole="TAREFA" />
-          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="DB_EcoBaseModel.FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO" FromRole="TAREFA_ACOMPANHAMENTO" ToRole="USUARIO_SUGESTAO" />
-        </EntityType>
-        <EntityType Name="TAREFA_ANEXO">
-          <Key>
-            <PropertyRef Name="TAAN_CD_ID" />
-          </Key>
-          <Property Name="TAAN_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="TAAN_NM_TITULO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TAAN_DT_ANEXO" Type="DateTime" Precision="0" />
-          <Property Name="TAAN_IN_TIPO" Type="Int32" />
-          <Property Name="TAAN_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="TAAN_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TAREFA" Relationship="DB_EcoBaseModel.FK_TAREFA_ANEXO_TAREFA" FromRole="TAREFA_ANEXO" ToRole="TAREFA" />
-        </EntityType>
-        <EntityType Name="TAREFA_NOTIFICACAO">
-          <Key>
-            <PropertyRef Name="TANO_CD_ID" />
-          </Key>
-          <Property Name="TANO_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="TANO_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TAREFA" Relationship="DB_EcoBaseModel.FK_TAREFA_NOTIFICACAO_TAREFA" FromRole="TAREFA_NOTIFICACAO" ToRole="TAREFA" />
-          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="DB_EcoBaseModel.FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO" FromRole="TAREFA_NOTIFICACAO" ToRole="USUARIO_SUGESTAO" />
-        </EntityType>
-        <EntityType Name="TAREFA_VINCULO">
-          <Key>
-            <PropertyRef Name="TAVI_CD_ID" />
-          </Key>
-          <Property Name="TAVI_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TARE_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="TAVI_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TAREFA" Relationship="DB_EcoBaseModel.FK_TAREFA_VINCULO_TAREFA" FromRole="TAREFA_VINCULO" ToRole="TAREFA" />
-          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="DB_EcoBaseModel.FK_TAREFA_VINCULO_USUARIO_SUGESTAO" FromRole="TAREFA_VINCULO" ToRole="USUARIO_SUGESTAO" />
-        </EntityType>
-        <EntityType Name="TELEFONE">
-          <Key>
-            <PropertyRef Name="TELE_CD_ID" />
-          </Key>
-          <Property Name="TELE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CATE_CD_ID" Type="Int32" />
-          <Property Name="TELE_NM_NOME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="TELE_NR_TELEFONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TELE_NR_CELULAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TELE_NR_WHATSAPP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TELE_NM_EMAIL" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="TELE_IN_ATIVO" Type="Int32" />
-          <Property Name="TELE_NM_ENDERECO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TELE_NM_BAIRRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TELE_NM_CIDADE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UF_CD_ID" Type="Int32" />
-          <Property Name="TELE_NR_CEP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TELE_TX_OBSERVACOES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CATEGORIA_TELEFONE" Relationship="DB_EcoBaseModel.FK_TELEFONE_CATEGORIA_TELEFONE" FromRole="TELEFONE" ToRole="CATEGORIA_TELEFONE" />
-          <NavigationProperty Name="UF" Relationship="DB_EcoBaseModel.FK_TELEFONE_UF" FromRole="TELEFONE" ToRole="UF" />
-        </EntityType>
-        <EntityType Name="TEMPLATE">
-          <Key>
-            <PropertyRef Name="TEMP_CD_ID" />
-          </Key>
-          <Property Name="TEMP_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TEMP_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_IN_TIPO" Type="Int32" />
-          <Property Name="TEMP_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_TX_CONTEUDO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_AQ_ARQUIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_IN_ATIVO" Type="Int32" Nullable="false" />
-          <Property Name="TEMP_TX_CONTEUDO_LIMPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_TX_CABECALHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_TX_CORPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_TX_DADOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEMP_DT_CRIACAO" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="TEMPLATE_EMAIL">
-          <Key>
-            <PropertyRef Name="TEEM_CD_ID" />
-          </Key>
-          <Property Name="TEEM_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TEEM_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_LK_LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_IN_ATIVO" Type="Int32" />
-          <Property Name="TEEM_TX_CABECALHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_TX_CORPO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_TX_DADOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_AQ_ARQUIVO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_TX_COMPLETO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TEEM_IN_HTML" Type="Int32" />
-        </EntityType>
-        <EntityType Name="TEMPLATE_SMS">
-          <Key>
-            <PropertyRef Name="TSMS_CD_ID" />
-          </Key>
-          <Property Name="TSMS_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TSMS_NM_NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TSMS_SG_SIGLA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TSMS_TX_CORPO" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TSMS_LK_LINK" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TSMS_IN_ATIVO" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TIPO_TAREFA">
-          <Key>
-            <PropertyRef Name="TITR_CD_ID" />
-          </Key>
-          <Property Name="TITR_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TITR_NM_NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TITR_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TAREFA" Relationship="DB_EcoBaseModel.FK_TAREFA_TIPO_TAREFA" FromRole="TIPO_TAREFA" ToRole="TAREFA" />
-        </EntityType>
-        <Association Name="FK_AGENDA_ANEXO_AGENDA">
-          <End Type="DB_EcoBaseModel.AGENDA" Role="AGENDA" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.AGENDA_ANEXO" Role="AGENDA_ANEXO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AGENDA">
-              <PropertyRef Name="AGEN_CD_ID" />
-            </Principal>
-            <Dependent Role="AGENDA_ANEXO">
-              <PropertyRef Name="AGEN_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AGENDA_CATEGORIA_AGENDA">
-          <End Type="DB_EcoBaseModel.CATEGORIA_AGENDA" Role="CATEGORIA_AGENDA" Multiplicity="0..1" />
-          <End Type="DB_EcoBaseModel.AGENDA" Role="AGENDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CATEGORIA_AGENDA">
-              <PropertyRef Name="CAAG_CD_ID" />
-            </Principal>
-            <Dependent Role="AGENDA">
-              <PropertyRef Name="CAAG_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AGENDA_USUARIO_SUGESTAO">
-          <End Type="DB_EcoBaseModel.USUARIO_SUGESTAO" Role="USUARIO_SUGESTAO" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.AGENDA" Role="AGENDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO_SUGESTAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="AGENDA">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AGENDA_USUARIO_SUGESTAO1">
-          <End Type="DB_EcoBaseModel.USUARIO_SUGESTAO" Role="USUARIO_SUGESTAO" Multiplicity="0..1" />
-          <End Type="DB_EcoBaseModel.AGENDA" Role="AGENDA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO_SUGESTAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="AGENDA">
-              <PropertyRef Name="AGEN_CD_USUARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AGENDA_VINCULO_AGENDA">
-          <End Type="DB_EcoBaseModel.AGENDA" Role="AGENDA" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.AGENDA_VINCULO" Role="AGENDA_VINCULO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AGENDA">
-              <PropertyRef Name="AGEN_CD_ID" />
-            </Principal>
-            <Dependent Role="AGENDA_VINCULO">
-              <PropertyRef Name="AGEN_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AGENDA_VINCULO_USUARIO_SUGESTAO">
-          <End Type="DB_EcoBaseModel.USUARIO_SUGESTAO" Role="USUARIO_SUGESTAO" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.AGENDA_VINCULO" Role="AGENDA_VINCULO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO_SUGESTAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="AGENDA_VINCULO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TELEFONE_CATEGORIA_TELEFONE">
-          <End Type="DB_EcoBaseModel.CATEGORIA_TELEFONE" Role="CATEGORIA_TELEFONE" Multiplicity="0..1" />
-          <End Type="DB_EcoBaseModel.TELEFONE" Role="TELEFONE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CATEGORIA_TELEFONE">
-              <PropertyRef Name="CATE_CD_ID" />
-            </Principal>
-            <Dependent Role="TELEFONE">
-              <PropertyRef Name="CATE_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_PERIODICIDADE_TAREFA">
-          <End Type="DB_EcoBaseModel.PERIODICIDADE_TAREFA" Role="PERIODICIDADE_TAREFA" Multiplicity="0..1" />
-          <End Type="DB_EcoBaseModel.TAREFA" Role="TAREFA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PERIODICIDADE_TAREFA">
-              <PropertyRef Name="PETA_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA">
-              <PropertyRef Name="PETA_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_ACOMPANHAMENTO_TAREFA">
-          <End Type="DB_EcoBaseModel.TAREFA" Role="TAREFA" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.TAREFA_ACOMPANHAMENTO" Role="TAREFA_ACOMPANHAMENTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TAREFA">
-              <PropertyRef Name="TARE_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA_ACOMPANHAMENTO">
-              <PropertyRef Name="TARE_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_ANEXO_TAREFA">
-          <End Type="DB_EcoBaseModel.TAREFA" Role="TAREFA" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.TAREFA_ANEXO" Role="TAREFA_ANEXO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TAREFA">
-              <PropertyRef Name="TARE_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA_ANEXO">
-              <PropertyRef Name="TARE_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_NOTIFICACAO_TAREFA">
-          <End Type="DB_EcoBaseModel.TAREFA" Role="TAREFA" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.TAREFA_NOTIFICACAO" Role="TAREFA_NOTIFICACAO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TAREFA">
-              <PropertyRef Name="TARE_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA_NOTIFICACAO">
-              <PropertyRef Name="TARE_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_TIPO_TAREFA">
-          <End Type="DB_EcoBaseModel.TIPO_TAREFA" Role="TIPO_TAREFA" Multiplicity="0..1" />
-          <End Type="DB_EcoBaseModel.TAREFA" Role="TAREFA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TIPO_TAREFA">
-              <PropertyRef Name="TITR_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA">
-              <PropertyRef Name="TITR_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_USUARIO_SUGESTAO">
-          <End Type="DB_EcoBaseModel.USUARIO_SUGESTAO" Role="USUARIO_SUGESTAO" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.TAREFA" Role="TAREFA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO_SUGESTAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_VINCULO_TAREFA">
-          <End Type="DB_EcoBaseModel.TAREFA" Role="TAREFA" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.TAREFA_VINCULO" Role="TAREFA_VINCULO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TAREFA">
-              <PropertyRef Name="TARE_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA_VINCULO">
-              <PropertyRef Name="TARE_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_ACOMPANHAMENTO_USUARIO_SUGESTAO">
-          <End Type="DB_EcoBaseModel.USUARIO_SUGESTAO" Role="USUARIO_SUGESTAO" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.TAREFA_ACOMPANHAMENTO" Role="TAREFA_ACOMPANHAMENTO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO_SUGESTAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA_ACOMPANHAMENTO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_NOTIFICACAO_USUARIO_SUGESTAO">
-          <End Type="DB_EcoBaseModel.USUARIO_SUGESTAO" Role="USUARIO_SUGESTAO" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.TAREFA_NOTIFICACAO" Role="TAREFA_NOTIFICACAO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO_SUGESTAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA_NOTIFICACAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TAREFA_VINCULO_USUARIO_SUGESTAO">
-          <End Type="DB_EcoBaseModel.USUARIO_SUGESTAO" Role="USUARIO_SUGESTAO" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.TAREFA_VINCULO" Role="TAREFA_VINCULO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO_SUGESTAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="TAREFA_VINCULO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TELEFONE_UF">
-          <End Type="DB_EcoBaseModel.UF" Role="UF" Multiplicity="0..1" />
-          <End Type="DB_EcoBaseModel.TELEFONE" Role="TELEFONE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UF">
-              <PropertyRef Name="UF_CD_ID" />
-            </Principal>
-            <Dependent Role="TELEFONE">
-              <PropertyRef Name="UF_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="CONFIGURACAO">
-          <Key>
-            <PropertyRef Name="CONF_CD_ID" />
-          </Key>
-          <Property Name="CONF_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CONF_NR_FALHAS_DIA" Type="Int32" />
-          <Property Name="CONF_NM_HOST_SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NM_PORTA_SMTP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NM_EMAIL_EMISSOO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NM_SENHA_EMISSOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NR_REFRESH_DASH" Type="Int32" />
-          <Property Name="CONF_NM_ARQUIVO_ALARME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NR_REFRESH_NOTIFICACAO" Type="Int32" />
-          <Property Name="CONF_SG_LOGIN_SMS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_SG_SENHA_SMS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NM_SENDGRID_LOGIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NM_SENDGRID_PWD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_NM_SENDGRID_APIKEY" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CONF_IN_RESIDUAL" Type="Int32" />
-          <Property Name="CONF_NR_DIAS_ATENDIMENTO" Type="Int32" />
-          <Property Name="CONF_NR_DIAS_ACAO" Type="Int32" />
-          <Property Name="CONF_NR_DIAS_PROPOSTA" Type="Int32" />
-          <Property Name="CONF_NR_MARGEM_ATRASO" Type="Int32" />
-        </EntityType>
-        <EntityType Name="LOG">
-          <Key>
-            <PropertyRef Name="LOG_CD_ID" />
-          </Key>
-          <Property Name="LOG_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="USUA_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="LOG_DT_DATA" Type="DateTime" Precision="3" />
-          <Property Name="LOG_NM_OPERACAO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LOG_TX_REGISTRO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LOG_TX_REGISTRO_ANTES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LOG_IN_ATIVO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="DB_EcoBaseModel.FK_LOG_USUARIO_SUGESTAO" FromRole="LOG" ToRole="USUARIO_SUGESTAO" />
-        </EntityType>
-        <Association Name="FK_LOG_USUARIO_SUGESTAO">
-          <End Type="DB_EcoBaseModel.USUARIO_SUGESTAO" Role="USUARIO_SUGESTAO" Multiplicity="1" />
-          <End Type="DB_EcoBaseModel.LOG" Role="LOG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USUARIO_SUGESTAO">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Principal>
-            <Dependent Role="LOG">
-              <PropertyRef Name="USUA_CD_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12073,6 +12077,47 @@
                 <ScalarProperty Name="ACON_CD_ID" ColumnName="ACON_CD_ID" />
                 <ScalarProperty Name="ACON_NM_NOME" ColumnName="ACON_NM_NOME" />
                 <ScalarProperty Name="ACON_IN_ATIVO" ColumnName="ACON_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AGENDA">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.AGENDA">
+              <MappingFragment StoreEntitySet="AGENDA">
+                <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="CAAG_CD_ID" ColumnName="CAAG_CD_ID" />
+                <ScalarProperty Name="AGEN_DT_DATA" ColumnName="AGEN_DT_DATA" />
+                <ScalarProperty Name="AGEN_HR_HORA" ColumnName="AGEN_HR_HORA" />
+                <ScalarProperty Name="AGEN_NM_TITULO" ColumnName="AGEN_NM_TITULO" />
+                <ScalarProperty Name="AGEN_DS_DESCRICAO" ColumnName="AGEN_DS_DESCRICAO" />
+                <ScalarProperty Name="AGEN_IN_ATIVO" ColumnName="AGEN_IN_ATIVO" />
+                <ScalarProperty Name="AGEN_CD_USUARIO" ColumnName="AGEN_CD_USUARIO" />
+                <ScalarProperty Name="AGEN_TX_OBSERVACOES" ColumnName="AGEN_TX_OBSERVACOES" />
+                <ScalarProperty Name="AGEN_IN_STATUS" ColumnName="AGEN_IN_STATUS" />
+                <ScalarProperty Name="AGEN_IN_CORPORATIVA" ColumnName="AGEN_IN_CORPORATIVA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AGENDA_ANEXO">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.AGENDA_ANEXO">
+              <MappingFragment StoreEntitySet="AGENDA_ANEXO">
+                <ScalarProperty Name="AGAN_CD_ID" ColumnName="AGAN_CD_ID" />
+                <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
+                <ScalarProperty Name="AGAN_NM_TITULO" ColumnName="AGAN_NM_TITULO" />
+                <ScalarProperty Name="AGAN_DT_ANEXO" ColumnName="AGAN_DT_ANEXO" />
+                <ScalarProperty Name="AGAN_IN_TIPO" ColumnName="AGAN_IN_TIPO" />
+                <ScalarProperty Name="AGAN_AQ_ARQUIVO" ColumnName="AGAN_AQ_ARQUIVO" />
+                <ScalarProperty Name="AGAN_IN_ATIVO" ColumnName="AGAN_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AGENDA_VINCULO">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.AGENDA_VINCULO">
+              <MappingFragment StoreEntitySet="AGENDA_VINCULO">
+                <ScalarProperty Name="AGVI_CD_ID" ColumnName="AGVI_CD_ID" />
+                <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="AGVI_IN_ATIVO" ColumnName="AGVI_IN_ATIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -12143,6 +12188,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIA_AGENDA">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.CATEGORIA_AGENDA">
+              <MappingFragment StoreEntitySet="CATEGORIA_AGENDA">
+                <ScalarProperty Name="CAAG_CD_ID" ColumnName="CAAG_CD_ID" />
+                <ScalarProperty Name="CAAG_NM_NOME" ColumnName="CAAG_NM_NOME" />
+                <ScalarProperty Name="CAAG_IN_ATIVO" ColumnName="CAAG_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CATEGORIA_ATENDIMENTO">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.CATEGORIA_ATENDIMENTO">
               <MappingFragment StoreEntitySet="CATEGORIA_ATENDIMENTO">
@@ -12176,6 +12230,15 @@
                 <ScalarProperty Name="CAPR_CD_ID" ColumnName="CAPR_CD_ID" />
                 <ScalarProperty Name="CAPR_NM_NOME" ColumnName="CAPR_NM_NOME" />
                 <ScalarProperty Name="CAPR_IN_ATIVO" ColumnName="CAPR_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIA_TELEFONE">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.CATEGORIA_TELEFONE">
+              <MappingFragment StoreEntitySet="CATEGORIA_TELEFONE">
+                <ScalarProperty Name="CATE_CD_ID" ColumnName="CATE_CD_ID" />
+                <ScalarProperty Name="CATE_NM_NOME" ColumnName="CATE_NM_NOME" />
+                <ScalarProperty Name="CATE_IN_ATIVO" ColumnName="CATE_IN_ATIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -12352,6 +12415,31 @@
                 <ScalarProperty Name="CNCA_CD_ID" ColumnName="CNCA_CD_ID" />
                 <ScalarProperty Name="CNCA_NM_NOME" ColumnName="CNCA_NM_NOME" />
                 <ScalarProperty Name="CNCA_IN_ATIVO" ColumnName="CNCA_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONFIGURACAO">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.CONFIGURACAO">
+              <MappingFragment StoreEntitySet="CONFIGURACAO">
+                <ScalarProperty Name="CONF_CD_ID" ColumnName="CONF_CD_ID" />
+                <ScalarProperty Name="CONF_NR_FALHAS_DIA" ColumnName="CONF_NR_FALHAS_DIA" />
+                <ScalarProperty Name="CONF_NM_HOST_SMTP" ColumnName="CONF_NM_HOST_SMTP" />
+                <ScalarProperty Name="CONF_NM_PORTA_SMTP" ColumnName="CONF_NM_PORTA_SMTP" />
+                <ScalarProperty Name="CONF_NM_EMAIL_EMISSOO" ColumnName="CONF_NM_EMAIL_EMISSOO" />
+                <ScalarProperty Name="CONF_NM_SENHA_EMISSOR" ColumnName="CONF_NM_SENHA_EMISSOR" />
+                <ScalarProperty Name="CONF_NR_REFRESH_DASH" ColumnName="CONF_NR_REFRESH_DASH" />
+                <ScalarProperty Name="CONF_NM_ARQUIVO_ALARME" ColumnName="CONF_NM_ARQUIVO_ALARME" />
+                <ScalarProperty Name="CONF_NR_REFRESH_NOTIFICACAO" ColumnName="CONF_NR_REFRESH_NOTIFICACAO" />
+                <ScalarProperty Name="CONF_SG_LOGIN_SMS" ColumnName="CONF_SG_LOGIN_SMS" />
+                <ScalarProperty Name="CONF_SG_SENHA_SMS" ColumnName="CONF_SG_SENHA_SMS" />
+                <ScalarProperty Name="CONF_NM_SENDGRID_LOGIN" ColumnName="CONF_NM_SENDGRID_LOGIN" />
+                <ScalarProperty Name="CONF_NM_SENDGRID_PWD" ColumnName="CONF_NM_SENDGRID_PWD" />
+                <ScalarProperty Name="CONF_NM_SENDGRID_APIKEY" ColumnName="CONF_NM_SENDGRID_APIKEY" />
+                <ScalarProperty Name="CONF_IN_RESIDUAL" ColumnName="CONF_IN_RESIDUAL" />
+                <ScalarProperty Name="CONF_NR_DIAS_ATENDIMENTO" ColumnName="CONF_NR_DIAS_ATENDIMENTO" />
+                <ScalarProperty Name="CONF_NR_DIAS_ACAO" ColumnName="CONF_NR_DIAS_ACAO" />
+                <ScalarProperty Name="CONF_NR_DIAS_PROPOSTA" ColumnName="CONF_NR_DIAS_PROPOSTA" />
+                <ScalarProperty Name="CONF_NR_MARGEM_ATRASO" ColumnName="CONF_NR_MARGEM_ATRASO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -12870,6 +12958,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="LOG">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.LOG">
+              <MappingFragment StoreEntitySet="LOG">
+                <ScalarProperty Name="LOG_CD_ID" ColumnName="LOG_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="LOG_DT_DATA" ColumnName="LOG_DT_DATA" />
+                <ScalarProperty Name="LOG_NM_OPERACAO" ColumnName="LOG_NM_OPERACAO" />
+                <ScalarProperty Name="LOG_TX_REGISTRO" ColumnName="LOG_TX_REGISTRO" />
+                <ScalarProperty Name="LOG_TX_REGISTRO_ANTES" ColumnName="LOG_TX_REGISTRO_ANTES" />
+                <ScalarProperty Name="LOG_IN_ATIVO" ColumnName="LOG_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MARCA_VEICULO">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.MARCA_VEICULO">
               <MappingFragment StoreEntitySet="MARCA_VEICULO">
@@ -12931,8 +13032,6 @@
           <EntitySetMapping Name="NOTIFICACAO">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.NOTIFICACAO">
               <MappingFragment StoreEntitySet="NOTIFICACAO">
-                <ScalarProperty Name="NOTI_IN_NIVEL" ColumnName="NOTI_IN_NIVEL" />
-                <ScalarProperty Name="NOTI_IN_STATUS" ColumnName="NOTI_IN_STATUS" />
                 <ScalarProperty Name="NOTI_CD_ID" ColumnName="NOTI_CD_ID" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
                 <ScalarProperty Name="CANO_CD_ID" ColumnName="CANO_CD_ID" />
@@ -12943,6 +13042,8 @@
                 <ScalarProperty Name="NOTI_IN_VISTA" ColumnName="NOTI_IN_VISTA" />
                 <ScalarProperty Name="NOTI_DT_VISTA" ColumnName="NOTI_DT_VISTA" />
                 <ScalarProperty Name="NOTI_IN_ATIVO" ColumnName="NOTI_IN_ATIVO" />
+                <ScalarProperty Name="NOTI_IN_STATUS" ColumnName="NOTI_IN_STATUS" />
+                <ScalarProperty Name="NOTI_IN_NIVEL" ColumnName="NOTI_IN_NIVEL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -13262,6 +13363,16 @@
                 <ScalarProperty Name="PERI_NM_NOME" ColumnName="PERI_NM_NOME" />
                 <ScalarProperty Name="PERI_NR_DIAS" ColumnName="PERI_NR_DIAS" />
                 <ScalarProperty Name="PERI_IN_ATIVO" ColumnName="PERI_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERIODICIDADE_TAREFA">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.PERIODICIDADE_TAREFA">
+              <MappingFragment StoreEntitySet="PERIODICIDADE_TAREFA">
+                <ScalarProperty Name="PETA_CD_ID" ColumnName="PETA_CD_ID" />
+                <ScalarProperty Name="PETA_NM_NOME" ColumnName="PETA_NM_NOME" />
+                <ScalarProperty Name="PETA_NR_DIAS" ColumnName="PETA_NR_DIAS" />
+                <ScalarProperty Name="PETA_IN_ATIVO" ColumnName="PETA_IN_ATIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -13758,6 +13869,128 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TAREFA">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA">
+              <MappingFragment StoreEntitySet="TAREFA">
+                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="TITR_CD_ID" ColumnName="TITR_CD_ID" />
+                <ScalarProperty Name="PETA_CD_ID" ColumnName="PETA_CD_ID" />
+                <ScalarProperty Name="TARE_DT_CADASTRO" ColumnName="TARE_DT_CADASTRO" />
+                <ScalarProperty Name="TARE_NM_TITULO" ColumnName="TARE_NM_TITULO" />
+                <ScalarProperty Name="TARE_DS_DESCRICAO" ColumnName="TARE_DS_DESCRICAO" />
+                <ScalarProperty Name="TARE_DT_ESTIMADA" ColumnName="TARE_DT_ESTIMADA" />
+                <ScalarProperty Name="TARE_IN_STATUS" ColumnName="TARE_IN_STATUS" />
+                <ScalarProperty Name="TARE_IN_PRIORIDADE" ColumnName="TARE_IN_PRIORIDADE" />
+                <ScalarProperty Name="TARE_IN_ATIVO" ColumnName="TARE_IN_ATIVO" />
+                <ScalarProperty Name="TARE_DT_REALIZADA" ColumnName="TARE_DT_REALIZADA" />
+                <ScalarProperty Name="TARE_TX_OBSERVACOES" ColumnName="TARE_TX_OBSERVACOES" />
+                <ScalarProperty Name="TARE_NM_LOCAL" ColumnName="TARE_NM_LOCAL" />
+                <ScalarProperty Name="TARE_IN_AVISA" ColumnName="TARE_IN_AVISA" />
+                <ScalarProperty Name="TARE_NR_PERIODICIDADE_QUANTIDADE" ColumnName="TARE_NR_PERIODICIDADE_QUANTIDADE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAREFA_ACOMPANHAMENTO">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA_ACOMPANHAMENTO">
+              <MappingFragment StoreEntitySet="TAREFA_ACOMPANHAMENTO">
+                <ScalarProperty Name="TAAC_CD_ID" ColumnName="TAAC_CD_ID" />
+                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="TAAC_DS_ACOMPANHAMENTO" ColumnName="TAAC_DS_ACOMPANHAMENTO" />
+                <ScalarProperty Name="TAAC_IN_ATIVO" ColumnName="TAAC_IN_ATIVO" />
+                <ScalarProperty Name="TAAC_DT_ACOMPANHAMENTO" ColumnName="TAAC_DT_ACOMPANHAMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAREFA_ANEXO">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA_ANEXO">
+              <MappingFragment StoreEntitySet="TAREFA_ANEXO">
+                <ScalarProperty Name="TAAN_CD_ID" ColumnName="TAAN_CD_ID" />
+                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
+                <ScalarProperty Name="TAAN_NM_TITULO" ColumnName="TAAN_NM_TITULO" />
+                <ScalarProperty Name="TAAN_DT_ANEXO" ColumnName="TAAN_DT_ANEXO" />
+                <ScalarProperty Name="TAAN_IN_TIPO" ColumnName="TAAN_IN_TIPO" />
+                <ScalarProperty Name="TAAN_AQ_ARQUIVO" ColumnName="TAAN_AQ_ARQUIVO" />
+                <ScalarProperty Name="TAAN_IN_ATIVO" ColumnName="TAAN_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAREFA_NOTIFICACAO">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA_NOTIFICACAO">
+              <MappingFragment StoreEntitySet="TAREFA_NOTIFICACAO">
+                <ScalarProperty Name="TANO_CD_ID" ColumnName="TANO_CD_ID" />
+                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="TANO_IN_ATIVO" ColumnName="TANO_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAREFA_VINCULO">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA_VINCULO">
+              <MappingFragment StoreEntitySet="TAREFA_VINCULO">
+                <ScalarProperty Name="TAVI_CD_ID" ColumnName="TAVI_CD_ID" />
+                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
+                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
+                <ScalarProperty Name="TAVI_IN_ATIVO" ColumnName="TAVI_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TELEFONE">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TELEFONE">
+              <MappingFragment StoreEntitySet="TELEFONE">
+                <ScalarProperty Name="TELE_CD_ID" ColumnName="TELE_CD_ID" />
+                <ScalarProperty Name="CATE_CD_ID" ColumnName="CATE_CD_ID" />
+                <ScalarProperty Name="TELE_NM_NOME" ColumnName="TELE_NM_NOME" />
+                <ScalarProperty Name="TELE_NR_TELEFONE" ColumnName="TELE_NR_TELEFONE" />
+                <ScalarProperty Name="TELE_NR_CELULAR" ColumnName="TELE_NR_CELULAR" />
+                <ScalarProperty Name="TELE_NR_WHATSAPP" ColumnName="TELE_NR_WHATSAPP" />
+                <ScalarProperty Name="TELE_NM_EMAIL" ColumnName="TELE_NM_EMAIL" />
+                <ScalarProperty Name="TELE_IN_ATIVO" ColumnName="TELE_IN_ATIVO" />
+                <ScalarProperty Name="TELE_NM_ENDERECO" ColumnName="TELE_NM_ENDERECO" />
+                <ScalarProperty Name="TELE_NM_BAIRRO" ColumnName="TELE_NM_BAIRRO" />
+                <ScalarProperty Name="TELE_NM_CIDADE" ColumnName="TELE_NM_CIDADE" />
+                <ScalarProperty Name="UF_CD_ID" ColumnName="UF_CD_ID" />
+                <ScalarProperty Name="TELE_NR_CEP" ColumnName="TELE_NR_CEP" />
+                <ScalarProperty Name="TELE_TX_OBSERVACOES" ColumnName="TELE_TX_OBSERVACOES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMPLATE">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TEMPLATE">
+              <MappingFragment StoreEntitySet="TEMPLATE">
+                <ScalarProperty Name="TEMP_CD_ID" ColumnName="TEMP_CD_ID" />
+                <ScalarProperty Name="TEMP_SG_SIGLA" ColumnName="TEMP_SG_SIGLA" />
+                <ScalarProperty Name="TEMP_IN_TIPO" ColumnName="TEMP_IN_TIPO" />
+                <ScalarProperty Name="TEMP_NM_NOME" ColumnName="TEMP_NM_NOME" />
+                <ScalarProperty Name="TEMP_TX_CONTEUDO" ColumnName="TEMP_TX_CONTEUDO" />
+                <ScalarProperty Name="TEMP_AQ_ARQUIVO" ColumnName="TEMP_AQ_ARQUIVO" />
+                <ScalarProperty Name="TEMP_IN_ATIVO" ColumnName="TEMP_IN_ATIVO" />
+                <ScalarProperty Name="TEMP_TX_CONTEUDO_LIMPO" ColumnName="TEMP_TX_CONTEUDO_LIMPO" />
+                <ScalarProperty Name="TEMP_TX_CABECALHO" ColumnName="TEMP_TX_CABECALHO" />
+                <ScalarProperty Name="TEMP_TX_CORPO" ColumnName="TEMP_TX_CORPO" />
+                <ScalarProperty Name="TEMP_TX_DADOS" ColumnName="TEMP_TX_DADOS" />
+                <ScalarProperty Name="TEMP_DT_CRIACAO" ColumnName="TEMP_DT_CRIACAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMPLATE_EMAIL">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TEMPLATE_EMAIL">
+              <MappingFragment StoreEntitySet="TEMPLATE_EMAIL">
+                <ScalarProperty Name="TEEM_CD_ID" ColumnName="TEEM_CD_ID" />
+                <ScalarProperty Name="TEEM_NM_NOME" ColumnName="TEEM_NM_NOME" />
+                <ScalarProperty Name="TEEM_SG_SIGLA" ColumnName="TEEM_SG_SIGLA" />
+                <ScalarProperty Name="TEEM_LK_LINK" ColumnName="TEEM_LK_LINK" />
+                <ScalarProperty Name="TEEM_IN_ATIVO" ColumnName="TEEM_IN_ATIVO" />
+                <ScalarProperty Name="TEEM_TX_CABECALHO" ColumnName="TEEM_TX_CABECALHO" />
+                <ScalarProperty Name="TEEM_TX_CORPO" ColumnName="TEEM_TX_CORPO" />
+                <ScalarProperty Name="TEEM_TX_DADOS" ColumnName="TEEM_TX_DADOS" />
+                <ScalarProperty Name="TEEM_AQ_ARQUIVO" ColumnName="TEEM_AQ_ARQUIVO" />
+                <ScalarProperty Name="TEEM_TX_COMPLETO" ColumnName="TEEM_TX_COMPLETO" />
+                <ScalarProperty Name="TEEM_IN_HTML" ColumnName="TEEM_IN_HTML" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TEMPLATE_MENSAGEM">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.TEMPLATE_MENSAGEM">
               <MappingFragment StoreEntitySet="TEMPLATE_MENSAGEM">
@@ -13768,6 +14001,18 @@
                 <ScalarProperty Name="TEMP_AQ_MENSAGEM" ColumnName="TEMP_AQ_MENSAGEM" />
                 <ScalarProperty Name="TEMP_IN_ATIVO" ColumnName="TEMP_IN_ATIVO" />
                 <ScalarProperty Name="TEMP_TX_MENSAGEM_TEXTO" ColumnName="TEMP_TX_MENSAGEM_TEXTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMPLATE_SMS">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TEMPLATE_SMS">
+              <MappingFragment StoreEntitySet="TEMPLATE_SMS">
+                <ScalarProperty Name="TSMS_CD_ID" ColumnName="TSMS_CD_ID" />
+                <ScalarProperty Name="TSMS_NM_NOME" ColumnName="TSMS_NM_NOME" />
+                <ScalarProperty Name="TSMS_SG_SIGLA" ColumnName="TSMS_SG_SIGLA" />
+                <ScalarProperty Name="TSMS_TX_CORPO" ColumnName="TSMS_TX_CORPO" />
+                <ScalarProperty Name="TSMS_LK_LINK" ColumnName="TSMS_LK_LINK" />
+                <ScalarProperty Name="TSMS_IN_ATIVO" ColumnName="TSMS_IN_ATIVO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -13934,6 +14179,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_TAREFA">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.TIPO_TAREFA">
+              <MappingFragment StoreEntitySet="TIPO_TAREFA">
+                <ScalarProperty Name="TITR_CD_ID" ColumnName="TITR_CD_ID" />
+                <ScalarProperty Name="TITR_NM_NOME" ColumnName="TITR_NM_NOME" />
+                <ScalarProperty Name="TITR_IN_ATIVO" ColumnName="TITR_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TIPO_VEICULO">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.TIPO_VEICULO">
               <MappingFragment StoreEntitySet="TIPO_VEICULO">
@@ -13986,11 +14240,8 @@
           <EntitySetMapping Name="USUARIO_SUGESTAO">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.USUARIO_SUGESTAO">
               <MappingFragment StoreEntitySet="USUARIO_SUGESTAO">
-                <ScalarProperty Name="USUA_IN_SISTEMA" ColumnName="USUA_IN_SISTEMA" />
-                <ScalarProperty Name="USUA_IN_TECNICO" ColumnName="USUA_IN_TECNICO" />
-                <ScalarProperty Name="USUA_IN_APROVADOR" ColumnName="USUA_IN_APROVADOR" />
-                <ScalarProperty Name="USUA_IN_COMPRADOR" ColumnName="USUA_IN_COMPRADOR" />
-                <ScalarProperty Name="USUA_NM_EMAIL" ColumnName="USUA_NM_EMAIL" />
+                <ScalarProperty Name="USUA_NR_WHATSAPP" ColumnName="USUA_NR_WHATSAPP" />
+                <ScalarProperty Name="USUA_NR_TELEFONE" ColumnName="USUA_NR_TELEFONE" />
                 <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
                 <ScalarProperty Name="PERF_CD_ID" ColumnName="PERF_CD_ID" />
                 <ScalarProperty Name="CAUS_CD_ID" ColumnName="CAUS_CD_ID" />
@@ -14021,6 +14272,11 @@
                 <ScalarProperty Name="USUA_NR_CPF" ColumnName="USUA_NR_CPF" />
                 <ScalarProperty Name="USUA_NR_RG" ColumnName="USUA_NR_RG" />
                 <ScalarProperty Name="USUA_TX_OBSERVACOES" ColumnName="USUA_TX_OBSERVACOES" />
+                <ScalarProperty Name="USUA_NM_EMAIL" ColumnName="USUA_NM_EMAIL" />
+                <ScalarProperty Name="USUA_IN_COMPRADOR" ColumnName="USUA_IN_COMPRADOR" />
+                <ScalarProperty Name="USUA_IN_APROVADOR" ColumnName="USUA_IN_APROVADOR" />
+                <ScalarProperty Name="USUA_IN_TECNICO" ColumnName="USUA_IN_TECNICO" />
+                <ScalarProperty Name="USUA_IN_SISTEMA" ColumnName="USUA_IN_SISTEMA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -14030,256 +14286,6 @@
                 <ScalarProperty Name="VEFU_CD_ID" ColumnName="VEFU_CD_ID" />
                 <ScalarProperty Name="VEFU_NM_NOME" ColumnName="VEFU_NM_NOME" />
                 <ScalarProperty Name="VEFU_IN_ATIVO" ColumnName="VEFU_IN_ATIVO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AGENDA">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.AGENDA">
-              <MappingFragment StoreEntitySet="AGENDA">
-                <ScalarProperty Name="AGEN_IN_CORPORATIVA" ColumnName="AGEN_IN_CORPORATIVA" />
-                <ScalarProperty Name="AGEN_IN_STATUS" ColumnName="AGEN_IN_STATUS" />
-                <ScalarProperty Name="AGEN_TX_OBSERVACOES" ColumnName="AGEN_TX_OBSERVACOES" />
-                <ScalarProperty Name="AGEN_CD_USUARIO" ColumnName="AGEN_CD_USUARIO" />
-                <ScalarProperty Name="AGEN_IN_ATIVO" ColumnName="AGEN_IN_ATIVO" />
-                <ScalarProperty Name="AGEN_DS_DESCRICAO" ColumnName="AGEN_DS_DESCRICAO" />
-                <ScalarProperty Name="AGEN_NM_TITULO" ColumnName="AGEN_NM_TITULO" />
-                <ScalarProperty Name="AGEN_HR_HORA" ColumnName="AGEN_HR_HORA" />
-                <ScalarProperty Name="AGEN_DT_DATA" ColumnName="AGEN_DT_DATA" />
-                <ScalarProperty Name="CAAG_CD_ID" ColumnName="CAAG_CD_ID" />
-                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
-                <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AGENDA_ANEXO">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.AGENDA_ANEXO">
-              <MappingFragment StoreEntitySet="AGENDA_ANEXO">
-                <ScalarProperty Name="AGAN_IN_ATIVO" ColumnName="AGAN_IN_ATIVO" />
-                <ScalarProperty Name="AGAN_AQ_ARQUIVO" ColumnName="AGAN_AQ_ARQUIVO" />
-                <ScalarProperty Name="AGAN_IN_TIPO" ColumnName="AGAN_IN_TIPO" />
-                <ScalarProperty Name="AGAN_DT_ANEXO" ColumnName="AGAN_DT_ANEXO" />
-                <ScalarProperty Name="AGAN_NM_TITULO" ColumnName="AGAN_NM_TITULO" />
-                <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
-                <ScalarProperty Name="AGAN_CD_ID" ColumnName="AGAN_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AGENDA_VINCULO">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.AGENDA_VINCULO">
-              <MappingFragment StoreEntitySet="AGENDA_VINCULO">
-                <ScalarProperty Name="AGVI_IN_ATIVO" ColumnName="AGVI_IN_ATIVO" />
-                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
-                <ScalarProperty Name="AGEN_CD_ID" ColumnName="AGEN_CD_ID" />
-                <ScalarProperty Name="AGVI_CD_ID" ColumnName="AGVI_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CATEGORIA_AGENDA">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.CATEGORIA_AGENDA">
-              <MappingFragment StoreEntitySet="CATEGORIA_AGENDA">
-                <ScalarProperty Name="CAAG_IN_ATIVO" ColumnName="CAAG_IN_ATIVO" />
-                <ScalarProperty Name="CAAG_NM_NOME" ColumnName="CAAG_NM_NOME" />
-                <ScalarProperty Name="CAAG_CD_ID" ColumnName="CAAG_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CATEGORIA_TELEFONE">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.CATEGORIA_TELEFONE">
-              <MappingFragment StoreEntitySet="CATEGORIA_TELEFONE">
-                <ScalarProperty Name="CATE_IN_ATIVO" ColumnName="CATE_IN_ATIVO" />
-                <ScalarProperty Name="CATE_NM_NOME" ColumnName="CATE_NM_NOME" />
-                <ScalarProperty Name="CATE_CD_ID" ColumnName="CATE_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PERIODICIDADE_TAREFA">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.PERIODICIDADE_TAREFA">
-              <MappingFragment StoreEntitySet="PERIODICIDADE_TAREFA">
-                <ScalarProperty Name="PETA_IN_ATIVO" ColumnName="PETA_IN_ATIVO" />
-                <ScalarProperty Name="PETA_NR_DIAS" ColumnName="PETA_NR_DIAS" />
-                <ScalarProperty Name="PETA_NM_NOME" ColumnName="PETA_NM_NOME" />
-                <ScalarProperty Name="PETA_CD_ID" ColumnName="PETA_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TAREFA">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA">
-              <MappingFragment StoreEntitySet="TAREFA">
-                <ScalarProperty Name="TARE_NR_PERIODICIDADE_QUANTIDADE" ColumnName="TARE_NR_PERIODICIDADE_QUANTIDADE" />
-                <ScalarProperty Name="TARE_IN_AVISA" ColumnName="TARE_IN_AVISA" />
-                <ScalarProperty Name="TARE_NM_LOCAL" ColumnName="TARE_NM_LOCAL" />
-                <ScalarProperty Name="TARE_TX_OBSERVACOES" ColumnName="TARE_TX_OBSERVACOES" />
-                <ScalarProperty Name="TARE_DT_REALIZADA" ColumnName="TARE_DT_REALIZADA" />
-                <ScalarProperty Name="TARE_IN_ATIVO" ColumnName="TARE_IN_ATIVO" />
-                <ScalarProperty Name="TARE_IN_PRIORIDADE" ColumnName="TARE_IN_PRIORIDADE" />
-                <ScalarProperty Name="TARE_IN_STATUS" ColumnName="TARE_IN_STATUS" />
-                <ScalarProperty Name="TARE_DT_ESTIMADA" ColumnName="TARE_DT_ESTIMADA" />
-                <ScalarProperty Name="TARE_DS_DESCRICAO" ColumnName="TARE_DS_DESCRICAO" />
-                <ScalarProperty Name="TARE_NM_TITULO" ColumnName="TARE_NM_TITULO" />
-                <ScalarProperty Name="TARE_DT_CADASTRO" ColumnName="TARE_DT_CADASTRO" />
-                <ScalarProperty Name="PETA_CD_ID" ColumnName="PETA_CD_ID" />
-                <ScalarProperty Name="TITR_CD_ID" ColumnName="TITR_CD_ID" />
-                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
-                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TAREFA_ACOMPANHAMENTO">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA_ACOMPANHAMENTO">
-              <MappingFragment StoreEntitySet="TAREFA_ACOMPANHAMENTO">
-                <ScalarProperty Name="TAAC_DT_ACOMPANHAMENTO" ColumnName="TAAC_DT_ACOMPANHAMENTO" />
-                <ScalarProperty Name="TAAC_IN_ATIVO" ColumnName="TAAC_IN_ATIVO" />
-                <ScalarProperty Name="TAAC_DS_ACOMPANHAMENTO" ColumnName="TAAC_DS_ACOMPANHAMENTO" />
-                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
-                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
-                <ScalarProperty Name="TAAC_CD_ID" ColumnName="TAAC_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TAREFA_ANEXO">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA_ANEXO">
-              <MappingFragment StoreEntitySet="TAREFA_ANEXO">
-                <ScalarProperty Name="TAAN_IN_ATIVO" ColumnName="TAAN_IN_ATIVO" />
-                <ScalarProperty Name="TAAN_AQ_ARQUIVO" ColumnName="TAAN_AQ_ARQUIVO" />
-                <ScalarProperty Name="TAAN_IN_TIPO" ColumnName="TAAN_IN_TIPO" />
-                <ScalarProperty Name="TAAN_DT_ANEXO" ColumnName="TAAN_DT_ANEXO" />
-                <ScalarProperty Name="TAAN_NM_TITULO" ColumnName="TAAN_NM_TITULO" />
-                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
-                <ScalarProperty Name="TAAN_CD_ID" ColumnName="TAAN_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TAREFA_NOTIFICACAO">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA_NOTIFICACAO">
-              <MappingFragment StoreEntitySet="TAREFA_NOTIFICACAO">
-                <ScalarProperty Name="TANO_IN_ATIVO" ColumnName="TANO_IN_ATIVO" />
-                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
-                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
-                <ScalarProperty Name="TANO_CD_ID" ColumnName="TANO_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TAREFA_VINCULO">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TAREFA_VINCULO">
-              <MappingFragment StoreEntitySet="TAREFA_VINCULO">
-                <ScalarProperty Name="TAVI_IN_ATIVO" ColumnName="TAVI_IN_ATIVO" />
-                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
-                <ScalarProperty Name="TARE_CD_ID" ColumnName="TARE_CD_ID" />
-                <ScalarProperty Name="TAVI_CD_ID" ColumnName="TAVI_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TELEFONE">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TELEFONE">
-              <MappingFragment StoreEntitySet="TELEFONE">
-                <ScalarProperty Name="TELE_TX_OBSERVACOES" ColumnName="TELE_TX_OBSERVACOES" />
-                <ScalarProperty Name="TELE_NR_CEP" ColumnName="TELE_NR_CEP" />
-                <ScalarProperty Name="UF_CD_ID" ColumnName="UF_CD_ID" />
-                <ScalarProperty Name="TELE_NM_CIDADE" ColumnName="TELE_NM_CIDADE" />
-                <ScalarProperty Name="TELE_NM_BAIRRO" ColumnName="TELE_NM_BAIRRO" />
-                <ScalarProperty Name="TELE_NM_ENDERECO" ColumnName="TELE_NM_ENDERECO" />
-                <ScalarProperty Name="TELE_IN_ATIVO" ColumnName="TELE_IN_ATIVO" />
-                <ScalarProperty Name="TELE_NM_EMAIL" ColumnName="TELE_NM_EMAIL" />
-                <ScalarProperty Name="TELE_NR_WHATSAPP" ColumnName="TELE_NR_WHATSAPP" />
-                <ScalarProperty Name="TELE_NR_CELULAR" ColumnName="TELE_NR_CELULAR" />
-                <ScalarProperty Name="TELE_NR_TELEFONE" ColumnName="TELE_NR_TELEFONE" />
-                <ScalarProperty Name="TELE_NM_NOME" ColumnName="TELE_NM_NOME" />
-                <ScalarProperty Name="CATE_CD_ID" ColumnName="CATE_CD_ID" />
-                <ScalarProperty Name="TELE_CD_ID" ColumnName="TELE_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TEMPLATE">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TEMPLATE">
-              <MappingFragment StoreEntitySet="TEMPLATE">
-                <ScalarProperty Name="TEMP_DT_CRIACAO" ColumnName="TEMP_DT_CRIACAO" />
-                <ScalarProperty Name="TEMP_TX_DADOS" ColumnName="TEMP_TX_DADOS" />
-                <ScalarProperty Name="TEMP_TX_CORPO" ColumnName="TEMP_TX_CORPO" />
-                <ScalarProperty Name="TEMP_TX_CABECALHO" ColumnName="TEMP_TX_CABECALHO" />
-                <ScalarProperty Name="TEMP_TX_CONTEUDO_LIMPO" ColumnName="TEMP_TX_CONTEUDO_LIMPO" />
-                <ScalarProperty Name="TEMP_IN_ATIVO" ColumnName="TEMP_IN_ATIVO" />
-                <ScalarProperty Name="TEMP_AQ_ARQUIVO" ColumnName="TEMP_AQ_ARQUIVO" />
-                <ScalarProperty Name="TEMP_TX_CONTEUDO" ColumnName="TEMP_TX_CONTEUDO" />
-                <ScalarProperty Name="TEMP_NM_NOME" ColumnName="TEMP_NM_NOME" />
-                <ScalarProperty Name="TEMP_IN_TIPO" ColumnName="TEMP_IN_TIPO" />
-                <ScalarProperty Name="TEMP_SG_SIGLA" ColumnName="TEMP_SG_SIGLA" />
-                <ScalarProperty Name="TEMP_CD_ID" ColumnName="TEMP_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TEMPLATE_EMAIL">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TEMPLATE_EMAIL">
-              <MappingFragment StoreEntitySet="TEMPLATE_EMAIL">
-                <ScalarProperty Name="TEEM_IN_HTML" ColumnName="TEEM_IN_HTML" />
-                <ScalarProperty Name="TEEM_TX_COMPLETO" ColumnName="TEEM_TX_COMPLETO" />
-                <ScalarProperty Name="TEEM_AQ_ARQUIVO" ColumnName="TEEM_AQ_ARQUIVO" />
-                <ScalarProperty Name="TEEM_TX_DADOS" ColumnName="TEEM_TX_DADOS" />
-                <ScalarProperty Name="TEEM_TX_CORPO" ColumnName="TEEM_TX_CORPO" />
-                <ScalarProperty Name="TEEM_TX_CABECALHO" ColumnName="TEEM_TX_CABECALHO" />
-                <ScalarProperty Name="TEEM_IN_ATIVO" ColumnName="TEEM_IN_ATIVO" />
-                <ScalarProperty Name="TEEM_LK_LINK" ColumnName="TEEM_LK_LINK" />
-                <ScalarProperty Name="TEEM_SG_SIGLA" ColumnName="TEEM_SG_SIGLA" />
-                <ScalarProperty Name="TEEM_NM_NOME" ColumnName="TEEM_NM_NOME" />
-                <ScalarProperty Name="TEEM_CD_ID" ColumnName="TEEM_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TEMPLATE_SMS">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TEMPLATE_SMS">
-              <MappingFragment StoreEntitySet="TEMPLATE_SMS">
-                <ScalarProperty Name="TSMS_IN_ATIVO" ColumnName="TSMS_IN_ATIVO" />
-                <ScalarProperty Name="TSMS_LK_LINK" ColumnName="TSMS_LK_LINK" />
-                <ScalarProperty Name="TSMS_TX_CORPO" ColumnName="TSMS_TX_CORPO" />
-                <ScalarProperty Name="TSMS_SG_SIGLA" ColumnName="TSMS_SG_SIGLA" />
-                <ScalarProperty Name="TSMS_NM_NOME" ColumnName="TSMS_NM_NOME" />
-                <ScalarProperty Name="TSMS_CD_ID" ColumnName="TSMS_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TIPO_TAREFA">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.TIPO_TAREFA">
-              <MappingFragment StoreEntitySet="TIPO_TAREFA">
-                <ScalarProperty Name="TITR_IN_ATIVO" ColumnName="TITR_IN_ATIVO" />
-                <ScalarProperty Name="TITR_NM_NOME" ColumnName="TITR_NM_NOME" />
-                <ScalarProperty Name="TITR_CD_ID" ColumnName="TITR_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CONFIGURACAO">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.CONFIGURACAO">
-              <MappingFragment StoreEntitySet="CONFIGURACAO">
-                <ScalarProperty Name="CONF_NR_MARGEM_ATRASO" ColumnName="CONF_NR_MARGEM_ATRASO" />
-                <ScalarProperty Name="CONF_NR_DIAS_PROPOSTA" ColumnName="CONF_NR_DIAS_PROPOSTA" />
-                <ScalarProperty Name="CONF_NR_DIAS_ACAO" ColumnName="CONF_NR_DIAS_ACAO" />
-                <ScalarProperty Name="CONF_NR_DIAS_ATENDIMENTO" ColumnName="CONF_NR_DIAS_ATENDIMENTO" />
-                <ScalarProperty Name="CONF_IN_RESIDUAL" ColumnName="CONF_IN_RESIDUAL" />
-                <ScalarProperty Name="CONF_NM_SENDGRID_APIKEY" ColumnName="CONF_NM_SENDGRID_APIKEY" />
-                <ScalarProperty Name="CONF_NM_SENDGRID_PWD" ColumnName="CONF_NM_SENDGRID_PWD" />
-                <ScalarProperty Name="CONF_NM_SENDGRID_LOGIN" ColumnName="CONF_NM_SENDGRID_LOGIN" />
-                <ScalarProperty Name="CONF_SG_SENHA_SMS" ColumnName="CONF_SG_SENHA_SMS" />
-                <ScalarProperty Name="CONF_SG_LOGIN_SMS" ColumnName="CONF_SG_LOGIN_SMS" />
-                <ScalarProperty Name="CONF_NR_REFRESH_NOTIFICACAO" ColumnName="CONF_NR_REFRESH_NOTIFICACAO" />
-                <ScalarProperty Name="CONF_NM_ARQUIVO_ALARME" ColumnName="CONF_NM_ARQUIVO_ALARME" />
-                <ScalarProperty Name="CONF_NR_REFRESH_DASH" ColumnName="CONF_NR_REFRESH_DASH" />
-                <ScalarProperty Name="CONF_NM_SENHA_EMISSOR" ColumnName="CONF_NM_SENHA_EMISSOR" />
-                <ScalarProperty Name="CONF_NM_EMAIL_EMISSOO" ColumnName="CONF_NM_EMAIL_EMISSOO" />
-                <ScalarProperty Name="CONF_NM_PORTA_SMTP" ColumnName="CONF_NM_PORTA_SMTP" />
-                <ScalarProperty Name="CONF_NM_HOST_SMTP" ColumnName="CONF_NM_HOST_SMTP" />
-                <ScalarProperty Name="CONF_NR_FALHAS_DIA" ColumnName="CONF_NR_FALHAS_DIA" />
-                <ScalarProperty Name="CONF_CD_ID" ColumnName="CONF_CD_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LOG">
-            <EntityTypeMapping TypeName="DB_EcoBaseModel.LOG">
-              <MappingFragment StoreEntitySet="LOG">
-                <ScalarProperty Name="LOG_IN_ATIVO" ColumnName="LOG_IN_ATIVO" />
-                <ScalarProperty Name="LOG_TX_REGISTRO_ANTES" ColumnName="LOG_TX_REGISTRO_ANTES" />
-                <ScalarProperty Name="LOG_TX_REGISTRO" ColumnName="LOG_TX_REGISTRO" />
-                <ScalarProperty Name="LOG_NM_OPERACAO" ColumnName="LOG_NM_OPERACAO" />
-                <ScalarProperty Name="LOG_DT_DATA" ColumnName="LOG_DT_DATA" />
-                <ScalarProperty Name="USUA_CD_ID" ColumnName="USUA_CD_ID" />
-                <ScalarProperty Name="LOG_CD_ID" ColumnName="LOG_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

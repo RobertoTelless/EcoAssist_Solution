@@ -4,17 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1CDDE20D-2DBA-4E3A-B80D-D5711F30A51E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{295D109E-9888-4C71-9354-ADE00C6AF343}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EntitiesServices</RootNamespace>
     <AssemblyName>EntitiesServices</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +25,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,38 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <EntityDeploy Include="Model\EcoAssist_Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EcoAssist_Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model\EcoAssist_Model.edmx.diagram">
-      <DependentUpon>EcoAssist_Model.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-    <None Include="scripts\tinymce\langs\README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>..\packages\BouncyCastle.1.8.6.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="AngleSharp, Version=0.16.1.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.0.16.1\lib\net461\AngleSharp.dll</HintPath>
     </Reference>
     <Reference Include="Canducci.Zip, Version=3.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CanducciCep.3.0.1\lib\net451\Canducci.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Consulta.CNPJ, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Consulta.CNPJ.1.0.1\lib\netstandard2.0\Consulta.CNPJ.dll</HintPath>
-    </Reference>
-    <Reference Include="Correios.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Correios.CEP.Net.1.1.6\lib\Correios.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="DateTimeExtensions, Version=5.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DateTimeExtensions.5.5.0\lib\net45\DateTimeExtensions.dll</HintPath>
+    <Reference Include="Correios.NET, Version=1.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Correios.NET.1.3.2\lib\netstandard2.0\Correios.NET.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -75,51 +51,29 @@
     <Reference Include="EPPlus, Version=5.5.5.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.5.5.5\lib\net45\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack, Version=1.8.10.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.8.10\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
-    <Reference Include="Itenso.TimePeriod, Version=2.1.1.0, Culture=neutral, PublicKeyToken=8cb6db75b4e81486, processorArchitecture=MSIL">
-      <HintPath>..\packages\TimePeriodLibrary.NET.2.1.1\lib\net46\Itenso.TimePeriod.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
-    <Reference Include="itext.barcodes, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.barcodes.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="itext.forms, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.forms.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Http, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Http.6.0.0\lib\net461\Microsoft.Extensions.Http.dll</HintPath>
     </Reference>
-    <Reference Include="itext.io, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.io.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.6.0.0\lib\net461\Microsoft.Extensions.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="itext.kernel, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.kernel.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="itext.layout, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.layout.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Options, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.6.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
-    <Reference Include="itext.pdfa, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.pdfa.dll</HintPath>
-    </Reference>
-    <Reference Include="itext.sign, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.sign.dll</HintPath>
-    </Reference>
-    <Reference Include="itext.styledxmlparser, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.styledxmlparser.dll</HintPath>
-    </Reference>
-    <Reference Include="itext.svg, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.svg.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\iTextSharp.5.5.13.2\lib\itextsharp.dll</HintPath>
-    </Reference>
-    <Reference Include="itextsharp.xmlworker, Version=5.5.13.2, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itextsharp.xmlworker.5.5.13.2\lib\itextsharp.xmlworker.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Logging.1.1.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.6.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.3.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.3.6\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
@@ -127,8 +81,8 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
@@ -144,25 +98,41 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encoding.CodePages, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.5.0.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -182,156 +152,12 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Twilio, Version=5.73.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Twilio.5.73.0\lib\net451\Twilio.dll</HintPath>
-    </Reference>
-    <Reference Include="Twilio.AspNet.Common, Version=5.73.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Twilio.AspNet.Common.5.73.0\lib\net451\Twilio.AspNet.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Twilio.AspNet.Mvc, Version=5.73.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Twilio.AspNet.Mvc.5.73.0\lib\net451\Twilio.AspNet.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model\EcoAssist_Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EcoAssist_Model.edmx</DependentUpon>
-      <LastGenOutput>EcoAssist_Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\EcoAssist_Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EcoAssist_Model.edmx</DependentUpon>
-      <LastGenOutput>EcoAssist_Model.cs</LastGenOutput>
-    </Content>
-    <Content Include="scripts\tinymce\icons\default\icons.js" />
-    <Content Include="scripts\tinymce\icons\default\icons.min.js" />
-    <Content Include="scripts\tinymce\license.txt" />
-    <Content Include="scripts\tinymce\models\dom\model.js" />
-    <Content Include="scripts\tinymce\models\dom\model.min.js" />
-    <Content Include="scripts\tinymce\plugins\advlist\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\advlist\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\anchor\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\anchor\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\autolink\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\autolink\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\autoresize\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\autoresize\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\autosave\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\autosave\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\charmap\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\charmap\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\codesample\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\codesample\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\code\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\code\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\directionality\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\directionality\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\emoticons\js\emojiimages.js" />
-    <Content Include="scripts\tinymce\plugins\emoticons\js\emojiimages.min.js" />
-    <Content Include="scripts\tinymce\plugins\emoticons\js\emojis.js" />
-    <Content Include="scripts\tinymce\plugins\emoticons\js\emojis.min.js" />
-    <Content Include="scripts\tinymce\plugins\emoticons\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\emoticons\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\fullscreen\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\fullscreen\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\help\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\help\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\image\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\image\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\importcss\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\importcss\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\insertdatetime\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\insertdatetime\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\link\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\link\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\lists\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\lists\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\media\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\media\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\nonbreaking\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\nonbreaking\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\pagebreak\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\pagebreak\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\preview\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\preview\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\quickbars\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\quickbars\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\save\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\save\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\searchreplace\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\searchreplace\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\table\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\table\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\template\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\template\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\visualblocks\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\visualblocks\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\visualchars\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\visualchars\plugin.min.js" />
-    <Content Include="scripts\tinymce\plugins\wordcount\plugin.js" />
-    <Content Include="scripts\tinymce\plugins\wordcount\plugin.min.js" />
-    <Content Include="scripts\tinymce\skins\content\dark\content.css" />
-    <Content Include="scripts\tinymce\skins\content\dark\content.min.css" />
-    <Content Include="scripts\tinymce\skins\content\default\content.css" />
-    <Content Include="scripts\tinymce\skins\content\default\content.min.css" />
-    <Content Include="scripts\tinymce\skins\content\document\content.css" />
-    <Content Include="scripts\tinymce\skins\content\document\content.min.css" />
-    <Content Include="scripts\tinymce\skins\content\tinymce-5-dark\content.css" />
-    <Content Include="scripts\tinymce\skins\content\tinymce-5-dark\content.min.css" />
-    <Content Include="scripts\tinymce\skins\content\tinymce-5\content.css" />
-    <Content Include="scripts\tinymce\skins\content\tinymce-5\content.min.css" />
-    <Content Include="scripts\tinymce\skins\content\writer\content.css" />
-    <Content Include="scripts\tinymce\skins\content\writer\content.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide-dark\content.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide-dark\content.inline.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide-dark\content.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide-dark\skin.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide-dark\skin.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide-dark\skin.shadowdom.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide-dark\skin.shadowdom.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide\content.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide\content.inline.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide\content.inline.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide\content.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide\skin.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide\skin.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide\skin.shadowdom.css" />
-    <Content Include="scripts\tinymce\skins\ui\oxide\skin.shadowdom.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\content.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\content.inline.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\content.inline.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\content.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\skin.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\skin.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5-dark\skin.shadowdom.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5\content.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5\content.inline.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5\content.inline.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5\content.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5\skin.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5\skin.min.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5\skin.shadowdom.css" />
-    <Content Include="scripts\tinymce\skins\ui\tinymce-5\skin.shadowdom.min.css" />
-    <Content Include="scripts\tinymce\themes\silver\theme.js" />
-    <Content Include="scripts\tinymce\themes\silver\theme.min.js" />
-    <Content Include="scripts\tinymce\tinymce.js" />
-    <Content Include="scripts\tinymce\tinymce.min.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="scripts\tinymce\tinymce.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CrossCutting\CrossCutting.csproj">
-      <Project>{dfea3a29-97d4-4f3a-88d2-786ec4f8864d}</Project>
-      <Name>CrossCutting</Name>
-    </ProjectReference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ChechTimeAttribute.cs" />
@@ -352,6 +178,19 @@
     <Compile Include="EntitiesServices\TemplateService.cs" />
     <Compile Include="EntitiesServices\TipoPessoaService.cs" />
     <Compile Include="EntitiesServices\UsuarioService.cs" />
+    <Compile Include="Interfaces\Entities\IAgendaService.cs" />
+    <Compile Include="Interfaces\Entities\ICategoriaTelefoneService.cs" />
+    <Compile Include="Interfaces\Entities\IConfiguracaoService.cs" />
+    <Compile Include="Interfaces\Entities\ILogService.cs" />
+    <Compile Include="Interfaces\Entities\INoticiaService.cs" />
+    <Compile Include="Interfaces\Entities\INotificacaoService.cs" />
+    <Compile Include="Interfaces\Entities\IPerfilService.cs" />
+    <Compile Include="Interfaces\Entities\IServiceBase.cs" />
+    <Compile Include="Interfaces\Entities\ITarefaService.cs" />
+    <Compile Include="Interfaces\Entities\ITelefoneService.cs" />
+    <Compile Include="Interfaces\Entities\ITemplateService.cs" />
+    <Compile Include="Interfaces\Entities\ITipoPessoaService.cs" />
+    <Compile Include="Interfaces\Entities\IUsuarioService.cs" />
     <Compile Include="Interfaces\Repositories\IAgendaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IAgendaRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICargoRepository.cs" />
@@ -360,6 +199,7 @@
     <Compile Include="Interfaces\Repositories\ICategoriaTelefoneRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaUsuarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IConfiguracaoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IDepartamentoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ILogRepository.cs" />
     <Compile Include="Interfaces\Repositories\INoticiaComentarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\INoticiaRepository.cs" />
@@ -368,7 +208,6 @@
     <Compile Include="Interfaces\Repositories\IPerfilRepository.cs" />
     <Compile Include="Interfaces\Repositories\IPeriodicidadeRepository.cs" />
     <Compile Include="Interfaces\Repositories\IPeriodicidadeTarefaRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
     <Compile Include="Interfaces\Repositories\ITarefaAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITarefaNotificacaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITarefaRepository.cs" />
@@ -379,19 +218,7 @@
     <Compile Include="Interfaces\Repositories\IUFRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUsuarioAnexoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUsuarioRepository.cs" />
-    <Compile Include="Interfaces\Services\IAgendaService.cs" />
-    <Compile Include="Interfaces\Services\ICategoriaTelefoneService.cs" />
-    <Compile Include="Interfaces\Services\IConfiguracaoService.cs" />
-    <Compile Include="Interfaces\Services\ILogService.cs" />
-    <Compile Include="Interfaces\Services\INoticiaService.cs" />
-    <Compile Include="Interfaces\Services\INotificacaoService.cs" />
-    <Compile Include="Interfaces\Services\IPerfilService.cs" />
-    <Compile Include="Interfaces\Services\IServiceBase.cs" />
-    <Compile Include="Interfaces\Services\ITarefaService.cs" />
-    <Compile Include="Interfaces\Services\ITelefoneService.cs" />
-    <Compile Include="Interfaces\Services\ITemplateService.cs" />
-    <Compile Include="Interfaces\Services\ITipoPessoaService.cs" />
-    <Compile Include="Interfaces\Services\IUsuarioService.cs" />
+    <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
     <Compile Include="Model\ACONDICIONAMENTO.cs">
       <DependentUpon>EcoAssist_Model.tt</DependentUpon>
     </Compile>
@@ -896,19 +723,55 @@
     <Compile Include="Model\VEICULO_FUNCAO.cs">
       <DependentUpon>EcoAssist_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="WorkClasses\AttachmentCRM.cs" />
-    <Compile Include="WorkClasses\AttachmentForn.cs" />
-    <Compile Include="WorkClasses\CNPJ.cs" />
-    <Compile Include="WorkClasses\Endereco.cs" />
-    <Compile Include="WorkClasses\FileQueue.cs" />
-    <Compile Include="WorkClasses\Login.cs" />
-    <Compile Include="WorkClasses\MontagemGrupo.cs" />
-    <Compile Include="WorkClasses\PRODUTOS_MAIS_VENDIDOS.cs" />
-    <Compile Include="WorkClasses\SessionMocks.cs" />
-    <Compile Include="WorkClasses\TrocaSenha.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkingClasses\AttachmentCRM.cs" />
+    <Compile Include="WorkingClasses\AttachmentForn.cs" />
+    <Compile Include="WorkingClasses\CNPJ.cs" />
+    <Compile Include="WorkingClasses\Endereco.cs" />
+    <Compile Include="WorkingClasses\FileQueue.cs" />
+    <Compile Include="WorkingClasses\MontagemGrupo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="Model\EcoAssist_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EcoAssist_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\EcoAssist_Model.edmx.diagram">
+      <DependentUpon>EcoAssist_Model.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrossCutting\CrossCutting.csproj">
+      <Project>{9a9d1615-7fa7-4b20-9d2c-7233d8aeb347}</Project>
+      <Name>CrossCutting</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\EcoAssist_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EcoAssist_Model.edmx</DependentUpon>
+      <LastGenOutput>EcoAssist_Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\EcoAssist_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EcoAssist_Model.edmx</DependentUpon>
+      <LastGenOutput>EcoAssist_Model.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
+  </Target>
 </Project>

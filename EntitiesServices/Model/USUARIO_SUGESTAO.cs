@@ -17,6 +17,9 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public USUARIO_SUGESTAO()
         {
+            this.AGENDA = new HashSet<AGENDA>();
+            this.AGENDA1 = new HashSet<AGENDA>();
+            this.AGENDA_VINCULO = new HashSet<AGENDA_VINCULO>();
             this.ATENDIMENTO_ACOMPANHAMENTO = new HashSet<ATENDIMENTO_ACOMPANHAMENTO>();
             this.AUDITORIA = new HashSet<AUDITORIA>();
             this.CONTA_PAGAR = new HashSet<CONTA_PAGAR>();
@@ -24,6 +27,7 @@ namespace EntitiesServices.Model
             this.CONTRATO_ANOTACOES = new HashSet<CONTRATO_ANOTACOES>();
             this.DESTINADOR_ANOTACOES = new HashSet<DESTINADOR_ANOTACOES>();
             this.DESTINADOR_ENVIO_ANOTACOES = new HashSet<DESTINADOR_ENVIO_ANOTACOES>();
+            this.LOG = new HashSet<LOG>();
             this.NOTICIA_COMENTARIO = new HashSet<NOTICIA_COMENTARIO>();
             this.NOTIFICACAO = new HashSet<NOTIFICACAO>();
             this.ORDEM_SERVICO = new HashSet<ORDEM_SERVICO>();
@@ -38,16 +42,12 @@ namespace EntitiesServices.Model
             this.PRESTADOR_ENDERECO_VERIFICACAO = new HashSet<PRESTADOR_ENDERECO_VERIFICACAO>();
             this.PRESTADOR_MOTORISTA_ANOTACOES = new HashSet<PRESTADOR_MOTORISTA_ANOTACOES>();
             this.PRESTADOR_VEICULO_ANOTACOES = new HashSet<PRESTADOR_VEICULO_ANOTACOES>();
-            this.TICKET_ATENDIMENTO = new HashSet<TICKET_ATENDIMENTO>();
-            this.USUARIO_ANEXO = new HashSet<USUARIO_ANEXO>();
-            this.AGENDA = new HashSet<AGENDA>();
-            this.AGENDA1 = new HashSet<AGENDA>();
-            this.AGENDA_VINCULO = new HashSet<AGENDA_VINCULO>();
             this.TAREFA = new HashSet<TAREFA>();
             this.TAREFA_ACOMPANHAMENTO = new HashSet<TAREFA_ACOMPANHAMENTO>();
             this.TAREFA_NOTIFICACAO = new HashSet<TAREFA_NOTIFICACAO>();
             this.TAREFA_VINCULO = new HashSet<TAREFA_VINCULO>();
-            this.LOG = new HashSet<LOG>();
+            this.TICKET_ATENDIMENTO = new HashSet<TICKET_ATENDIMENTO>();
+            this.USUARIO_ANEXO = new HashSet<USUARIO_ANEXO>();
         }
     
         public int USUA_CD_ID { get; set; }
@@ -85,7 +85,15 @@ namespace EntitiesServices.Model
         public Nullable<int> USUA_IN_APROVADOR { get; set; }
         public Nullable<int> USUA_IN_TECNICO { get; set; }
         public Nullable<int> USUA_IN_SISTEMA { get; set; }
+        public string USUA_NR_TELEFONE { get; set; }
+        public string USUA_NR_WHATSAPP { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AGENDA> AGENDA { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AGENDA> AGENDA1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AGENDA_VINCULO> AGENDA_VINCULO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ATENDIMENTO_ACOMPANHAMENTO> ATENDIMENTO_ACOMPANHAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -103,6 +111,8 @@ namespace EntitiesServices.Model
         public virtual ICollection<DESTINADOR_ANOTACOES> DESTINADOR_ANOTACOES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DESTINADOR_ENVIO_ANOTACOES> DESTINADOR_ENVIO_ANOTACOES { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LOG> LOG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NOTICIA_COMENTARIO> NOTICIA_COMENTARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -133,16 +143,6 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRESTADOR_VEICULO_ANOTACOES> PRESTADOR_VEICULO_ANOTACOES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TICKET_ATENDIMENTO> TICKET_ATENDIMENTO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIO_ANEXO> USUARIO_ANEXO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AGENDA> AGENDA { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AGENDA> AGENDA1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AGENDA_VINCULO> AGENDA_VINCULO { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREFA> TAREFA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREFA_ACOMPANHAMENTO> TAREFA_ACOMPANHAMENTO { get; set; }
@@ -151,6 +151,8 @@ namespace EntitiesServices.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREFA_VINCULO> TAREFA_VINCULO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LOG> LOG { get; set; }
+        public virtual ICollection<TICKET_ATENDIMENTO> TICKET_ATENDIMENTO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USUARIO_ANEXO> USUARIO_ANEXO { get; set; }
     }
 }

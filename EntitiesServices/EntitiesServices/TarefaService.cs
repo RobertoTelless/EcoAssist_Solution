@@ -34,9 +34,9 @@ namespace ModelServices.EntitiesServices
             _usuRepository = usuRepository;
         }
 
-        public TAREFA CheckExist(TAREFA tarefa, Int32 idUsu)
+        public TAREFA CheckExist(TAREFA tarefa, Int32 idAss)
         {
-            TAREFA item = _baseRepository.CheckExist(tarefa, idUsu);
+            TAREFA item = _baseRepository.CheckExist(tarefa, idAss);
             return item;
         }
 
@@ -46,9 +46,9 @@ namespace ModelServices.EntitiesServices
             return item;
         }
 
-        public List<TAREFA> GetByDate(DateTime data, Int32 idUsu)
+        public List<TAREFA> GetByDate(DateTime data, Int32 idAss)
         {
-            return _baseRepository.GetByDate(data, idUsu);
+            return _baseRepository.GetByDate(data, idAss);
         }
 
         public USUARIO_SUGESTAO GetUserById(Int32 id)

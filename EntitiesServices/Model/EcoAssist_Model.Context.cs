@@ -26,16 +26,21 @@ namespace EntitiesServices.Model
         }
     
         public virtual DbSet<ACONDICIONAMENTO> ACONDICIONAMENTO { get; set; }
+        public virtual DbSet<AGENDA> AGENDA { get; set; }
+        public virtual DbSet<AGENDA_ANEXO> AGENDA_ANEXO { get; set; }
+        public virtual DbSet<AGENDA_VINCULO> AGENDA_VINCULO { get; set; }
         public virtual DbSet<ATENDIMENTO_ACOMPANHAMENTO> ATENDIMENTO_ACOMPANHAMENTO { get; set; }
         public virtual DbSet<ATENDIMENTO_ANEXO> ATENDIMENTO_ANEXO { get; set; }
         public virtual DbSet<ATENDIMENTO_STATUS> ATENDIMENTO_STATUS { get; set; }
         public virtual DbSet<AUDITORIA> AUDITORIA { get; set; }
         public virtual DbSet<BANCO> BANCO { get; set; }
         public virtual DbSet<CARGO> CARGO { get; set; }
+        public virtual DbSet<CATEGORIA_AGENDA> CATEGORIA_AGENDA { get; set; }
         public virtual DbSet<CATEGORIA_ATENDIMENTO> CATEGORIA_ATENDIMENTO { get; set; }
         public virtual DbSet<CATEGORIA_FORNECEDOR> CATEGORIA_FORNECEDOR { get; set; }
         public virtual DbSet<CATEGORIA_NOTIFICACAO> CATEGORIA_NOTIFICACAO { get; set; }
         public virtual DbSet<CATEGORIA_PRODUTO> CATEGORIA_PRODUTO { get; set; }
+        public virtual DbSet<CATEGORIA_TELEFONE> CATEGORIA_TELEFONE { get; set; }
         public virtual DbSet<CATEGORIA_USUARIO> CATEGORIA_USUARIO { get; set; }
         public virtual DbSet<CENTRO_CUSTO> CENTRO_CUSTO { get; set; }
         public virtual DbSet<CLASSE> CLASSE { get; set; }
@@ -50,6 +55,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<CLIENTE_PERGUNTA_OPCAO> CLIENTE_PERGUNTA_OPCAO { get; set; }
         public virtual DbSet<CLIENTE_RESPOSTA> CLIENTE_RESPOSTA { get; set; }
         public virtual DbSet<CNH_CATEGORIA> CNH_CATEGORIA { get; set; }
+        public virtual DbSet<CONFIGURACAO> CONFIGURACAO { get; set; }
         public virtual DbSet<CONTA_BANCO> CONTA_BANCO { get; set; }
         public virtual DbSet<CONTA_BANCO_ANEXO> CONTA_BANCO_ANEXO { get; set; }
         public virtual DbSet<CONTA_BANCO_CONTATO> CONTA_BANCO_CONTATO { get; set; }
@@ -82,6 +88,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<LEILOEIRO_LOTE> LEILOEIRO_LOTE { get; set; }
         public virtual DbSet<LEILOEIRO_LOTE_ITENS> LEILOEIRO_LOTE_ITENS { get; set; }
         public virtual DbSet<LINHA_PRODUTO> LINHA_PRODUTO { get; set; }
+        public virtual DbSet<LOG> LOG { get; set; }
         public virtual DbSet<MARCA_VEICULO> MARCA_VEICULO { get; set; }
         public virtual DbSet<MODELO_VEICULO> MODELO_VEICULO { get; set; }
         public virtual DbSet<MOTIVO_FALHA_ORDEM_SERVICO> MOTIVO_FALHA_ORDEM_SERVICO { get; set; }
@@ -110,6 +117,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<PEDIDO_COMPRA_ANEXO> PEDIDO_COMPRA_ANEXO { get; set; }
         public virtual DbSet<PERFIL> PERFIL { get; set; }
         public virtual DbSet<PERIODICIDADE> PERIODICIDADE { get; set; }
+        public virtual DbSet<PERIODICIDADE_TAREFA> PERIODICIDADE_TAREFA { get; set; }
         public virtual DbSet<PERIODO> PERIODO { get; set; }
         public virtual DbSet<PESQUISA> PESQUISA { get; set; }
         public virtual DbSet<PESQUISA_ITEM> PESQUISA_ITEM { get; set; }
@@ -146,7 +154,16 @@ namespace EntitiesServices.Model
         public virtual DbSet<STATUS_ORDEM_SERVICO> STATUS_ORDEM_SERVICO { get; set; }
         public virtual DbSet<SUBCATEGORIA_PRODUTO> SUBCATEGORIA_PRODUTO { get; set; }
         public virtual DbSet<SUBGRUPO> SUBGRUPO { get; set; }
+        public virtual DbSet<TAREFA> TAREFA { get; set; }
+        public virtual DbSet<TAREFA_ACOMPANHAMENTO> TAREFA_ACOMPANHAMENTO { get; set; }
+        public virtual DbSet<TAREFA_ANEXO> TAREFA_ANEXO { get; set; }
+        public virtual DbSet<TAREFA_NOTIFICACAO> TAREFA_NOTIFICACAO { get; set; }
+        public virtual DbSet<TAREFA_VINCULO> TAREFA_VINCULO { get; set; }
+        public virtual DbSet<TELEFONE> TELEFONE { get; set; }
+        public virtual DbSet<TEMPLATE> TEMPLATE { get; set; }
+        public virtual DbSet<TEMPLATE_EMAIL> TEMPLATE_EMAIL { get; set; }
         public virtual DbSet<TEMPLATE_MENSAGEM> TEMPLATE_MENSAGEM { get; set; }
+        public virtual DbSet<TEMPLATE_SMS> TEMPLATE_SMS { get; set; }
         public virtual DbSet<TICKET_ATENDIMENTO> TICKET_ATENDIMENTO { get; set; }
         public virtual DbSet<TIPO_CENTRO_CUSTO> TIPO_CENTRO_CUSTO { get; set; }
         public virtual DbSet<TIPO_CERTIFICADO> TIPO_CERTIFICADO { get; set; }
@@ -163,6 +180,7 @@ namespace EntitiesServices.Model
         public virtual DbSet<TIPO_RESIDENCIA> TIPO_RESIDENCIA { get; set; }
         public virtual DbSet<TIPO_RESIDUO> TIPO_RESIDUO { get; set; }
         public virtual DbSet<TIPO_SERVICO> TIPO_SERVICO { get; set; }
+        public virtual DbSet<TIPO_TAREFA> TIPO_TAREFA { get; set; }
         public virtual DbSet<TIPO_VEICULO> TIPO_VEICULO { get; set; }
         public virtual DbSet<TRATAMENTO> TRATAMENTO { get; set; }
         public virtual DbSet<UF> UF { get; set; }
@@ -170,23 +188,5 @@ namespace EntitiesServices.Model
         public virtual DbSet<USUARIO_ANEXO> USUARIO_ANEXO { get; set; }
         public virtual DbSet<USUARIO_SUGESTAO> USUARIO_SUGESTAO { get; set; }
         public virtual DbSet<VEICULO_FUNCAO> VEICULO_FUNCAO { get; set; }
-        public virtual DbSet<AGENDA> AGENDA { get; set; }
-        public virtual DbSet<AGENDA_ANEXO> AGENDA_ANEXO { get; set; }
-        public virtual DbSet<AGENDA_VINCULO> AGENDA_VINCULO { get; set; }
-        public virtual DbSet<CATEGORIA_AGENDA> CATEGORIA_AGENDA { get; set; }
-        public virtual DbSet<CATEGORIA_TELEFONE> CATEGORIA_TELEFONE { get; set; }
-        public virtual DbSet<PERIODICIDADE_TAREFA> PERIODICIDADE_TAREFA { get; set; }
-        public virtual DbSet<TAREFA> TAREFA { get; set; }
-        public virtual DbSet<TAREFA_ACOMPANHAMENTO> TAREFA_ACOMPANHAMENTO { get; set; }
-        public virtual DbSet<TAREFA_ANEXO> TAREFA_ANEXO { get; set; }
-        public virtual DbSet<TAREFA_NOTIFICACAO> TAREFA_NOTIFICACAO { get; set; }
-        public virtual DbSet<TAREFA_VINCULO> TAREFA_VINCULO { get; set; }
-        public virtual DbSet<TELEFONE> TELEFONE { get; set; }
-        public virtual DbSet<TEMPLATE> TEMPLATE { get; set; }
-        public virtual DbSet<TEMPLATE_EMAIL> TEMPLATE_EMAIL { get; set; }
-        public virtual DbSet<TEMPLATE_SMS> TEMPLATE_SMS { get; set; }
-        public virtual DbSet<TIPO_TAREFA> TIPO_TAREFA { get; set; }
-        public virtual DbSet<CONFIGURACAO> CONFIGURACAO { get; set; }
-        public virtual DbSet<LOG> LOG { get; set; }
     }
 }
