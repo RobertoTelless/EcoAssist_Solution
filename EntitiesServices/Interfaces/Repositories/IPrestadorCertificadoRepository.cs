@@ -7,9 +7,9 @@ using EntitiesServices.Model;
 
 namespace ModelServices.Interfaces.Repositories
 {
-    public interface IPrestadorEnderecoRepository : IRepositoryBase<PRESTADOR_ENDERECO>
+    public interface IPrestadorCertificadoRepository : IRepositoryBase<PRESTADOR_CERTIFICADO>
     {
-        List<PRESTADOR_ENDERECO> GetAllItens();
-        PRESTADOR_ENDERECO GetItemById(Int32 id);
+        List<PRESTADOR_CERTIFICADO> GetAllItens();
+        PRESTADOR_CERTIFICADO GetItemById(Int32 id);
     }
 }

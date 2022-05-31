@@ -17,7 +17,7 @@ namespace DataServices.Repositories
             return query.FirstOrDefault();
         }
 
-        public List<TIPO_CONTA> GetAllItens(Int32 idAss)
+        public List<TIPO_CONTA> GetAllItens()
         {
             IQueryable<TIPO_CONTA> query = Db.TIPO_CONTA;
             return query.ToList();

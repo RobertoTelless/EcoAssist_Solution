@@ -12,18 +12,17 @@ namespace DataServices.Repositories
 {
     public class BancoRepository : RepositoryBase<BANCO>, IBancoRepository
     {
-        public BANCO CheckExist(BANCO conta, Int32 idAss)
+        public BANCO CheckExist(BANCO conta)
         {
             IQueryable<BANCO> query = Db.BANCO;
-            query = query.Where(p => p.BANC_SG_CODIGO == conta.BANC_SG_CODIGO);
-            query = query.Where(p => p.ASSI_CD_ID == idAss);
+            query = query.Where(p => p.BANC_NR_CODIGO == conta.BANC_NR_CODIGO);
             return query.FirstOrDefault();
         }
 
         public BANCO GetByCodigo(String codigo)
         {
             IQueryable<BANCO> query = Db.BANCO.Where(p => p.BANC_IN_ATIVO == 1);
-            query = query.Where(p => p.BANC_SG_CODIGO == codigo);
+            query = query.Where(p => p.BANC_NR_CODIGO == codigo);
             query = query.Include(p => p.CONTA_BANCO);
             return query.FirstOrDefault();
         }
@@ -36,29 +35,27 @@ namespace DataServices.Repositories
             return query.FirstOrDefault();
         }
 
-        public List<BANCO> GetAllItens(Int32 idAss)
+        public List<BANCO> GetAllItens()
         {
             IQueryable<BANCO> query = Db.BANCO.Where(p => p.BANC_IN_ATIVO == 1);
-            query = query.Where(p => p.ASSI_CD_ID == idAss);
             query = query.Include(p => p.CONTA_BANCO);
             return query.ToList();
         }
 
-        public List<BANCO> GetAllItensAdm(Int32 idAss)
+        public List<BANCO> GetAllItensAdm()
         {
             IQueryable<BANCO> query = Db.BANCO;
-            query = query.Where(p => p.ASSI_CD_ID == idAss);
             query = query.Include(p => p.CONTA_BANCO);
             return query.ToList();
         }
 
-        public List<BANCO> ExecuteFilter(String codigo, String nome, Int32 idAss)
+        public List<BANCO> ExecuteFilter(String codigo, String nome)
         {
             List<BANCO> lista = new List<BANCO>();
             IQueryable<BANCO> query = Db.BANCO;
             if (!String.IsNullOrEmpty(codigo))
             {
-                query = query.Where(p => p.BANC_SG_CODIGO == codigo);
+                query = query.Where(p => p.BANC_NR_CODIGO == codigo);
             }
             if (!String.IsNullOrEmpty(nome))
             {
@@ -66,7 +63,6 @@ namespace DataServices.Repositories
             }
             if (query != null)
             {
-                query = query.Where(p => p.ASSI_CD_ID == idAss);
                 query = query.OrderBy(a => a.BANC_NM_NOME);
                 lista = query.ToList<BANCO>();
             }

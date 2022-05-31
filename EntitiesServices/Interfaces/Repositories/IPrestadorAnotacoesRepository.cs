@@ -7,7 +7,7 @@ using EntitiesServices.Model;
 
 namespace ModelServices.Interfaces.Repositories
 {
-    public interface IEco_PrestadorAnotacoesRepository : IRepositoryBase<PRESTADOR_ANOTACOES>
+    public interface IPrestadorAnotacoesRepository : IRepositoryBase<PRESTADOR_ANOTACOES>
     {
         List<PRESTADOR_ANOTACOES> GetAllItens();
         PRESTADOR_ANOTACOES GetItemById(Int32 id);
