@@ -167,6 +167,8 @@
     <Compile Include="Interfaces\ILogAppService.cs" />
     <Compile Include="Interfaces\INoticiaAppService.cs" />
     <Compile Include="Interfaces\INotificacaoAppService.cs" />
+    <Compile Include="Interfaces\IPrestadorAppService.cs" />
+    <Compile Include="Interfaces\IPrestadorCnpjAppService.cs" />
     <Compile Include="Interfaces\ITarefaAppService.cs" />
     <Compile Include="Interfaces\ITelefoneAppService.cs" />
     <Compile Include="Interfaces\ITemplateAppService.cs" />
@@ -181,6 +183,8 @@
     <Compile Include="Services\LogAppService.cs" />
     <Compile Include="Services\NoticiaAppService.cs" />
     <Compile Include="Services\NotificacaoAppService.cs" />
+    <Compile Include="Services\PrestadorAppService.cs" />
+    <Compile Include="Services\PrestadorCnpjAppService.cs" />
     <Compile Include="Services\TarefaAppService.cs" />
     <Compile Include="Services\TelefoneAppService.cs" />
     <Compile Include="Services\TemplateAppService.cs" />

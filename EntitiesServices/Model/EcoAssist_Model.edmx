@@ -1479,6 +1479,19 @@
           <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
           <Property Name="PRMA_TX_ANOTACAO" Type="image" Nullable="false" />
         </EntityType>
+        <EntityType Name="PRESTADOR_QUADRO_SOCIETARIO">
+          <Key>
+            <PropertyRef Name="PRQS_CD_ID" />
+          </Key>
+          <Property Name="PRQS_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRES_CD_ID" Type="int" Nullable="false" />
+          <Property Name="PRQS_NM_QUALIFICACAO" Type="varchar" MaxLength="100" />
+          <Property Name="PRQS_NM_PAIS_ORIGEM" Type="varchar" MaxLength="50" />
+          <Property Name="PRQS_NM_REPRESENTANTE_LEGAL" Type="varchar" MaxLength="50" />
+          <Property Name="PRQS_NM_QUALIFICACAO_REP_LEGAL" Type="varchar" MaxLength="100" />
+          <Property Name="PRQS_NM_NOME" Type="varchar" MaxLength="150" />
+          <Property Name="PRQS_IN_ATIVO" Type="int" />
+        </EntityType>
         <EntityType Name="PRESTADOR_REGIAO">
           <Key>
             <PropertyRef Name="PRRE_CD_ID" />
@@ -2417,6 +2430,18 @@
             </Principal>
             <Dependent Role="PRESTADOR_MOTORISTA_ANOTACOES">
               <PropertyRef Name="USUA_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR">
+          <End Role="PRESTADOR" Type="Self.PRESTADOR" Multiplicity="1" />
+          <End Role="PRESTADOR_QUADRO_SOCIETARIO" Type="Self.PRESTADOR_QUADRO_SOCIETARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTADOR">
+              <PropertyRef Name="PRES_CD_ID" />
+            </Principal>
+            <Dependent Role="PRESTADOR_QUADRO_SOCIETARIO">
+              <PropertyRef Name="PRES_CD_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4862,6 +4887,7 @@
           <EntitySet Name="PRESTADOR_ENDERECO_VERIFICACAO" EntityType="Self.PRESTADOR_ENDERECO_VERIFICACAO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRESTADOR_MOTORISTA" EntityType="Self.PRESTADOR_MOTORISTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRESTADOR_MOTORISTA_ANOTACOES" EntityType="Self.PRESTADOR_MOTORISTA_ANOTACOES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRESTADOR_QUADRO_SOCIETARIO" EntityType="Self.PRESTADOR_QUADRO_SOCIETARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRESTADOR_REGIAO" EntityType="Self.PRESTADOR_REGIAO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRESTADOR_VEICULO" EntityType="Self.PRESTADOR_VEICULO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRESTADOR_VEICULO_ANOTACOES" EntityType="Self.PRESTADOR_VEICULO_ANOTACOES" Schema="dbo" store:Type="Tables" />
@@ -5031,6 +5057,10 @@
           <AssociationSet Name="FK_PRESTADOR_MOTORISTA_ANOTACOES_USUARIO_SUGESTAO" Association="Self.FK_PRESTADOR_MOTORISTA_ANOTACOES_USUARIO_SUGESTAO">
             <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
             <End Role="PRESTADOR_MOTORISTA_ANOTACOES" EntitySet="PRESTADOR_MOTORISTA_ANOTACOES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR" Association="Self.FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR">
+            <End Role="PRESTADOR" EntitySet="PRESTADOR" />
+            <End Role="PRESTADOR_QUADRO_SOCIETARIO" EntitySet="PRESTADOR_QUADRO_SOCIETARIO" />
           </AssociationSet>
           <AssociationSet Name="FK_PRESTADOR_VEICULO_ANOTACOES_USUARIO_SUGESTAO" Association="Self.FK_PRESTADOR_VEICULO_ANOTACOES_USUARIO_SUGESTAO">
             <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
@@ -7403,6 +7433,7 @@
           <NavigationProperty Name="PRESTADOR_CONTATO" Relationship="Self.FKPRESTADOR_6929" FromRole="PRESTADOR" ToRole="PRESTADOR_CONTATO" />
           <NavigationProperty Name="PRESTADOR_MOTORISTA" Relationship="Self.FKPRESTADOR_830422" FromRole="PRESTADOR" ToRole="PRESTADOR_MOTORISTA" />
           <NavigationProperty Name="PRESTADOR_BANCO" Relationship="Self.FKPRESTADOR_880708" FromRole="PRESTADOR" ToRole="PRESTADOR_BANCO" />
+          <NavigationProperty Name="PRESTADOR_QUADRO_SOCIETARIO" Relationship="DB_EcoBaseModel.FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR" FromRole="PRESTADOR" ToRole="PRESTADOR_QUADRO_SOCIETARIO" />
         </EntityType>
         <EntityType Name="PRESTADOR_AJUDANTE">
           <Key>
@@ -12064,7 +12095,38 @@
             <End Role="USUARIO_SUGESTAO" EntitySet="USUARIO_SUGESTAO" />
             <End Role="USUARIO_ANEXO" EntitySet="USUARIO_ANEXO" />
           </AssociationSet>
+          <EntitySet Name="PRESTADOR_QUADRO_SOCIETARIO" EntityType="DB_EcoBaseModel.PRESTADOR_QUADRO_SOCIETARIO" />
+          <AssociationSet Name="FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR" Association="DB_EcoBaseModel.FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR">
+            <End Role="PRESTADOR" EntitySet="PRESTADOR" />
+            <End Role="PRESTADOR_QUADRO_SOCIETARIO" EntitySet="PRESTADOR_QUADRO_SOCIETARIO" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="PRESTADOR_QUADRO_SOCIETARIO">
+          <Key>
+            <PropertyRef Name="PRQS_CD_ID" />
+          </Key>
+          <Property Name="PRQS_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRES_CD_ID" Type="Int32" Nullable="false" />
+          <Property Name="PRQS_NM_QUALIFICACAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PRQS_NM_PAIS_ORIGEM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRQS_NM_REPRESENTANTE_LEGAL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRQS_NM_QUALIFICACAO_REP_LEGAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PRQS_NM_NOME" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PRQS_IN_ATIVO" Type="Int32" />
+          <NavigationProperty Name="PRESTADOR" Relationship="DB_EcoBaseModel.FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR" FromRole="PRESTADOR_QUADRO_SOCIETARIO" ToRole="PRESTADOR" />
+        </EntityType>
+        <Association Name="FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR">
+          <End Type="DB_EcoBaseModel.PRESTADOR" Role="PRESTADOR" Multiplicity="1" />
+          <End Type="DB_EcoBaseModel.PRESTADOR_QUADRO_SOCIETARIO" Role="PRESTADOR_QUADRO_SOCIETARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTADOR">
+              <PropertyRef Name="PRES_CD_ID" />
+            </Principal>
+            <Dependent Role="PRESTADOR_QUADRO_SOCIETARIO">
+              <PropertyRef Name="PRES_CD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14286,6 +14348,20 @@
                 <ScalarProperty Name="VEFU_CD_ID" ColumnName="VEFU_CD_ID" />
                 <ScalarProperty Name="VEFU_NM_NOME" ColumnName="VEFU_NM_NOME" />
                 <ScalarProperty Name="VEFU_IN_ATIVO" ColumnName="VEFU_IN_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESTADOR_QUADRO_SOCIETARIO">
+            <EntityTypeMapping TypeName="DB_EcoBaseModel.PRESTADOR_QUADRO_SOCIETARIO">
+              <MappingFragment StoreEntitySet="PRESTADOR_QUADRO_SOCIETARIO">
+                <ScalarProperty Name="PRQS_IN_ATIVO" ColumnName="PRQS_IN_ATIVO" />
+                <ScalarProperty Name="PRQS_NM_NOME" ColumnName="PRQS_NM_NOME" />
+                <ScalarProperty Name="PRQS_NM_QUALIFICACAO_REP_LEGAL" ColumnName="PRQS_NM_QUALIFICACAO_REP_LEGAL" />
+                <ScalarProperty Name="PRQS_NM_REPRESENTANTE_LEGAL" ColumnName="PRQS_NM_REPRESENTANTE_LEGAL" />
+                <ScalarProperty Name="PRQS_NM_PAIS_ORIGEM" ColumnName="PRQS_NM_PAIS_ORIGEM" />
+                <ScalarProperty Name="PRQS_NM_QUALIFICACAO" ColumnName="PRQS_NM_QUALIFICACAO" />
+                <ScalarProperty Name="PRES_CD_ID" ColumnName="PRES_CD_ID" />
+                <ScalarProperty Name="PRQS_CD_ID" ColumnName="PRQS_CD_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

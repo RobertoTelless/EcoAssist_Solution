@@ -30,6 +30,7 @@ namespace EntitiesServices.Model
             this.PRESTADOR_CONTATO = new HashSet<PRESTADOR_CONTATO>();
             this.PRESTADOR_MOTORISTA = new HashSet<PRESTADOR_MOTORISTA>();
             this.PRESTADOR_BANCO = new HashSet<PRESTADOR_BANCO>();
+            this.PRESTADOR_QUADRO_SOCIETARIO = new HashSet<PRESTADOR_QUADRO_SOCIETARIO>();
         }
     
         public int PRES_CD_ID { get; set; }
@@ -89,5 +90,7 @@ namespace EntitiesServices.Model
         public virtual ICollection<PRESTADOR_MOTORISTA> PRESTADOR_MOTORISTA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRESTADOR_BANCO> PRESTADOR_BANCO { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRESTADOR_QUADRO_SOCIETARIO> PRESTADOR_QUADRO_SOCIETARIO { get; set; }
     }
 }

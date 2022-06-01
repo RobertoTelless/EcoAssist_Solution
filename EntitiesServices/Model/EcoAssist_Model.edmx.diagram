@@ -392,6 +392,8 @@
         <AssociationConnector Association="DB_EcoBaseModel.FK_TELEFONE_UF" ManuallyRouted="false" />
         <AssociationConnector Association="DB_EcoBaseModel.FKTICKET_ATE274359" ManuallyRouted="false" />
         <AssociationConnector Association="DB_EcoBaseModel.FKUSUARIO_AN744744" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DB_EcoBaseModel.PRESTADOR_QUADRO_SOCIETARIO" Width="1.5" PointX="9" PointY="33" />
+        <AssociationConnector Association="DB_EcoBaseModel.FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -173,6 +173,7 @@
     <Compile Include="EntitiesServices\NoticiaService.cs" />
     <Compile Include="EntitiesServices\NotificacaoService.cs" />
     <Compile Include="EntitiesServices\PerfilService.cs" />
+    <Compile Include="EntitiesServices\PrestadorCnpjService.cs" />
     <Compile Include="EntitiesServices\PrestadorService.cs" />
     <Compile Include="EntitiesServices\ServiceBase.cs" />
     <Compile Include="EntitiesServices\TarefaService.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Interfaces\Entities\INoticiaService.cs" />
     <Compile Include="Interfaces\Entities\INotificacaoService.cs" />
     <Compile Include="Interfaces\Entities\IPerfilService.cs" />
+    <Compile Include="Interfaces\Entities\IPrestadorCnpjService.cs" />
     <Compile Include="Interfaces\Entities\IPrestadorService.cs" />
     <Compile Include="Interfaces\Entities\IServiceBase.cs" />
     <Compile Include="Interfaces\Entities\ITarefaService.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="Interfaces\Repositories\IBancoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICargoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IModeloVeiculoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IPrestadorCnpjRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRegiaoCoberturaRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRegiaoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ICategoriaCNHRepository.cs" />
@@ -602,6 +605,9 @@
       <DependentUpon>EcoAssist_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PRESTADOR_MOTORISTA_ANOTACOES.cs">
+      <DependentUpon>EcoAssist_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PRESTADOR_QUADRO_SOCIETARIO.cs">
       <DependentUpon>EcoAssist_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PRESTADOR_REGIAO.cs">

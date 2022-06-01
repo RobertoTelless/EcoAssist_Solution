@@ -165,6 +165,7 @@
     <Compile Include="Repositories\BancoRepository.cs" />
     <Compile Include="Repositories\CargoRepository.cs" />
     <Compile Include="Repositories\ModeloVeiculoRepository.cs" />
+    <Compile Include="Repositories\PrestadorCnpjRepository.cs" />
     <Compile Include="Repositories\RegiaoCoberturaRepository.cs" />
     <Compile Include="Repositories\RegiaoRepository.cs" />
     <Compile Include="Repositories\CategoriaCNHRepository.cs" />

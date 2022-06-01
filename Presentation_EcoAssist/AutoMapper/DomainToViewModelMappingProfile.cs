@@ -24,6 +24,16 @@ namespace MvcMapping.Mappers
             CreateMap<TELEFONE, TelefoneViewModel>();
             CreateMap<TAREFA, TarefaViewModel>();
             CreateMap<TAREFA_ACOMPANHAMENTO, TarefaAcompanhamentoViewModel>();
+            CreateMap<PRESTADOR, PrestadorViewModel>();
+            CreateMap<PRESTADOR_AJUDANTE, PrestadorAjudanteViewModel>();
+            CreateMap<PRESTADOR_ANOTACOES, PrestadorAnotacoesViewModel>();
+            CreateMap<PRESTADOR_BANCO, PrestadorBancoViewModel>();
+            CreateMap<PRESTADOR_CERTIFICADO, PrestadorCertificadoViewModel>();
+            CreateMap<PRESTADOR_CONTATO, PrestadorContatoViewModel>();
+            CreateMap<PRESTADOR_ENDERECO, PrestadorEnderecoViewModel>();
+            CreateMap<PRESTADOR_MOTORISTA, PrestadorMotoristaViewModel>();
+            CreateMap<PRESTADOR_REGIAO, PrestadorRegiaoViewModel>();
+            CreateMap<PRESTADOR_VEICULO, PrestadorVeiculoViewModel>();
 
         }
     }

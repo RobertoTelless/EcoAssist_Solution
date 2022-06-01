@@ -188,5 +188,6 @@ namespace EntitiesServices.Model
         public virtual DbSet<USUARIO_ANEXO> USUARIO_ANEXO { get; set; }
         public virtual DbSet<USUARIO_SUGESTAO> USUARIO_SUGESTAO { get; set; }
         public virtual DbSet<VEICULO_FUNCAO> VEICULO_FUNCAO { get; set; }
+        public virtual DbSet<PRESTADOR_QUADRO_SOCIETARIO> PRESTADOR_QUADRO_SOCIETARIO { get; set; }
     }
 }

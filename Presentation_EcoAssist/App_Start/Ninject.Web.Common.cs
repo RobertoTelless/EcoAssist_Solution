@@ -80,6 +80,8 @@ namespace Presentation.Start
             kernel.Bind<ITipoPessoaAppService>().To<TipoPessoaAppService>();
             kernel.Bind<ITelefoneAppService>().To<TelefoneAppService>();
             kernel.Bind<ICategoriaTelefoneAppService>().To<CategoriaTelefoneAppService>();
+            kernel.Bind<IPrestadorAppService>().To<PrestadorAppService>();
+            kernel.Bind<IPrestadorCnpjAppService>().To<PrestadorCnpjAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -93,6 +95,8 @@ namespace Presentation.Start
             kernel.Bind<ITipoPessoaService>().To<TipoPessoaService>();
             kernel.Bind<ITelefoneService>().To<TelefoneService>();
             kernel.Bind<ICategoriaTelefoneService>().To<CategoriaTelefoneService>();
+            kernel.Bind<IPrestadorService>().To<PrestadorService>();
+            kernel.Bind<IPrestadorCnpjService>().To<PrestadorCnpjService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -119,8 +123,34 @@ namespace Presentation.Start
             kernel.Bind<ITelefoneRepository>().To<TelefoneRepository>();
             kernel.Bind<ICategoriaTelefoneRepository>().To<CategoriaTelefoneRepository>();
             kernel.Bind<IPeriodicidadeRepository>().To<PeriodicidadeRepository>();
-
-
+            kernel.Bind<IBancoRepository>().To<BancoRepository>();
+            kernel.Bind<ICategoriaCNHRepository>().To<CategoriaCNHRepository>();
+            kernel.Bind<IMarcaVeiculoRepository>().To<MarcaVeiculoRepository>();
+            kernel.Bind<IModeloVeiculoRepository>().To<ModeloVeiculoRepository>();
+            kernel.Bind<IPrestadorAjudanteAnotacoesRepository>().To<PrestadorAjudanteAnotacoesRepository>();
+            kernel.Bind<IPrestadorAjudanteRepository>().To<PrestadorAjudanteRepository>();
+            kernel.Bind<IPrestadorAnexoRepository>().To<PrestadorAnexoRepository>();
+            kernel.Bind<IPrestadorAnotacoesRepository>().To<PrestadorAnotacoesRepository>();
+            kernel.Bind<IPrestadorBancoRepository>().To<PrestadorBancoRepository>();
+            kernel.Bind<IPrestadorCertificadoRepository>().To<PrestadorCertificadoRepository>();
+            kernel.Bind<IPrestadorCnpjRepository>().To<PrestadorCnpjRepository>();
+            kernel.Bind<IPrestadorContatoRepository>().To<PrestadorContatoRepository>();
+            kernel.Bind<IPrestadorEnderecoRepository>().To<PrestadorEnderecoRepository>();
+            kernel.Bind<IPrestadorMotoristaAnotacoesRepository>().To<IPrestadorMotoristaAnotacoesRepository>();
+            kernel.Bind<IPrestadorMotoristaRepository>().To<IPrestadorMotoristaRepository>();
+            kernel.Bind<IPrestadorRegiaoRepository>().To<PrestadorRegiaoRepository>();
+            kernel.Bind<IPrestadorRepository>().To<PrestadorRepository>();
+            kernel.Bind<IPrestadorVeiculoAnotacoesRepository>().To<PrestadorVeiculoAnotacoesRepository>();
+            kernel.Bind<IPrestadorVeiculoCertificadoRepository>().To<PrestadorVeiculoCertificadoRepository>();
+            kernel.Bind<IPrestadorVeiculoFuncaoRepository>().To<PrestadorVeiculoFuncaoRepository>();
+            kernel.Bind<IPrestadorVeiculoRepository>().To<PrestadorVeiculoRepository>();
+            kernel.Bind<IRegiaoCoberturaRepository>().To<RegiaoCoberturaRepository>();
+            kernel.Bind<IRegiaoRepository>().To<RegiaoRepository>();
+            kernel.Bind<ITipoCertificadoRepository>().To<TipoCertificadoRepository>();
+            kernel.Bind<ITipoCertificadoVeiculoRepository>().To<TipoCertificadoVeiculoRepository>();
+            kernel.Bind<ITipoContaRepository>().To<TipoContaRepository>();
+            kernel.Bind<ITipoVeiculoRepository>().To<TipoVeiculoRepository>();
+            kernel.Bind<IVeiculoFuncaoRepository>().To<VeiculoFuncaoRepository>();
         }
     }
 }
