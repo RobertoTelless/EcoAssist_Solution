@@ -227,9 +227,9 @@ namespace ApplicationServices.Services
             try
             {
                 // Verifica integridade referencial
-                if (true)
+                if (item.ORDEM_SERVICO_PRESTADOR.Count > 0)
                 {
-
+                    return 1;
                 }
 
                 // Acerta campos

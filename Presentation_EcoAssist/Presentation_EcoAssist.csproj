@@ -246,6 +246,7 @@
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
     <Compile Include="App_Start\PlatMensagens_Resources.Designer.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SMS_Mensagens.Designer.cs" />
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
@@ -3042,13 +3043,36 @@
     <Content Include="Views\Usuario\MontarTelaDashboardAdministracao.cshtml" />
     <Content Include="Views\Configuracao\MontarTelaConfiguracao.cshtml" />
     <Content Include="Views\Configuracao\EditarConfiguracao.cshtml" />
+    <Content Include="Views\Prestador\MontarTelaPrestador.cshtml" />
+    <Content Include="Views\Prestador\IncluirPrestador.cshtml" />
+    <Content Include="Views\Prestador\EditarPrestador.cshtml" />
+    <Content Include="Views\Prestador\ExcluirPrestador.cshtml" />
+    <Content Include="Views\Prestador\ReativarPrestador.cshtml" />
+    <Content Include="Views\Prestador\VerCardsPrestador.cshtml" />
+    <Content Include="Views\Prestador\VerAnexoPrestador.cshtml" />
+    <Content Include="Views\Prestador\IncluirComentario.cshtml" />
+    <Content Include="Views\Prestador\EditarContato.cshtml" />
+    <Content Include="Views\Prestador\IncluirContato.cshtml" />
+    <Content Include="Views\Prestador\EditarAjudante.cshtml" />
+    <Content Include="Views\Prestador\IncluirAjudante.cshtml" />
+    <Content Include="Views\Prestador\EditarBanco.cshtml" />
+    <Content Include="Views\Prestador\IncluirBanco.cshtml" />
+    <Content Include="Views\Prestador\EditarCertificado.cshtml" />
+    <Content Include="Views\Prestador\IncluirCertificado.cshtml" />
+    <Content Include="Views\Prestador\EditarEndereco.cshtml" />
+    <Content Include="Views\Prestador\IncluirEndereco.cshtml" />
+    <Content Include="Views\Prestador\EditarMotorista.cshtml" />
+    <Content Include="Views\Prestador\IncluirMotorista.cshtml" />
+    <Content Include="Views\Prestador\EditarRegiao.cshtml" />
+    <Content Include="Views\Prestador\IncluirRegiao.cshtml" />
+    <Content Include="Views\Prestador\EditarVeiculo.cshtml" />
+    <Content Include="Views\Prestador\IncluirVeiculo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
     <Folder Include="Imagens\1\Usuario\1\Anexos\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Prestador\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3065,6 +3089,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_Start\PlatMensagens_Resources.resx" />
+    <EmbeddedResource Include="App_Start\SMS_Mensagens.resx" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\tinymce\tinymce.d.ts" />
