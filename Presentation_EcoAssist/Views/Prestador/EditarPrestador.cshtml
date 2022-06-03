@@ -4,7 +4,26 @@
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 <div class="wrapper wrapper-content animated fadeInRight">
-
+    <div class="modalContainer">
+        <div id="modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        @*titulo gerado dinamicamente*@
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @*Gerado dinamicamente*@
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="page-title">
         <h3 class="title">Prestadores</h3>
         <br />
@@ -54,6 +73,7 @@
                             <li class=""><a data-toggle="tab" href="#tab-10">Motoristas</a></li>
                             <li class=""><a data-toggle="tab" href="#tab-11">Regiões</a></li>
                             <li class=""><a data-toggle="tab" href="#tab-12">Veículos</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-13">Indicadores</a></li>
                         </ul>
                         <div class="tab-content">
 
@@ -399,11 +419,11 @@
                                                                         @Html.TableLinkDetails(cond.PRCO_CD_ID, "EditarContato", "fa-edit", "Editar/Consultar Contato")
                                                                         @if (cond.PRCO_IN_ATIVO == 1)
                                                                         {
-                                                                            @Html.TableLinkDetails(cond.PRCO_CD_ID, "ExcluirContato", "fa-trash-o", "Desativar Contato")
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Prestador/ExcluirContato/@cond.PRCO_CD_ID')" title="Excluir"></span>
                                                                         }
                                                                         else
-                                                                        {
-                                                                            @Html.TableLinkDetails(cond.PRCO_CD_ID, "ReativarContato", "fa-refresh", "Reativar Contato")
+                                                                        {   
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Prestador/ReativarContato/@cond.PRCO_CD_ID')" title="Reativar"></span>
                                                                         }
                                                                     </td>
                                                                 </tr>
@@ -458,11 +478,11 @@
                                                                         @Html.TableLinkDetails(cond.PREN_CD_ID, "EditarEndereco", "fa-edit", "Editar/Consultar")
                                                                         @if (cond.PREN_IN_ATIVO == 1)
                                                                         {
-                                                                            @Html.TableLinkDetails(cond.PREN_CD_ID, "ExcluirEndereco", "fa-trash-o", "Desativar")
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Prestador/ExcluirEndereco/@cond.PREN_CD_ID')" title="Excluir"></span>
                                                                         }
                                                                         else
-                                                                        {
-                                                                            @Html.TableLinkDetails(cond.PREN_CD_ID, "ReativarEndereco", "fa-refresh", "Reativar")
+                                                                        {   
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Prestador/ReativarEndereco/@cond.PREN_CD_ID')" title="Reativar"></span>
                                                                         }
                                                                     </td>
                                                                 </tr>
@@ -518,7 +538,14 @@
                                                                         <td>-</td>
                                                                     }
                                                                     <td>@cond.PRAJ_NM_RG_ORGAO_EMISSOR</td>
-                                                                    <td>@cond.UF.UF_SG_SIGLA</td>
+                                                                    @if (cond.UF != null)
+                                                                    {
+                                                                        <td>@cond.UF.UF_SG_SIGLA</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
                                                                     @if (!String.IsNullOrEmpty(cond.PARJ__AQ_FOTO) && File.Exists(Server.MapPath(cond.PARJ__AQ_FOTO)))
                                                                     {
                                                                         <td><img src="@Url.Content(cond.PARJ__AQ_FOTO)" style="width: auto; height: auto; max-height: 55px; max-width: 45px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@cond.PRAJ_NM_NOME', '@Url.Content(cond.PARJ__AQ_FOTO)')"></td>
@@ -531,11 +558,11 @@
                                                                         @Html.TableLinkDetails(cond.PRAJ_CD_ID, "EditarAjudante", "fa-edit", "Editar/Consultar")
                                                                         @if (cond.PRAJ_IN_ATIVO == 1)
                                                                         {
-                                                                            @Html.TableLinkDetails(cond.PRAJ_CD_ID, "ExcluirAjudante", "fa-trash-o", "Desativar")
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Prestador/ExcluirAjudante/@cond.PRAJ_CD_ID')" title="Excluir"></span>
                                                                         }
                                                                         else
-                                                                        {
-                                                                            @Html.TableLinkDetails(cond.PRAJ_CD_ID, "ReativarAjudante", "fa-refresh", "Reativar")
+                                                                        {   
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Prestador/ReativarAjudante/@cond.PRAJ_CD_ID')" title="Reativar"></span>
                                                                         }
                                                                     </td>
                                                                 </tr>
@@ -552,12 +579,372 @@
                                 </div>
                             </div>
                         
+                            @*Certificados*@
+                            <div id="tab-9" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                                <h4>Certificados</h4>
+                                                <br />
+                                                @if (Model.PRESTADOR_CERTIFICADO.Count > 0)
+                                                {
+                                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                                        <thead style="background-color:lightsteelblue">
+                                                            <tr>
+                                                                <th>Tipo</th>
+                                                                <th>Emissão</th>
+                                                                <th>Validade</th>
+                                                                <th class="td-one-action">Ações</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var cond in (Model.PRESTADOR_CERTIFICADO))
+                                                            {
+                                                                <tr>
+                                                                    <td>@cond.TIPO_CERTIFICADO.TICE_NM_NOME</td>
+                                                                    <td>@cond.PRDE_DT_EMISSAO.ToShortDateString()</td>
+                                                                    <td>@cond.PRCE_DT_VALIDADE.ToShortDateString()</td>
+                                                                    <td class="td-one-action">
+                                                                        @Html.TableLinkDetails(cond.PRCE_CD_ID, "EditarAjudante", "fa-edit", "Editar/Consultar")
+                                                                        @if (cond.PRCE_IN_ATIVO == 1)
+                                                                        {
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Prestador/ExcluirCertificado/@cond.PRCE_CD_ID')" title="Excluir"></span>
+                                                                        }
+                                                                        else
+                                                                        {   
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Prestador/ReativarCertificado/@cond.PRCE_CD_ID')" title="Reativar"></span>
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ButtonLinkIndex(text: "Incluir Novo Certificado", action: "IncluirCertificado", controller: "Prestador")
+                                    </div>
+                                </div>
+                            </div>
                         
+                            @*Motoristas*@
+                            <div id="tab-10" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                                <h4>Motoristas</h4>
+                                                <br />
+                                                @if (Model.PRESTADOR_MOTORISTA.Count > 0)
+                                                {
+                                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                                        <thead style="background-color:lightsteelblue">
+                                                            <tr>
+                                                                <th>Nome</th>
+                                                                <th>CPF</th>
+                                                                <th>RG</th>
+                                                                <th>Emissão</th>
+                                                                <th>Órgão</th>
+                                                                <th>UF</th>
+                                                                <th>CNH</th>
+                                                                <th>Valid.CNH</th>
+                                                                <th>Categ.CNH</th>
+                                                                <th></th>
+                                                                <th class="td-one-action">Ações</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var cond in (Model.PRESTADOR_MOTORISTA))
+                                                            {
+                                                                <tr>
+                                                                    <td>@cond.PRMO_NM_NOME</td>
+                                                                    <td>@cond.PRMO_NR_CPF</td>
+                                                                    <td>@cond.PRMO_NR_RG</td>
+                                                                    @if (cond.PRMO_DT_EMISSAO_RG != null)
+                                                                    {
+                                                                        <td>@cond.PRMO_DT_EMISSAO_RG.Value.ToShortDateString()</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    <td>@cond.PRMO_NM_ORGAO_RG</td>
+                                                                    @if (cond.UF != null)
+                                                                    {
+                                                                        <td>@cond.UF.UF_SG_SIGLA</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    <td>@cond.PRMO_NR_CNH</td>
+                                                                    @if (cond.PRMO_DT_CNH_VALIDADE != null)
+                                                                    {
+                                                                        <td>@cond.PRMO_DT_CNH_VALIDADE.Value.ToShortDateString()</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    @if (cond.CNH_CATEGORIA != null)
+                                                                    {
+                                                                        <td>@cond.CNH_CATEGORIA.CNCA_NM_NOME</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    @if (!String.IsNullOrEmpty(cond.PRMO_AQ_FOTO) && File.Exists(Server.MapPath(cond.PRMO_AQ_FOTO)))
+                                                                    {
+                                                                        <td><img src="@Url.Content(cond.PRMO_AQ_FOTO)" style="width: auto; height: auto; max-height: 55px; max-width: 45px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@cond.PRMO_NM_NOME', '@Url.Content(cond.PRMO_AQ_FOTO)')"></td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td><img src="~/Images/gallery/10s.jpg" style="width: auto; height: auto; max-height: 55px; max-width: 45px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@cond.PRMO_NM_NOME', '~/Images/a8.jpg')"></td>
+                                                                    }
+                                                                    <td class="td-one-action">
+                                                                        @Html.TableLinkDetails(cond.PRMO_CD_ID, "EditarMotorista", "fa-edit", "Editar/Consultar")
+                                                                        @if (cond.PRMO_IN_ATIVO == 1)
+                                                                        {
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Prestador/ExcluirMotorista/@cond.PRMO_CD_ID')" title="Excluir"></span>
+                                                                        }
+                                                                        else
+                                                                        {   
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Prestador/ReativarMotorista/@cond.PRMO_CD_ID')" title="Reativar"></span>
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ButtonLinkIndex(text: "Incluir Novo Motorista", action: "IncluirMotorista", controller: "Prestador")
+                                    </div>
+                                </div>
+                            </div>
                         
+                            @*Regiões*@
+                            <div id="tab-11" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                                <h4>Regiões</h4>
+                                                <br />
+                                                @if (Model.PRESTADOR_REGIAO.Count > 0)
+                                                {
+                                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                                        <thead style="background-color:lightsteelblue">
+                                                            <tr>
+                                                                <th>Região</th>
+                                                                <th>Cidade</th>
+                                                                <th>UF</th>
+                                                                <th>Preço Base (R$)</th>
+                                                                <th>Preço Máximo (R$)</th>
+                                                                <th>Preço Mínimo (R$)</th>
+                                                                <th>Acresc.Hora (R$)</th>
+                                                                <th class="td-one-action">Ações</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var cond in (Model.PRESTADOR_REGIAO))
+                                                            {
+                                                                <tr>
+                                                                    <td>@cond.REGIAO.REGI_NM_NOME</td>
+                                                                    <td>@cond.REGIAO_COBERTURA.RECO_NM_CIDADE</td>
+                                                                    <td>@cond.REGIAO_COBERTURA.UF.UF_SG_SIGLA</td>
+                                                                    @if (cond.PRRE_VL_PRECO_BASE != null)
+                                                                    {
+                                                                        <td>@CrossCutting.Formatters.DecimalFormatter(cond.PRRE_VL_PRECO_BASE)</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    @if (cond.PRRE_VL_PRECO_MAXIMO != null)
+                                                                    {
+                                                                        <td>@CrossCutting.Formatters.DecimalFormatter(cond.PRRE_VL_PRECO_MAXIMO.Value)</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    @if (cond.PRRE_VL_PRECO_MINIMO != null)
+                                                                    {
+                                                                        <td>@CrossCutting.Formatters.DecimalFormatter(cond.PRRE_VL_PRECO_MINIMO.Value)</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    @if (cond.PRRE_ACRESCIMO_HORA != null)
+                                                                    {
+                                                                        <td>@CrossCutting.Formatters.DecimalFormatter(cond.PRRE_ACRESCIMO_HORA.Value)</td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td>-</td>
+                                                                    }
+                                                                    <td class="td-one-action">
+                                                                        @Html.TableLinkDetails(cond.PRRE_CD_ID, "EditarRegiao", "fa-edit", "Editar/Consultar")
+                                                                        @if (cond.PRRE_IN_ATIVO == 1)
+                                                                        {
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Prestador/ExcluirRegiao/@cond.PRRE_CD_ID')" title="Excluir"></span>
+                                                                        }
+                                                                        else
+                                                                        {   
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Prestador/ReativarRegiao/@cond.PRRE_CD_ID')" title="Reativar"></span>
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ButtonLinkIndex(text: "Incluir NovaRegiaoRegião", action: "IncluirMotorista", controller: "Prestador")
+                                    </div>
+                                </div>
+                            </div>
                         
-                        
-                        
-                        
+                            @*Veículos*@
+                            <div id="tab-12" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                                <h4>Veículos</h4>
+                                                <br />
+                                                @if (Model.PRESTADOR_VEICULO.Count > 0)
+                                                {
+                                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                                        <thead style="background-color:lightsteelblue">
+                                                            <tr>
+                                                                <th>Tipo</th>
+                                                                <th>Marca</th>
+                                                                <th>Modelo</th>
+                                                                <th>Placa</th>
+                                                                <th></th>
+                                                                <th class="td-one-action">Ações</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var cond in (Model.PRESTADOR_VEICULO))
+                                                            {
+                                                                <tr>
+                                                                    <td>@cond.TIPO_VEICULO.TIVE_NM_NOME</td>
+                                                                    <td>@cond.MARCA_VEICULO.MAVE_NM_NOME</td>
+                                                                    <td>@cond.MODELO_VEICULO.MOVE_NM_NOME</td>
+                                                                    <td>@cond.PRVE_NR_PLACA</td>
+                                                                    @if (!String.IsNullOrEmpty(cond.PRVE_AQ_FOTO) && File.Exists(Server.MapPath(cond.PRVE_AQ_FOTO)))
+                                                                    {
+                                                                        <td><img src="@Url.Content(cond.PRVE_AQ_FOTO)" style="width: auto; height: auto; max-height: 55px; max-width: 45px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@cond.PRVE_NR_PLACA', '@Url.Content(cond.PRVE_AQ_FOTO)')"></td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td><img src="~/Images/gallery/10s.jpg" style="width: auto; height: auto; max-height: 55px; max-width: 45px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@cond.PRVE_NR_PLACA', '~/Images/a8.jpg')"></td>
+                                                                    }
+                                                                    <td class="td-one-action">
+                                                                        @Html.TableLinkDetails(cond.PRVE_CD_ID, "EditarVeiculo", "fa-edit", "Editar/Consultar")
+                                                                        @if (cond.PRVE_IN_ATIVO == 1)
+                                                                        {
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Prestador/ExcluirVeiculo/@cond.PRVE_CD_ID')" title="Excluir"></span>
+                                                                        }
+                                                                        else
+                                                                        {   
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Prestador/ReativarVeiculo/@cond.PRVE_CD_ID')" title="Reativar"></span>
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ButtonLinkIndex(text: "Incluir Novo Veiculo", action: "IncluirVeiculo", controller: "Prestador")
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*Bancos*@
+                            <div id="tab-8" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                                <h4>Bancos Associados</h4>
+                                                <br />
+                                                @if (Model.PRESTADOR_BANCO.Count > 0)
+                                                {
+                                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                                        <thead style="background-color:lightsteelblue">
+                                                            <tr>
+                                                                <th>Tipo</th>
+                                                                <th>Banco</th>
+                                                                <th>Agência</th>
+                                                                <th>Conta</th>
+                                                                <th class="td-one-action">Ações</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var cond in (Model.PRESTADOR_BANCO))
+                                                            {
+                                                                <tr>
+                                                                    <td>@cond.TIPO_CONTA.TICO_NM_NOME</td>
+                                                                    <td>@cond.BANCO.BANC_NM_NOME</td>
+                                                                    <td>@cond.PRBA_NR_AGENCIA</td>
+                                                                    <td>@cond.PRBA_NR_CONTA</td>
+                                                                    <td class="td-one-action">
+                                                                        @Html.TableLinkDetails(cond.PRBA_CD_ID, "EditarBanco", "fa-edit", "Editar/Consultar")
+                                                                        @if (cond.PRBA_IN_ATIVO == 1)
+                                                                        {
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Prestador/ExcluirBanco/@cond.PRBA_CD_ID')" title="Excluir"></span>
+                                                                        }
+                                                                        else
+                                                                        {   
+                                                                            <span style="color: #337ab7; cursor:pointer;" alt="Reativar" class="tbl-link fa-lg fa fa-refresh" onclick="ShowModalReativar('/Prestador/ReativarBanco/@cond.PRBA_CD_ID')" title="Reativar"></span>
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.ButtonLinkIndex(text: "Associar Novo Banco", action: "IncluirBanco", controller: "Prestador")
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*Indicadores*@
+                            <div id="tab-13" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                            <div class="col-lg-12 col-md-12 col-xs-12">
+                                                <h4>Indicadores</h4>
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -592,16 +979,37 @@
             $('#modalDesc').modal('show');
         }
     </script>
+    <script>
+        $(function () {
+            limpaModal();
+        });
 
-    @*<script type="text/javascript">
+        function limpaModal() {
+            $('#btnModal').remove();
+            $('#modalTitle').remove();
+        }
+
+        function ShowModalExcluir(url) {
+            $('#modal').find('.modal-footer').prepend('<a id="btnModal" alt="Desativar" class="btn btn-primary" href="' + url + '" target="_self" title="Desativar">Confirmar</a>');
+            $('#modal').find('.modal-body').html('Confirma exclusão?');
+            $('#modal').find('.modal-header').prepend('<h5 id="modalTitle" class="modal-title">Confimar Exclusão</h5>');
+            $('#modal').modal('show');
+        }
+
+        function ShowModalReativar(url) {
+            $('#modal').find('.modal-footer').prepend('<a id="btnModal" alt="Reativar" class="btn btn-primary" href="' + url + '" target="_self" title="Reativar">Confirmar</a>');
+            $('#modal').find('.modal-body').html('Confirma reativação?');
+            $('#modal').find('.modal-header').prepend('<h5 id="modalTitle" class="modal-title">Confimar Reativação</h5>');
+            $('#modal').modal('show');
+        }
+    </script>
+    <script type="text/javascript">
         $(document).ready(function () {
 
             $('.dataTables-example').DataTable({
                 pageLength: 25,
                 dom: '<"html5buttons"B>lTfgitp',
                 buttons: [
-                    { extend: 'copy' },
-                    { extend: 'csv' },
                     { extend: 'excel', title: 'ExampleFile' },
                     { extend: 'pdf', title: 'ExampleFile' },
 
@@ -624,7 +1032,7 @@
 
         });
 
-    </script>*@
+    </script>
     <script type="text/javascript">
         $(function () {
             $("#cpf").mask("999.999.999-99");

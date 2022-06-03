@@ -26,7 +26,6 @@
                 <div class="ibox-title">
                     <h5>Prestador - Inclusão</h5>
                 </div>
-
                 <div class="ibox-content">
                     @Html.AntiForgeryToken()
                     @if (!ViewData.ModelState.IsValid)
@@ -513,7 +512,7 @@
 
             if (cnpj != "") {
                 $.ajax({
-                    url: '../Fornecedor/PesquisaCNPJ'
+                    url: '../Prestador/PesquisaCNPJ'
                     , async: false
                     , type: 'POST'
                     , data: data
@@ -528,19 +527,8 @@
                                     );
                                 });
                             }
-                            $('#ie').val(r[0].FORNECEDOR.FORN_NR_INSCRICAO_ESTADUAL);
                             $('#QS').show();
-                            $('#valRazao').val(r[0].FORNECEDOR.FORN_NM_RAZAO);
-                            $('#cep').val(r[0].FORNECEDOR.FORN_NR_CEP);
-                            $("#cep").mask("99999-999");
-                            $('#endereco').val(r[0].FORNECEDOR.FORN_NM_ENDERECO);
-                            $('#bairro').val(r[0].FORNECEDOR.FORN_NM_BAIRRO);
-                            $('#cidade').val(r[0].FORNECEDOR.FORN_NM_CIDADE);
-                            $('#uf option[value="' + r[0].FORNECEDOR.UF_CD_ID + '"]').attr('selected', 'selected');
-                            $('#email').val(r[0].FORNECEDOR.FORN_NM_EMAIL);
-                            $('#tel').val(r[0].FORNECEDOR.FORN_NM_TELEFONES);
-                            $('#situacao').val(r[0].FORNECEDOR.FORN_NM_SITUACAO);
-
+                            $('#valRazao').val(r[0].PRESTADOR.PRES_NM_RAZAO_SOCIAL);
                             $('#btnPesquisaCnpj').html('Buscar CNPJ');
                             $('#btnPesquisaCnpj').attr('disabled', false);
                         } else {

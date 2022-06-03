@@ -582,7 +582,6 @@ namespace Presentation_EcoAssist.Controllers
                         }
                         Session["FileQueuePrestador"] = null;
                     }
-
                     return RedirectToAction("VoltarAnexoPrestador");
                 }
                 catch (Exception ex)
@@ -1005,6 +1004,34 @@ namespace Presentation_EcoAssist.Controllers
         }
 
         [HttpPost]
+        public void UploadFileToSessionAjudante(IEnumerable<HttpPostedFileBase> files, String profile)
+        {
+            List<FileQueue> queue = new List<FileQueue>();
+
+            foreach (var file in files)
+            {
+                FileQueue f = new FileQueue();
+                f.Name = Path.GetFileName(file.FileName);
+                f.ContentType = Path.GetExtension(file.FileName);
+
+                MemoryStream ms = new MemoryStream();
+                file.InputStream.CopyTo(ms);
+                f.Contents = ms.ToArray();
+
+                if (profile != null)
+                {
+                    if (file.FileName.Equals(profile))
+                    {
+                        f.Profile = 1;
+                    }
+                }
+
+                queue.Add(f);
+            }
+            Session["FileQueueAjudante"] = queue;
+        }
+
+        [HttpPost]
         public ActionResult UploadFileQueuePrestador(FileQueue file)
         {
             if ((String)Session["Ativa"] == null)
@@ -1120,6 +1147,83 @@ namespace Presentation_EcoAssist.Controllers
             objetoAntes = item;
             Int32 volta = baseApp.ValidateEdit(item, objetoAntes);
             return RedirectToAction("VoltarAnexoPrestador");
+        }
+
+        [HttpPost]
+        public ActionResult UploadFotoQueueAjudante(FileQueue file)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdAjudante"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            if (file == null)
+            {
+                Session["MensPrestador"] = 5;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            PRESTADOR_AJUDANTE item = baseApp.GetAjudanteById(idNot);
+            USUARIO_SUGESTAO usu = (USUARIO_SUGESTAO)Session["UserCredentials"];
+            var fileName = file.Name;
+            if (fileName.Length > 250)
+            {
+                Session["MensPrestador"] = 6;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            String caminho = "/Imagens/1" + "/Ajudantes/" + item.PRAJ_CD_ID.ToString() + "/Fotos/";
+            String path = Path.Combine(Server.MapPath(caminho), fileName);
+            System.IO.File.WriteAllBytes(path, file.Contents);
+
+            //Recupera tipo de arquivo
+            extensao = Path.GetExtension(fileName);
+            String a = extensao;
+
+            // Gravar registro
+            item.PARJ__AQ_FOTO = "~" + caminho + fileName;
+            Int32 volta = baseApp.ValidateEditAjudante(item);
+            return RedirectToAction("VoltarAjudante");
+        }
+
+        [HttpPost]
+        public ActionResult UploadFotoCliente(HttpPostedFileBase file)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdCliente"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            if (file == null)
+            {
+                Session["MensCliente"] = 5;
+                return RedirectToAction("VoltarAnexoCliente");
+            }
+            CLIENTE item = baseApp.GetById(idNot);
+            USUARIO usu = (USUARIO)Session["UserCredentials"];
+            var fileName = Path.GetFileName(file.FileName);
+            if (fileName.Length > 250)
+            {
+                Session["MensCliente"] = 6;
+                return RedirectToAction("VoltarAnexoCliente");
+            }
+            String caminho = "/Imagens/" + item.ASSI_CD_ID.ToString() + "/Clientes/" + item.CLIE_CD_ID.ToString() + "/Fotos/";
+            String path = Path.Combine(Server.MapPath(caminho), fileName);
+            file.SaveAs(path);
+
+            //Recupera tipo de arquivo
+            extensao = Path.GetExtension(fileName);
+            String a = extensao;
+
+            // Gravar registro
+            item.CLIE_AQ_FOTO = "~" + caminho + fileName;
+            objetoAntes = item;
+            Int32 volta = baseApp.ValidateEdit(item, objetoAntes);
+            listaMaster = new List<CLIENTE>();
+            Session["ListaCliente"] = null;
+            return RedirectToAction("VoltarAnexoCliente");
         }
 
         [HttpPost]
@@ -1375,6 +1479,27 @@ namespace Presentation_EcoAssist.Controllers
                     // Executa a operação
                     PRESTADOR_AJUDANTE item = Mapper.Map<PrestadorAjudanteViewModel, PRESTADOR_AJUDANTE>(vm);
                     Int32 volta = baseApp.ValidateCreateAjudante(item);
+
+                    // Cria pastas
+                    String caminho = "/Imagens/1" + "/Ajudantes/" + item.PRAJ_CD_ID.ToString() + "/Foto/";
+                    Directory.CreateDirectory(Server.MapPath(caminho));
+
+                    Session["IdPrestador"] = item.PRES_CD_ID;
+                    Session["IdAjuante"] = item.PRAJ_CD_ID;
+                    if (Session["FileQueueAjudante"] != null)
+                    {
+                        List<FileQueue> fq = (List<FileQueue>)Session["FileQueueAjudante"];
+
+                        foreach (var file in fq)
+                        {
+                            if (file.Profile == null)
+                            {
+                                UploadFotoQueueAjudante(file);
+                            }
+                        }
+                        Session["FileQueueAjudante"] = null;
+                    }
+
                     // Verifica retorno
                     return RedirectToAction("VoltarAnexoPrestador");
                 }
