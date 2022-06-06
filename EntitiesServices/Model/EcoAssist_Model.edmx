@@ -1478,6 +1478,7 @@
           <Property Name="PRMA_DT_ANOTACAO" Type="date" Nullable="false" />
           <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
           <Property Name="PRMA_TX_ANOTACAO" Type="image" Nullable="false" />
+          <Property Name="PRMA_TX_TEXTO" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="PRESTADOR_QUADRO_SOCIETARIO">
           <Key>
@@ -1539,6 +1540,7 @@
           <Property Name="PRVA_DT_ANOTACAO" Type="date" Nullable="false" />
           <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
           <Property Name="PRVA_TX_ANOTACAO" Type="image" Nullable="false" />
+          <Property Name="PRVA_TX_TEXTO" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="PRESTADOR_VEICULO_CERTIFICADO">
           <Key>
@@ -1641,6 +1643,7 @@
           </Key>
           <Property Name="RECO_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="REGI_CD_ID" Type="int" Nullable="false" />
+          <Property Name="RECO_NM_NOME" Type="varchar" MaxLength="50" />
           <Property Name="RECO_NM_CIDADE" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="UF_CD_ID" Type="int" Nullable="false" />
           <Property Name="RECO_NR_CEP_INICIO" Type="varchar" MaxLength="10" />
@@ -7624,6 +7627,7 @@
           <Property Name="PRMA_TX_ANOTACAO" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="PRESTADOR_MOTORISTA" Relationship="Self.FKPRESTADOR_552750" FromRole="PRESTADOR_MOTORISTA_ANOTACOES" ToRole="PRESTADOR_MOTORISTA" />
           <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_PRESTADOR_MOTORISTA_ANOTACOES_USUARIO_SUGESTAO" FromRole="PRESTADOR_MOTORISTA_ANOTACOES" ToRole="USUARIO_SUGESTAO" />
+          <Property Name="PRMA_TX_TEXTO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRESTADOR_REGIAO">
           <Key>
@@ -7685,6 +7689,7 @@
           <Property Name="PRVA_TX_ANOTACAO" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="PRESTADOR_VEICULO" Relationship="Self.FKPRESTADOR_45018" FromRole="PRESTADOR_VEICULO_ANOTACOES" ToRole="PRESTADOR_VEICULO" />
           <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_PRESTADOR_VEICULO_ANOTACOES_USUARIO_SUGESTAO" FromRole="PRESTADOR_VEICULO_ANOTACOES" ToRole="USUARIO_SUGESTAO" />
+          <Property Name="PRVA_TX_TEXTO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRESTADOR_VEICULO_CERTIFICADO">
           <Key>
@@ -7816,6 +7821,7 @@
           <NavigationProperty Name="PRESTADOR_REGIAO" Relationship="Self.FKPRESTADOR_667906" FromRole="REGIAO_COBERTURA" ToRole="PRESTADOR_REGIAO" />
           <NavigationProperty Name="REGIAO" Relationship="Self.FKREGIAO_COB871090" FromRole="REGIAO_COBERTURA" ToRole="REGIAO" />
           <NavigationProperty Name="UF" Relationship="Self.FKREGIAO_COB317722" FromRole="REGIAO_COBERTURA" ToRole="UF" />
+          <Property Name="RECO_NM_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="STATUS_COLETA">
           <Key>
@@ -13712,6 +13718,7 @@
           <EntitySetMapping Name="PRESTADOR_MOTORISTA_ANOTACOES">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.PRESTADOR_MOTORISTA_ANOTACOES">
               <MappingFragment StoreEntitySet="PRESTADOR_MOTORISTA_ANOTACOES">
+                <ScalarProperty Name="PRMA_TX_TEXTO" ColumnName="PRMA_TX_TEXTO" />
                 <ScalarProperty Name="PRMA_CD_ID" ColumnName="PRMA_CD_ID" />
                 <ScalarProperty Name="PRMO_CD_ID" ColumnName="PRMO_CD_ID" />
                 <ScalarProperty Name="PRMA_DT_ANOTACAO" ColumnName="PRMA_DT_ANOTACAO" />
@@ -13763,6 +13770,7 @@
           <EntitySetMapping Name="PRESTADOR_VEICULO_ANOTACOES">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.PRESTADOR_VEICULO_ANOTACOES">
               <MappingFragment StoreEntitySet="PRESTADOR_VEICULO_ANOTACOES">
+                <ScalarProperty Name="PRVA_TX_TEXTO" ColumnName="PRVA_TX_TEXTO" />
                 <ScalarProperty Name="PRVA_CD_ID" ColumnName="PRVA_CD_ID" />
                 <ScalarProperty Name="PRVE_CD_ID" ColumnName="PRVE_CD_ID" />
                 <ScalarProperty Name="PRVA_DT_ANOTACAO" ColumnName="PRVA_DT_ANOTACAO" />
@@ -13877,6 +13885,7 @@
           <EntitySetMapping Name="REGIAO_COBERTURA">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.REGIAO_COBERTURA">
               <MappingFragment StoreEntitySet="REGIAO_COBERTURA">
+                <ScalarProperty Name="RECO_NM_NOME" ColumnName="RECO_NM_NOME" />
                 <ScalarProperty Name="RECO_CD_ID" ColumnName="RECO_CD_ID" />
                 <ScalarProperty Name="REGI_CD_ID" ColumnName="REGI_CD_ID" />
                 <ScalarProperty Name="RECO_NM_CIDADE" ColumnName="RECO_NM_CIDADE" />

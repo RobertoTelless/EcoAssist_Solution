@@ -30,6 +30,7 @@ namespace EntitiesServices.Model
         public decimal RECO_VL_PRECO_MAXIMO { get; set; }
         public decimal RECO_VL_PRECO_MINIMO { get; set; }
         public int RECO_IN_ATIVO { get; set; }
+        public string RECO_NM_NOME { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRESTADOR_REGIAO> PRESTADOR_REGIAO { get; set; }

@@ -895,6 +895,33 @@ namespace Presentation_EcoAssist.Controllers
             return RedirectToAction("EditarPrestador", new { id = (Int32)Session["IdPrestador"] });
         }
 
+        public ActionResult VoltarAjudante()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            return RedirectToAction("EditarAjudante", new { id = (Int32)Session["IdAjudante"] });
+        }
+
+        public ActionResult VoltarMotorista()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            return RedirectToAction("EditarMotorista", new { id = (Int32)Session["IdMotorista"] });
+        }
+
+        public ActionResult VoltarVeiculo()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            return RedirectToAction("EditarVeiculo", new { id = (Int32)Session["IdVeiculo"] });
+        }
+
         public FileResult DownloadPrestador(Int32 id)
         {
             PRESTADOR_ANEXO item = baseApp.GetAnexoById(id);
@@ -975,6 +1002,177 @@ namespace Presentation_EcoAssist.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult IncluirAnotacaoAjudante()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 id = (Int32)Session["IdAjudante"];
+            PRESTADOR_AJUDANTE item = baseApp.GetAjudanteById(id);
+            USUARIO_SUGESTAO usuarioLogado = (USUARIO_SUGESTAO)Session["UserCredentials"];
+            PRESTADOR_AJUDANTE_ANOTACOES coment = new PRESTADOR_AJUDANTE_ANOTACOES();
+            PrestadorAjudanteAnotacoesViewModel vm = Mapper.Map<PRESTADOR_AJUDANTE_ANOTACOES, PrestadorAjudanteAnotacoesViewModel>(coment);
+            vm.PRAA_DT_ANOTACAO = DateTime.Now;
+            vm.PRAJ_CD_ID = item.PRAJ_CD_ID;
+            vm.USUARIO_SUGESTAO = usuarioLogado;
+            vm.USUA_CD_ID = usuarioLogado.USUA_CD_ID;
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult IncluirAnotacaoAjudante(PrestadorAjudanteAnotacoesViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdAjudante"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    PRESTADOR_AJUDANTE_ANOTACOES item = Mapper.Map<PrestadorAjudanteAnotacoesViewModel, PRESTADOR_AJUDANTE_ANOTACOES>(vm);
+                    USUARIO_SUGESTAO usuarioLogado = (USUARIO_SUGESTAO)Session["UserCredentials"];
+                    PRESTADOR_AJUDANTE not = baseApp.GetAjudanteById(idNot);
+
+                    item.USUARIO_SUGESTAO = null;
+                    not.PRESTADOR_AJUDANTE_ANOTACOES.Add(item);
+                    Int32 volta = baseApp.ValidateEditAjudante(not);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    return RedirectToAction("VoltarAjudante");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult IncluirAnotacaoMotorista()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 id = (Int32)Session["IdMotorista"];
+            PRESTADOR_MOTORISTA item = baseApp.GetMotoristaById(id);
+            USUARIO_SUGESTAO usuarioLogado = (USUARIO_SUGESTAO)Session["UserCredentials"];
+            PRESTADOR_MOTORISTA_ANOTACOES coment = new PRESTADOR_MOTORISTA_ANOTACOES();
+            PrestadorMotoristaAnotacoesViewModel vm = Mapper.Map<PRESTADOR_MOTORISTA_ANOTACOES, PrestadorMotoristaAnotacoesViewModel>(coment);
+            vm.PRMA_DT_ANOTACAO = DateTime.Now;
+            vm.PRMO_CD_ID = item.PRMO_CD_ID;
+            vm.USUARIO_SUGESTAO = usuarioLogado;
+            vm.USUA_CD_ID = usuarioLogado.USUA_CD_ID;
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult IncluirAnotacaoMotorista(PrestadorMotoristaAnotacoesViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdMotorista"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    PRESTADOR_MOTORISTA_ANOTACOES item = Mapper.Map<PrestadorMotoristaAnotacoesViewModel, PRESTADOR_MOTORISTA_ANOTACOES>(vm);
+                    USUARIO_SUGESTAO usuarioLogado = (USUARIO_SUGESTAO)Session["UserCredentials"];
+                    PRESTADOR_MOTORISTA not = baseApp.GetMotoristaById(idNot);
+
+                    item.USUARIO_SUGESTAO = null;
+                    not.PRESTADOR_MOTORISTA_ANOTACOES.Add(item);
+                    Int32 volta = baseApp.ValidateEditMotorista(not);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    return RedirectToAction("VoltarMotorista");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult IncluirAnotacaoVeiculo()
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 id = (Int32)Session["IdVeiculo"];
+            PRESTADOR_VEICULO item = baseApp.GetVeiculoById(id);
+            USUARIO_SUGESTAO usuarioLogado = (USUARIO_SUGESTAO)Session["UserCredentials"];
+            PRESTADOR_VEICULO_ANOTACOES coment = new PRESTADOR_VEICULO_ANOTACOES();
+            PrestadorVeiculoAnotacoesViewModel vm = Mapper.Map<PRESTADOR_VEICULO_ANOTACOES, PrestadorVeiculoAnotacoesViewModel>(coment);
+            vm.PRVA_DT_ANOTACAO = DateTime.Now;
+            vm.PRVE_CD_ID = item.PRVE_CD_ID;
+            vm.USUARIO_SUGESTAO = usuarioLogado;
+            vm.USUA_CD_ID = usuarioLogado.USUA_CD_ID;
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult IncluirAnotacaoVeiculo(PrestadorVeiculoAnotacoesViewModel vm)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdVeiculo"];
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Executa a operação
+                    PRESTADOR_VEICULO_ANOTACOES item = Mapper.Map<PrestadorVeiculoAnotacoesViewModel, PRESTADOR_VEICULO_ANOTACOES>(vm);
+                    USUARIO_SUGESTAO usuarioLogado = (USUARIO_SUGESTAO)Session["UserCredentials"];
+                    PRESTADOR_VEICULO not = baseApp.GetVeiculoById(idNot);
+
+                    item.USUARIO_SUGESTAO = null;
+                    not.PRESTADOR_VEICULO_ANOTACOES.Add(item);
+                    Int32 volta = baseApp.ValidateEditVeiculo(not);
+
+                    // Verifica retorno
+
+                    // Sucesso
+                    return RedirectToAction("VoltarVeiculo");
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = ex.Message;
+                    return View(vm);
+                }
+            }
+            else
+            {
+                return View(vm);
+            }
+        }
+
         [HttpPost]
         public void UploadFileToSession(IEnumerable<HttpPostedFileBase> files, String profile)
         {
@@ -1029,6 +1227,62 @@ namespace Presentation_EcoAssist.Controllers
                 queue.Add(f);
             }
             Session["FileQueueAjudante"] = queue;
+        }
+
+        [HttpPost]
+        public void UploadFileToSessionMotorista(IEnumerable<HttpPostedFileBase> files, String profile)
+        {
+            List<FileQueue> queue = new List<FileQueue>();
+
+            foreach (var file in files)
+            {
+                FileQueue f = new FileQueue();
+                f.Name = Path.GetFileName(file.FileName);
+                f.ContentType = Path.GetExtension(file.FileName);
+
+                MemoryStream ms = new MemoryStream();
+                file.InputStream.CopyTo(ms);
+                f.Contents = ms.ToArray();
+
+                if (profile != null)
+                {
+                    if (file.FileName.Equals(profile))
+                    {
+                        f.Profile = 1;
+                    }
+                }
+
+                queue.Add(f);
+            }
+            Session["FileQueueMotorista"] = queue;
+        }
+
+        [HttpPost]
+        public void UploadFileToSessionVeiculo(IEnumerable<HttpPostedFileBase> files, String profile)
+        {
+            List<FileQueue> queue = new List<FileQueue>();
+
+            foreach (var file in files)
+            {
+                FileQueue f = new FileQueue();
+                f.Name = Path.GetFileName(file.FileName);
+                f.ContentType = Path.GetExtension(file.FileName);
+
+                MemoryStream ms = new MemoryStream();
+                file.InputStream.CopyTo(ms);
+                f.Contents = ms.ToArray();
+
+                if (profile != null)
+                {
+                    if (file.FileName.Equals(profile))
+                    {
+                        f.Profile = 1;
+                    }
+                }
+
+                queue.Add(f);
+            }
+            Session["FileQueueVeiculo"] = queue;
         }
 
         [HttpPost]
@@ -1183,33 +1437,33 @@ namespace Presentation_EcoAssist.Controllers
             // Gravar registro
             item.PARJ__AQ_FOTO = "~" + caminho + fileName;
             Int32 volta = baseApp.ValidateEditAjudante(item);
-            return RedirectToAction("VoltarAjudante");
+            return RedirectToAction("VoltarAnexoPresyador");
         }
 
         [HttpPost]
-        public ActionResult UploadFotoCliente(HttpPostedFileBase file)
+        public ActionResult UploadFotoAjudante(HttpPostedFileBase file)
         {
             if ((String)Session["Ativa"] == null)
             {
                 return RedirectToAction("Login", "ControleAcesso");
             }
-            Int32 idNot = (Int32)Session["IdCliente"];
+            Int32 idNot = (Int32)Session["IdAjudante"];
             Int32 idAss = (Int32)Session["IdAssinante"];
 
             if (file == null)
             {
-                Session["MensCliente"] = 5;
-                return RedirectToAction("VoltarAnexoCliente");
+                Session["MensPrestador"] = 5;
+                return RedirectToAction("VoltarAnexoPrestador");
             }
-            CLIENTE item = baseApp.GetById(idNot);
-            USUARIO usu = (USUARIO)Session["UserCredentials"];
+            PRESTADOR_AJUDANTE item = baseApp.GetAjudanteById(idNot);
+            USUARIO_SUGESTAO usu = (USUARIO_SUGESTAO)Session["UserCredentials"];
             var fileName = Path.GetFileName(file.FileName);
             if (fileName.Length > 250)
             {
-                Session["MensCliente"] = 6;
-                return RedirectToAction("VoltarAnexoCliente");
+                Session["MensPrestador"] = 6;
+                return RedirectToAction("VoltarAnexoPrestador");
             }
-            String caminho = "/Imagens/" + item.ASSI_CD_ID.ToString() + "/Clientes/" + item.CLIE_CD_ID.ToString() + "/Fotos/";
+            String caminho = "/Imagens/1" + "/Ajudantes/" + item.PRAJ_CD_ID.ToString() + "/Fotos/";
             String path = Path.Combine(Server.MapPath(caminho), fileName);
             file.SaveAs(path);
 
@@ -1218,12 +1472,157 @@ namespace Presentation_EcoAssist.Controllers
             String a = extensao;
 
             // Gravar registro
-            item.CLIE_AQ_FOTO = "~" + caminho + fileName;
-            objetoAntes = item;
-            Int32 volta = baseApp.ValidateEdit(item, objetoAntes);
-            listaMaster = new List<CLIENTE>();
-            Session["ListaCliente"] = null;
-            return RedirectToAction("VoltarAnexoCliente");
+            item.PARJ__AQ_FOTO = "~" + caminho + fileName;
+            Int32 volta = baseApp.ValidateEditAjudante(item);
+            return RedirectToAction("VoltarAjudante");
+        }
+
+        [HttpPost]
+        public ActionResult UploadFotoQueueMotorista(FileQueue file)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdMotorista"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            if (file == null)
+            {
+                Session["MensPrestador"] = 5;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            PRESTADOR_MOTORISTA item = baseApp.GetMotoristaById(idNot);
+            USUARIO_SUGESTAO usu = (USUARIO_SUGESTAO)Session["UserCredentials"];
+            var fileName = file.Name;
+            if (fileName.Length > 250)
+            {
+                Session["MensPrestador"] = 6;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            String caminho = "/Imagens/1" + "/Motoristas/" + item.PRMO_CD_ID.ToString() + "/Fotos/";
+            String path = Path.Combine(Server.MapPath(caminho), fileName);
+            System.IO.File.WriteAllBytes(path, file.Contents);
+
+            //Recupera tipo de arquivo
+            extensao = Path.GetExtension(fileName);
+            String a = extensao;
+
+            // Gravar registro
+            item.PRMO_AQ_FOTO = "~" + caminho + fileName;
+            Int32 volta = baseApp.ValidateEditMotorista(item);
+            return RedirectToAction("VoltarAnexoPrestador");
+        }
+
+        [HttpPost]
+        public ActionResult UploadFotoMotorista(HttpPostedFileBase file)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdMotorista"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            if (file == null)
+            {
+                Session["MensPrestador"] = 5;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            PRESTADOR_MOTORISTA item = baseApp.GetMotoristaById(idNot);
+            USUARIO_SUGESTAO usu = (USUARIO_SUGESTAO)Session["UserCredentials"];
+            var fileName = Path.GetFileName(file.FileName);
+            if (fileName.Length > 250)
+            {
+                Session["MensPrestador"] = 6;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            String caminho = "/Imagens/1" + "/Motoristas/" + item.PRMO_CD_ID.ToString() + "/Fotos/";
+            String path = Path.Combine(Server.MapPath(caminho), fileName);
+            file.SaveAs(path);
+
+            //Recupera tipo de arquivo
+            extensao = Path.GetExtension(fileName);
+            String a = extensao;
+
+            // Gravar registro
+            item.PRMO_AQ_FOTO = "~" + caminho + fileName;
+            Int32 volta = baseApp.ValidateEditMotorista(item);
+            return RedirectToAction("VoltarMotorista");
+        }
+
+        [HttpPost]
+        public ActionResult UploadFotoQueueVeiculo(FileQueue file)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdVeiculo"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            if (file == null)
+            {
+                Session["MensPrestador"] = 5;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            PRESTADOR_VEICULO item = baseApp.GetVeiculoById(idNot);
+            USUARIO_SUGESTAO usu = (USUARIO_SUGESTAO)Session["UserCredentials"];
+            var fileName = file.Name;
+            if (fileName.Length > 250)
+            {
+                Session["MensPrestador"] = 6;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            String caminho = "/Imagens/1" + "/Veiculos/" + item.PRVE_CD_ID.ToString() + "/Fotos/";
+            String path = Path.Combine(Server.MapPath(caminho), fileName);
+            System.IO.File.WriteAllBytes(path, file.Contents);
+
+            //Recupera tipo de arquivo
+            extensao = Path.GetExtension(fileName);
+            String a = extensao;
+
+            // Gravar registro
+            item.PRVE_AQ_FOTO = "~" + caminho + fileName;
+            Int32 volta = baseApp.ValidateEditVeiculo(item);
+            return RedirectToAction("VoltarAnexoPrestador");
+        }
+
+        [HttpPost]
+        public ActionResult UploadFotoVeiculo(HttpPostedFileBase file)
+        {
+            if ((String)Session["Ativa"] == null)
+            {
+                return RedirectToAction("Login", "ControleAcesso");
+            }
+            Int32 idNot = (Int32)Session["IdVeiculo"];
+            Int32 idAss = (Int32)Session["IdAssinante"];
+
+            if (file == null)
+            {
+                Session["MensPrestador"] = 5;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            PRESTADOR_VEICULO item = baseApp.GetVeiculoById(idNot);
+            USUARIO_SUGESTAO usu = (USUARIO_SUGESTAO)Session["UserCredentials"];
+            var fileName = Path.GetFileName(file.FileName);
+            if (fileName.Length > 250)
+            {
+                Session["MensPrestador"] = 6;
+                return RedirectToAction("VoltarAnexoPrestador");
+            }
+            String caminho = "/Imagens/1" + "/Veiculos/" + item.PRVE_CD_ID.ToString() + "/Fotos/";
+            String path = Path.Combine(Server.MapPath(caminho), fileName);
+            file.SaveAs(path);
+
+            //Recupera tipo de arquivo
+            extensao = Path.GetExtension(fileName);
+            String a = extensao;
+
+            // Gravar registro
+            item.PRVE_AQ_FOTO = "~" + caminho + fileName;
+            Int32 volta = baseApp.ValidateEditVeiculo(item);
+            return RedirectToAction("VoltarVeiculo");
         }
 
         [HttpPost]
@@ -1481,11 +1880,11 @@ namespace Presentation_EcoAssist.Controllers
                     Int32 volta = baseApp.ValidateCreateAjudante(item);
 
                     // Cria pastas
-                    String caminho = "/Imagens/1" + "/Ajudantes/" + item.PRAJ_CD_ID.ToString() + "/Foto/";
+                    String caminho = "/Imagens/1" + "/Ajudantes/" + item.PRAJ_CD_ID.ToString() + "/Fotos/";
                     Directory.CreateDirectory(Server.MapPath(caminho));
 
                     Session["IdPrestador"] = item.PRES_CD_ID;
-                    Session["IdAjuante"] = item.PRAJ_CD_ID;
+                    Session["IdAjudante"] = item.PRAJ_CD_ID;
                     if (Session["FileQueueAjudante"] != null)
                     {
                         List<FileQueue> fq = (List<FileQueue>)Session["FileQueueAjudante"];
@@ -1998,6 +2397,27 @@ namespace Presentation_EcoAssist.Controllers
                     // Executa a operação
                     PRESTADOR_MOTORISTA item = Mapper.Map<PrestadorMotoristaViewModel, PRESTADOR_MOTORISTA>(vm);
                     Int32 volta = baseApp.ValidateCreateMotorista(item);
+
+                    // Cria pastas
+                    String caminho = "/Imagens/1" + "/Motoristas/" + item.PRMO_CD_ID.ToString() + "/Fotos/";
+                    Directory.CreateDirectory(Server.MapPath(caminho));
+
+                    Session["IdPrestador"] = item.PRES_CD_ID;
+                    Session["IdMotorista"] = item.PRMO_CD_ID;
+                    if (Session["FileQueueMotorista"] != null)
+                    {
+                        List<FileQueue> fq = (List<FileQueue>)Session["FileQueueMotorista"];
+
+                        foreach (var file in fq)
+                        {
+                            if (file.Profile == null)
+                            {
+                                UploadFotoQueueMotorista(file);
+                            }
+                        }
+                        Session["FileQueueMotorista"] = null;
+                    }
+
                     // Verifica retorno
                     return RedirectToAction("VoltarAnexoPrestador");
                 }
@@ -2022,7 +2442,13 @@ namespace Presentation_EcoAssist.Controllers
             }
             // Prepara view
             ViewBag.Regiao = new SelectList(baseApp.GetAllRegiao(), "REGI_CD_ID", "REGI_NM_NOME");
-            ViewBag.Cobertura = new SelectList(baseApp.GetAllRegiaoCobertura(), "RECO_CD_ID", "RECO_NM_CIDADE");
+            ViewBag.Cobertura = new SelectList(baseApp.GetAllRegiaoCobertura(), "RECO_CD_ID", "RECO_NM_NOME");
+            List<SelectListItem> prior = new List<SelectListItem>();
+            prior.Add(new SelectListItem() { Text = "Normal", Value = "1" });
+            prior.Add(new SelectListItem() { Text = "Baixa", Value = "2" });
+            prior.Add(new SelectListItem() { Text = "Alta", Value = "3" });
+            prior.Add(new SelectListItem() { Text = "Urgente", Value = "4" });
+            ViewBag.Prioridade = new SelectList(prior, "Value", "Text");
 
             PRESTADOR_REGIAO item = baseApp.GetRegiaoById(id);
             objetoAntes = (PRESTADOR)Session["Prestador"];
@@ -2035,7 +2461,13 @@ namespace Presentation_EcoAssist.Controllers
         public ActionResult EditarRegiao(PrestadorRegiaoViewModel vm)
         {
             ViewBag.Regiao = new SelectList(baseApp.GetAllRegiao(), "REGI_CD_ID", "REGI_NM_NOME");
-            ViewBag.Cobertura = new SelectList(baseApp.GetAllRegiaoCobertura(), "RECO_CD_ID", "RECO_NM_CIDADE");
+            ViewBag.Cobertura = new SelectList(baseApp.GetAllRegiaoCobertura(), "RECO_CD_ID", "RECO_NM_NOME");
+            List<SelectListItem> prior = new List<SelectListItem>();
+            prior.Add(new SelectListItem() { Text = "Normal", Value = "1" });
+            prior.Add(new SelectListItem() { Text = "Baixa", Value = "2" });
+            prior.Add(new SelectListItem() { Text = "Alta", Value = "3" });
+            prior.Add(new SelectListItem() { Text = "Urgente", Value = "4" });
+            ViewBag.Prioridade = new SelectList(prior, "Value", "Text");
             if ((String)Session["Ativa"] == null)
             {
                 return RedirectToAction("Login", "ControleAcesso");
@@ -2102,7 +2534,13 @@ namespace Presentation_EcoAssist.Controllers
 
             // Prepara view
             ViewBag.Regiao = new SelectList(baseApp.GetAllRegiao(), "REGI_CD_ID", "REGI_NM_NOME");
-            ViewBag.Cobertura = new SelectList(baseApp.GetAllRegiaoCobertura(), "RECO_CD_ID", "RECO_NM_CIDADE");
+            ViewBag.Cobertura = new SelectList(baseApp.GetAllRegiaoCobertura(), "RECO_CD_ID", "RECO_NM_NOME");
+            List<SelectListItem> prior = new List<SelectListItem>();
+            prior.Add(new SelectListItem() { Text = "Normal", Value = "1" });
+            prior.Add(new SelectListItem() { Text = "Baixa", Value = "2" });
+            prior.Add(new SelectListItem() { Text = "Alta", Value = "3" });
+            prior.Add(new SelectListItem() { Text = "Urgente", Value = "4" });
+            ViewBag.Prioridade = new SelectList(prior, "Value", "Text");
 
             PRESTADOR_REGIAO item = new PRESTADOR_REGIAO();
             PrestadorRegiaoViewModel vm = Mapper.Map<PRESTADOR_REGIAO, PrestadorRegiaoViewModel>(item);
@@ -2123,7 +2561,13 @@ namespace Presentation_EcoAssist.Controllers
         public ActionResult IncluirRegiao(PrestadorRegiaoViewModel vm)
         {
             ViewBag.Regiao = new SelectList(baseApp.GetAllRegiao(), "REGI_CD_ID", "REGI_NM_NOME");
-            ViewBag.Cobertura = new SelectList(baseApp.GetAllRegiaoCobertura(), "RECO_CD_ID", "RECO_NM_CIDADE");
+            ViewBag.Cobertura = new SelectList(baseApp.GetAllRegiaoCobertura(), "RECO_CD_ID", "RECO_NM_NOME");
+            List<SelectListItem> prior = new List<SelectListItem>();
+            prior.Add(new SelectListItem() { Text = "Normal", Value = "1" });
+            prior.Add(new SelectListItem() { Text = "Baixa", Value = "2" });
+            prior.Add(new SelectListItem() { Text = "Alta", Value = "3" });
+            prior.Add(new SelectListItem() { Text = "Urgente", Value = "4" });
+            ViewBag.Prioridade = new SelectList(prior, "Value", "Text");
             if (ModelState.IsValid)
             {
                 try
@@ -2144,6 +2588,33 @@ namespace Presentation_EcoAssist.Controllers
             {
                 return View(vm);
             }
+        }
+
+        [HttpPost]
+        public JsonResult FiltrarCobertura(Int32? id)
+        {
+            var listaCobFiltrada = baseApp.GetAllRegiaoCobertura();
+
+            // Filtro para caso o placeholder seja selecionado
+            if (id != null)
+            {
+                listaCobFiltrada = listaCobFiltrada.Where(x => x.REGI_CD_ID == id).ToList();
+            }
+            return Json(listaCobFiltrada.Select(x => new { x.RECO_CD_ID, x.RECO_NM_NOME }));
+        }
+
+        [HttpPost]
+        public JsonResult FiltrarRegiao(Int32? id)
+        {
+            var listaFiltrada = baseApp.GetAllRegiao();
+
+            // Filtro para caso o placeholder seja selecionado
+            if (id != null)
+            {
+                listaFiltrada = listaFiltrada.Where(x => x.REGIAO_COBERTURA.Any(s => s.RECO_CD_ID == id)).ToList();
+            }
+
+            return Json(listaFiltrada.Select(x => new { x.REGI_CD_ID, x.REGI_NM_NOME }));
         }
 
         [HttpGet]
@@ -2261,8 +2732,30 @@ namespace Presentation_EcoAssist.Controllers
                     // Executa a operação
                     PRESTADOR_VEICULO item = Mapper.Map<PrestadorVeiculoViewModel, PRESTADOR_VEICULO>(vm);
                     Int32 volta = baseApp.ValidateCreateVeiculo(item);
+
+                    // Cria pastas
+                    String caminho = "/Imagens/1" + "/Veiculos/" + item.PRVE_CD_ID.ToString() + "/Fotos/";
+                    Directory.CreateDirectory(Server.MapPath(caminho));
+
+                    Session["IdPrestador"] = item.PRES_CD_ID;
+                    Session["IdVeiculo"] = item.PRVE_CD_ID;
+                    if (Session["FileQueueVeiculo"] != null)
+                    {
+                        List<FileQueue> fq = (List<FileQueue>)Session["FileQueueVeiculo"];
+
+                        foreach (var file in fq)
+                        {
+                            if (file.Profile == null)
+                            {
+                                UploadFotoQueueVeiculo(file);
+                            }
+                        }
+                        Session["FileQueueVeiculo"] = null;
+                    }
+
                     // Verifica retorno
-                    return RedirectToAction("VoltarAnexoPrestador");
+                    Session["IdVeiculo"] = item.PRVE_CD_ID;
+                    return RedirectToAction("VoltarVeiculo");
                 }
                 catch (Exception ex)
                 {

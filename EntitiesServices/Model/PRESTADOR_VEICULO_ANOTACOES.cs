@@ -19,6 +19,7 @@ namespace EntitiesServices.Model
         public System.DateTime PRVA_DT_ANOTACAO { get; set; }
         public int USUA_CD_ID { get; set; }
         public byte[] PRVA_TX_ANOTACAO { get; set; }
+        public string PRVA_TX_TEXTO { get; set; }
     
         public virtual PRESTADOR_VEICULO PRESTADOR_VEICULO { get; set; }
         public virtual USUARIO_SUGESTAO USUARIO_SUGESTAO { get; set; }

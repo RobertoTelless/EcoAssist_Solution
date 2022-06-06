@@ -30,6 +30,11 @@
                     <h5>Ajudante - Edição</h5>
                 </div>
                 <div class="ibox-content">
+                    <div class="form-group">
+                        <br />
+                        @Html.ButtonLinkIndex(text: "Dashboard", controller: "Prestador", action: "Voltar")
+                        @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarAnexoPrestador", controller: "Prestador")
+                    </div>
                     @Html.AntiForgeryToken()
                     @if (!ViewData.ModelState.IsValid)
                     {
@@ -38,81 +43,159 @@
                             @Html.ValidationSummary(false, "Erros de Crítica Encontrados:", new { @class = "text-danger" })
                         </div>
                     }
-                    <div class="row">
-                        @using (Html.BeginForm("EditarAjudante", "Prestador", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
-                        {
-                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                <div class="col-lg-3 col-md-3 col-xs-12">
-                                    @Html.HiddenFor(m => m.PRES_CD_ID)
-                                    @Html.HiddenFor(m => m.PRAJ_IN_ATIVO)
-                                    @Html.HiddenFor(m => m.PRAJ_CD_ID)
-                                    Nome
-                                    @Html.TextBoxFor(m => m.PRAJ_NM_NOME, new { @class = "form-control", autofocus = true })
-                                    @Html.ValidationMessageFor(m => m.PRAJ_NM_NOME, "", new { @style = "color:red" })
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-xs-12">
-                                    CPF
-                                    @Html.TextBoxFor(m => m.PRAJ_NR_CPF, new { @class = "form-control", @id = "cpf", autofocus = true })
-                                    @Html.ValidationMessageFor(m => m.PRAJ_NR_CPF, "", new { @style = "color:red" })
-                                </div>
-                            </div>
-                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
-                                <div class="col-lg-2 col-md-2 col-xs-12">
-                                    RG
-                                    @Html.TextBoxFor(m => m.PRAJ_NR_RG, new { @class = "form-control", autofocus = true })
-                                    @Html.ValidationMessageFor(m => m.PRAJ_NR_RG, "", new { @style = "color:red" })
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-xs-12">
-                                    Emissão
-                                    @Html.TextBoxFor(m => m.PRAJ_DT_RG_EMISSAO, "{0:dd/MM/yyyy}", new { @class = "form-control date-picker", autofocus = true, id = "data" })
-                                    @Html.ValidationMessageFor(m => m.PRAJ_DT_RG_EMISSAO, "", new { @style = "color:red" })
-                                </div>
-                                <div class="col-lg-3 col-md-3 col-xs-12">
-                                    Órgão Emissor
-                                    @Html.TextBoxFor(m => m.PRAJ_NM_RG_ORGAO_EMISSOR, new { @class = "form-control", autofocus = true })
-                                    @Html.ValidationMessageFor(m => m.PRAJ_NM_RG_ORGAO_EMISSOR, "", new { @style = "color:red" })
-                                </div>
-                                <div class="col-lg-2 col-md-2 col-xs-12">
-                                    UF
-                                    @Html.DropDownListFor(m => m.UF_CD_ID, (SelectList)ViewBag.UF, "Selecionar", new { @class = "form-control", autofocus = true })
-                                    @Html.ValidationMessageFor(m => m.UF_CD_ID, "", new { @style = "color:red" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.ButtonActionSubmit(text: "BtnSubmit", htmlAttributes: new { id = "submit", style = "display: none;" })
-                                <button class="btnSubmit btn btn-sm btn-success" id="basictoast" type="button">Confirma Edição de Ajudante</button>
-                                @Html.ButtonLinkIndex(text: "Voltar", action: "VoltarAnexoPrestador", controller: "Prestador")
-                            </div>
-                        }
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-lg-10 col-md-10 col-xs-12">   
-                            <div class="form-group">
-                                <h4>Fotografia</h4>
-                                @using (Html.BeginForm("UploadFotoAjudante", "Prestador", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @id="pwd-container3" }))
-                                {
-                                    <div class="col-lg-12 col-md-12 col-xs-12">
-                                        <input style="float: left; margin-right: 5px;" type="file" accept=".jpg, .png, .jpeg, .gif|images/*" name="file" id="file" class="btn btn-sm btn-warning"/>
-                                        <input style="float: left;" type="submit" value="Incluir Foto do Usuário" class="btn btn-sm btn-success" />
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12">
-                            <div class="form-group">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <br />
-                                    @if (!String.IsNullOrEmpty(Model.PARJ__AQ_FOTO))
-	                                {
-                                        <img src="@Url.Content(Model.PARJ__AQ_FOTO)" style = "width: auto; height: auto; max-height: 110px; max-width: 90px;">
-                                    }
-                                    else
+                    <div class="tabs-container">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab-1">Dados Gerais</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-2">Foto</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-7">Anotações</a></li>
+                        </ul>
+                        <div class="tab-content">
+
+                            @*Dados Gerais*@
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="panel-body">
+                                    @using (Html.BeginForm("EditarAjudante", "Prestador", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
                                     {
-                                        <img src="~/Images/gallery/10s.jpg" style = "width: auto; height: auto; max-height: 110px; max-width: 90px;">
+                                        <div class="row" style="width: 100%;">
+                                            <div class="col-lg-2 col-md-2 col-xs-12">
+                                                <div style="text-align: center; margin-top: 20px; line-height: 10px;">
+                                                    @Html.HiddenFor(m => m.PRES_CD_ID)
+                                                    @Html.HiddenFor(m => m.PRAJ_IN_ATIVO)
+                                                    @Html.HiddenFor(m => m.PRAJ_CD_ID)
+                                                    @if (!String.IsNullOrEmpty(Model.PARJ__AQ_FOTO))
+                                                    {
+                                                        <img src="@Url.Content(Model.PARJ__AQ_FOTO)" style="width: auto; height: auto; max-height: 110px; max-width: 90px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@Model.PRAJ_NM_NOME', '@Url.Content(Model.PARJ__AQ_FOTO)')">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Images/gallery/10s.jpg" style="width: auto; height: auto; max-height: 110px; max-width: 90px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@Model.PRAJ_NM_NOME', '/Images/gallery/10s.jpg')">
+                                                    }
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                    <div class="col-lg-3 col-md-3 col-xs-12">
+                                                        Nome
+                                                        @Html.TextBoxFor(m => m.PRAJ_NM_NOME, new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.PRAJ_NM_NOME, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        CPF
+                                                        @Html.TextBoxFor(m => m.PRAJ_NR_CPF, new { @class = "form-control", @id = "cpf", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.PRAJ_NR_CPF, "", new { @style = "color:red" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        RG
+                                                        @Html.TextBoxFor(m => m.PRAJ_NR_RG, new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.PRAJ_NR_RG, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        Emissão
+                                                        @Html.TextBoxFor(m => m.PRAJ_DT_RG_EMISSAO, "{0:dd/MM/yyyy}", new { @class = "form-control date-picker", autofocus = true, id = "data" })
+                                                        @Html.ValidationMessageFor(m => m.PRAJ_DT_RG_EMISSAO, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-xs-12">
+                                                        Órgão Emissor
+                                                        @Html.TextBoxFor(m => m.PRAJ_NM_RG_ORGAO_EMISSOR, new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.PRAJ_NM_RG_ORGAO_EMISSOR, "", new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 col-xs-12">
+                                                        UF
+                                                        @Html.DropDownListFor(m => m.UF_CD_ID, (SelectList)ViewBag.UF, "Selecionar", new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.UF_CD_ID, "", new { @style = "color:red" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.ButtonActionSubmit(text: "BtnSubmit", htmlAttributes: new { id = "submit", style = "display: none;" })
+                                            <button class="btnSubmit btn btn-sm btn-success" id="basictoast" type="button">Confirma Edição de Ajudante</button>
+                                        </div>          
                                     }
-                                </div>                       
+                                </div>
                             </div>
+
+                            @*Anexos*@
+                            <div id="tab-2" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-10 col-md-10 col-xs-12">   
+                                            <div class="form-group">
+                                                <h4>Fotografia</h4>
+                                                @using (Html.BeginForm("UploadFotoAjudante", "Prestador", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data", @id="pwd-container3" }))
+                                                {
+                                                    <div class="col-lg-12 col-md-12 col-xs-12">
+                                                        <input style="float: left; margin-right: 5px;" type="file" accept=".jpg, .png, .jpeg, .gif|images/*" name="file" id="file" class="btn btn-sm btn-warning"/>
+                                                        <input style="float: left;" type="submit" value="Incluir Foto do Ajudante" class="btn btn-sm btn-success" />
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-xs-12">
+                                            <div class="form-group">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <br />
+                                                    @if (!String.IsNullOrEmpty(Model.PARJ__AQ_FOTO))
+	                                                {
+                                                        <img src="@Url.Content(Model.PARJ__AQ_FOTO)" style = "width: auto; height: auto; max-height: 110px; max-width: 90px;">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Images/gallery/10s.jpg" style = "width: auto; height: auto; max-height: 110px; max-width: 90px;">
+                                                    }
+                                                </div>                       
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*Anotações*@
+                            <div id="tab-7" class="tab-pane">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <h4>Anotações</h4>
+                                            @if (Model.PRESTADOR_AJUDANTE_ANOTACOES.Count > 0)
+                                            {
+                                                foreach (var item in (Model.PRESTADOR_AJUDANTE_ANOTACOES).OrderByDescending(a => a.PRAA_DT_ANOTACAO))
+                                                {
+                                                    <div class="social-feed-box">
+                                                        <div class="social-avatar">
+                                                            <a href="" class="pull-left">
+                                                                <img src="@Url.Content(item.USUARIO_SUGESTAO.USUA_AQ_FOTO)" style="width: auto; height: auto; max-height: 110px; max-width: 90px;">
+                                                            </a>
+                                                            <div class="media-body">
+                                                                <a href="#">
+                                                                    @item.USUARIO_SUGESTAO.USUA_NM_NOME
+                                                                </a>
+                                                                <small class="text-muted">@item.PRAA_DT_ANOTACAO.ToString("dd/MM/yyyy HH:mm")</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="social-body">
+                                                            <p>
+                                                                @item.PRAA_TX_ANOTACAO
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        @Html.ButtonLinkIndex(text: "Incluir Nova Anotação", action: "IncluirAnotacaoAjudante", controller: "Prestador")
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -144,7 +227,7 @@
     <script src="~/Scripts/uploadAnexo.js"></script>
 
     <script>
-        SendFilesV2('imgAjudante', 'Prestador', 'UploadFileToSession');
+        SendFilesV2('imgAjudante', 'Prestador', 'UploadFileToSessionAjudante');
     </script>
     <script type="text/javascript">
         $(function () {

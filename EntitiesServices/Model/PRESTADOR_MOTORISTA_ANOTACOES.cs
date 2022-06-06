@@ -19,6 +19,7 @@ namespace EntitiesServices.Model
         public System.DateTime PRMA_DT_ANOTACAO { get; set; }
         public int USUA_CD_ID { get; set; }
         public byte[] PRMA_TX_ANOTACAO { get; set; }
+        public string PRMA_TX_TEXTO { get; set; }
     
         public virtual PRESTADOR_MOTORISTA PRESTADOR_MOTORISTA { get; set; }
         public virtual USUARIO_SUGESTAO USUARIO_SUGESTAO { get; set; }

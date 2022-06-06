@@ -34,7 +34,9 @@ namespace MvcMapping.Mappers
             CreateMap<PRESTADOR_MOTORISTA, PrestadorMotoristaViewModel>();
             CreateMap<PRESTADOR_REGIAO, PrestadorRegiaoViewModel>();
             CreateMap<PRESTADOR_VEICULO, PrestadorVeiculoViewModel>();
-
+            CreateMap<PRESTADOR_AJUDANTE_ANOTACOES, PrestadorAjudanteAnotacoesViewModel>();
+            CreateMap<PRESTADOR_MOTORISTA_ANOTACOES, PrestadorMotoristaAnotacoesViewModel>();
+            CreateMap<PRESTADOR_VEICULO_ANOTACOES, PrestadorVeiculoAnotacoesViewModel>();
         }
     }
 }

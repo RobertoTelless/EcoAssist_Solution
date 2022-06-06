@@ -606,7 +606,7 @@
                                                                     <td>@cond.PRDE_DT_EMISSAO.ToShortDateString()</td>
                                                                     <td>@cond.PRCE_DT_VALIDADE.ToShortDateString()</td>
                                                                     <td class="td-one-action">
-                                                                        @Html.TableLinkDetails(cond.PRCE_CD_ID, "EditarAjudante", "fa-edit", "Editar/Consultar")
+                                                                        @Html.TableLinkDetails(cond.PRCE_CD_ID, "EditarCertificado", "fa-edit", "Editar/Consultar")
                                                                         @if (cond.PRCE_IN_ATIVO == 1)
                                                                         {
                                                                             <span style="color: #337ab7; cursor:pointer;" alt="Desativar" class="tbl-link fa-lg fa fa-trash-o" onclick="ShowModalExcluir('/Prestador/ExcluirCertificado/@cond.PRCE_CD_ID')" title="Excluir"></span>
@@ -744,7 +744,7 @@
                                                         <thead style="background-color:lightsteelblue">
                                                             <tr>
                                                                 <th>Região</th>
-                                                                <th>Cidade</th>
+                                                                <th>Cobertura</th>
                                                                 <th>UF</th>
                                                                 <th>Preço Base (R$)</th>
                                                                 <th>Preço Máximo (R$)</th>
@@ -758,7 +758,7 @@
                                                             {
                                                                 <tr>
                                                                     <td>@cond.REGIAO.REGI_NM_NOME</td>
-                                                                    <td>@cond.REGIAO_COBERTURA.RECO_NM_CIDADE</td>
+                                                                    <td>@cond.REGIAO_COBERTURA.RECO_NM_NOME</td>
                                                                     <td>@cond.REGIAO_COBERTURA.UF.UF_SG_SIGLA</td>
                                                                     @if (cond.PRRE_VL_PRECO_BASE != null)
                                                                     {

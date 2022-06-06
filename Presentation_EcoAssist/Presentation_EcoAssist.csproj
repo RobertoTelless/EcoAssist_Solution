@@ -275,6 +275,9 @@
     <Compile Include="ViewModels\LogViewModel.cs" />
     <Compile Include="ViewModels\MensagemWidgetViewModel.cs" />
     <Compile Include="ViewModels\ModeloViewModel.cs" />
+    <Compile Include="ViewModels\PrestadorVeiculoAnotacoesViewModel.cs" />
+    <Compile Include="ViewModels\PrestadorMotoristaAnotacoesViewModel.cs" />
+    <Compile Include="ViewModels\PrestadorAjudanteAnotacoesViewModel.cs" />
     <Compile Include="ViewModels\PrestadorAnotacoesViewModel.cs" />
     <Compile Include="ViewModels\NoticiaComentarioViewModel.cs" />
     <Compile Include="ViewModels\NoticiaViewModel.cs" />
@@ -3067,6 +3070,9 @@
     <Content Include="Views\Prestador\IncluirRegiao.cshtml" />
     <Content Include="Views\Prestador\EditarVeiculo.cshtml" />
     <Content Include="Views\Prestador\IncluirVeiculo.cshtml" />
+    <Content Include="Views\Prestador\IncluirAnotacaoAjudante.cshtml" />
+    <Content Include="Views\Prestador\IncluirAnotacaoMotorista.cshtml" />
+    <Content Include="Views\Prestador\IncluirAnotacaoVeiculo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
