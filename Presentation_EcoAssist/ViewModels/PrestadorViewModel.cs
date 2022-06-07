@@ -44,7 +44,7 @@ namespace ERP_CRM_Solution.ViewModels
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public int PRES_NR_FUNCIONARIOS_TERCEIROS { get; set; }
         [DataType(DataType.Date, ErrorMessage = "Deve ser uma data válida")]
-        public System.DateTime PRES_DT_INICIO_ATIVIDADE { get; set; }
+        public Nullable<System.DateTime> PRES_DT_INICIO_ATIVIDADE { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
         public int PRES_NR_PROPRIA_CAMINHAO { get; set; }
         [RegularExpression(@"^[0-9]+([,.][0-9]+)?$", ErrorMessage = "Deve ser um valor numérico positivo")]
@@ -64,6 +64,7 @@ namespace ERP_CRM_Solution.ViewModels
         [StringLength(5000, ErrorMessage = "A OBSERVAÇÃO deve conter no máximo 5000 caracteres.")]
         public byte[] PRES_TX_OBSERVACOES { get; set; }
         public int PRES_IN_FLAG_ATIVO { get; set; }
+        public string PRES_TX_OBSERVACAO { get; set; }
 
         public bool Seguro
         {

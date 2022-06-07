@@ -41,7 +41,7 @@
 
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab-1">Dados Gerais</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab-2">Foto/Logo e Anexos</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-2">Anexos</a></li>
                             </ul>
 
                             <div class="tab-content">
@@ -49,7 +49,7 @@
                                 <div id="tab-1" class="tab-pane active">
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" id="PJ">
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     @Html.HiddenFor(m => m.PRES_DT_DATA_CADASTRO)
                                                     @Html.HiddenFor(m => m.PRES_IN_FLAG_ATIVO)
@@ -62,7 +62,7 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 col-md-4 col-xs-12" id="razao">
+                                                <div class="col-lg-4 col-md-4 col-xs-12">
                                                     Razão Social*
                                                     @Html.TextBoxFor(m => m.PRES_NM_RAZAO_SOCIAL, new { @class = "form-control", autofocus = true, id = "valRazao" })
                                                     @Html.ValidationMessageFor(m => m.PRES_NM_RAZAO_SOCIAL, "", new { @style = "color:red" })
@@ -73,7 +73,7 @@
                                                     @Html.ValidationMessageFor(m => m.PRES_NM_NOME, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px; display: none;" id="QS">
+                                            @*<div class="form-group" style=" margin-left: -15px; margin-right: -15px; display: none;" id="QS">
                                                 <div class="col-lg-12 col-md-12 col-xs-12">
                                                     <hr />
                                                     <h4>Quadro Societário</h4>
@@ -89,10 +89,10 @@
                                                         </tbody>
                                                     </table>
                                                 </div>
-                                            </div>
+                                            </div>*@
                                         </div>
                                         <div class="row">
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" id="PJ">
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Responsável*
                                                     @Html.TextBoxFor(m => m.PRES_NM_RESPONSAVEL, new { @class = "form-control", autofocus = true })
@@ -114,7 +114,7 @@
                                                     @Html.ValidationMessageFor(m => m.PRES_NR_USUARIO_PRIME, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" id="PJ">
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     E-Mail Principal*
                                                     @Html.TextBoxFor(m => m.PRES_EM_EMAIL_PRINCIPAL, new { @class = "form-control", autofocus = true })
@@ -141,7 +141,7 @@
                                                     @Html.ValidationMessageFor(m => m.PRES_NM_WEBSITE, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" id="PJ">
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Func. CLT
                                                     @Html.TextBoxFor(m => m.PRES_NR_FUNCIONARIOS_CLT, new { @class = "form-control", autofocus = true })
@@ -173,8 +173,8 @@
                                                     @Html.CheckBoxFor(m => m.Rastreamento, new { @class = "checkbox i-checks", autofocus = true })
                                                 </div>                                         
                                             </div>
-                                            <h5 style="color:green; font-weight:bold">Frota Própria ----------------------------------------------------------</h5>
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" id="PJ">
+                                            <h5 style="color:green; font-weight:bold">Frota Própria -----------------------------------------------------------------------------------------------</h5>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Caminhões
                                                     @Html.TextBoxFor(m => m.PRES_NR_PROPRIA_CAMINHAO, new { @class = "form-control", autofocus = true })
@@ -196,8 +196,8 @@
                                                     @Html.CheckBoxFor(m => m.SeguroProprio, new { @class = "checkbox i-checks", autofocus = true })
                                                 </div>                                         
                                             </div>
-                                            <h5 style="color:green; font-weight:bold">Frota Terceirizada ----------------------------------------------------------</h5>
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" id="PJ">
+                                            <h5 style="color:green; font-weight:bold">Frota Terceirizada -----------------------------------------------------------------------------------------------</h5>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Caminhões
                                                     @Html.TextBoxFor(m => m.PRES_NR_TERCEIRO_CAMINHAO, new { @class = "form-control", autofocus = true })
@@ -222,15 +222,15 @@
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-12 col-md-12 col-xs-12">
                                                     Observações
-                                                    @Html.TextAreaFor(m => m.PRES_TX_OBSERVACOES, new { @class = "form-control", style = "width: 100%; height: 100px;", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.PRES_TX_OBSERVACOES, "", new { @style = "color:red" })
+                                                    @Html.TextAreaFor(m => m.PRES_TX_OBSERVACAO, new { @class = "form-control", style = "width: 100%; height: 100px;", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PRES_TX_OBSERVACAO, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                    </div>                               
-                                </div>   
+                                    @*</div>                               
+                                </div>*@   
     
                                 @*Imagens - Foto e Anexos*@
                                 <div id="tab-2" class="tab-pane">
@@ -282,6 +282,7 @@
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/plugins/jasnyBootstrapStyles")
     @Styles.Render("~/plugins/toastrStyles")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
 }
 @section Scripts {
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
@@ -294,6 +295,7 @@
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/bundles/inputmask")
     @Scripts.Render("~/plugins/jasnyBootstrap")
+    @Scripts.Render("~/plugins/iCheck")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
     <script src="~/Scripts/uploadAnexo.js"></script>
 
@@ -365,6 +367,16 @@
                     $("#razao").hide();
                 }
             });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
         });
     </script>
     <script type="text/javascript">
@@ -495,7 +507,7 @@
     </script>
 
     <script>
-        SendFilesV2('imgFornecedor', 'Fornecedor', 'UploadFileToSession');
+        SendFilesV2('imgPrestador', 'Prestador', 'UploadFileToSession');
     </script>
 
     <script>

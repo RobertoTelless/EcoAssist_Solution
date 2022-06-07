@@ -14,14 +14,14 @@ namespace DataServices.Repositories
         public USUARIO_SUGESTAO GetByEmail(String email)
         {
             IQueryable<USUARIO_SUGESTAO> query = Db.USUARIO_SUGESTAO.Where(p => p.USUA_IN_ATIVO == 1);
-            query = query.Where(p => p.USUA_NM_EMAIL == email);
+            query = query.Where(p => p.USUA_EM_EMAIL == email);
             return query.FirstOrDefault();
         }
 
         public USUARIO_SUGESTAO GetByEmailOnly(String email)
         {
             IQueryable<USUARIO_SUGESTAO> query = Db.USUARIO_SUGESTAO.Where(p => p.USUA_IN_ATIVO == 1);
-            query = query.Where(p => p.USUA_NM_EMAIL == email);
+            query = query.Where(p => p.USUA_EM_EMAIL == email);
             return query.FirstOrDefault();
         }
 
@@ -128,7 +128,7 @@ namespace DataServices.Repositories
             IQueryable<USUARIO_SUGESTAO> query = Db.USUARIO_SUGESTAO;
             if (!String.IsNullOrEmpty(email))
             {
-                query = query.Where(p => p.USUA_NM_EMAIL == email);
+                query = query.Where(p => p.USUA_EM_EMAIL == email);
             }
             if (!String.IsNullOrEmpty(nome))
             {

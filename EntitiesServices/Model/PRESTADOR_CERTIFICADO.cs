@@ -17,8 +17,8 @@ namespace EntitiesServices.Model
         public int PRCE_CD_ID { get; set; }
         public int PRES_CD_ID { get; set; }
         public int TICE_CD_ID { get; set; }
-        public System.DateTime PRDE_DT_EMISSAO { get; set; }
-        public System.DateTime PRCE_DT_VALIDADE { get; set; }
+        public Nullable<System.DateTime> PRDE_DT_EMISSAO { get; set; }
+        public Nullable<System.DateTime> PRCE_DT_VALIDADE { get; set; }
         public string PRCE_AQ_ARQUIVO { get; set; }
         public int PRCE_IN_ATIVO { get; set; }
     

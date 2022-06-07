@@ -82,6 +82,7 @@ namespace Presentation.Start
             kernel.Bind<ICategoriaTelefoneAppService>().To<CategoriaTelefoneAppService>();
             kernel.Bind<IPrestadorAppService>().To<PrestadorAppService>();
             kernel.Bind<IPrestadorCnpjAppService>().To<PrestadorCnpjAppService>();
+            kernel.Bind<IDepartamentoAppService>().To<DepartamentoAppService>();
 
             kernel.Bind(typeof(IServiceBase<>)).To(typeof(ServiceBase<>));
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
@@ -97,6 +98,7 @@ namespace Presentation.Start
             kernel.Bind<ICategoriaTelefoneService>().To<CategoriaTelefoneService>();
             kernel.Bind<IPrestadorService>().To<PrestadorService>();
             kernel.Bind<IPrestadorCnpjService>().To<PrestadorCnpjService>();
+            kernel.Bind<IDepartamentoService>().To<DepartamentoService>();
 
             kernel.Bind(typeof(IRepositoryBase<>)).To(typeof(RepositoryBase<>));
             kernel.Bind<IConfiguracaoRepository>().To<ConfiguracaoRepository>();
@@ -137,7 +139,7 @@ namespace Presentation.Start
             kernel.Bind<IPrestadorContatoRepository>().To<PrestadorContatoRepository>();
             kernel.Bind<IPrestadorEnderecoRepository>().To<PrestadorEnderecoRepository>();
             kernel.Bind<IPrestadorMotoristaAnotacoesRepository>().To<IPrestadorMotoristaAnotacoesRepository>();
-            kernel.Bind<IPrestadorMotoristaRepository>().To<IPrestadorMotoristaRepository>();
+            kernel.Bind<IPrestadorMotoristaRepository>().To<PrestadorMotoristaRepository>();
             kernel.Bind<IPrestadorRegiaoRepository>().To<PrestadorRegiaoRepository>();
             kernel.Bind<IPrestadorRepository>().To<PrestadorRepository>();
             kernel.Bind<IPrestadorVeiculoAnotacoesRepository>().To<PrestadorVeiculoAnotacoesRepository>();
@@ -151,6 +153,8 @@ namespace Presentation.Start
             kernel.Bind<ITipoContaRepository>().To<TipoContaRepository>();
             kernel.Bind<ITipoVeiculoRepository>().To<TipoVeiculoRepository>();
             kernel.Bind<IVeiculoFuncaoRepository>().To<VeiculoFuncaoRepository>();
+            kernel.Bind<IDepartamentoRepository>().To<DepartamentoRepository>();
+
         }
     }
 }

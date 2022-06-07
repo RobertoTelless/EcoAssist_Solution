@@ -67,7 +67,7 @@
                             <li class=""><a data-toggle="tab" href="#tab-7">Anotações</a></li>
                             <li class=""><a data-toggle="tab" href="#tab-3">Endereços</a></li>
                             <li class=""><a data-toggle="tab" href="#tab-4">Contatos</a></li>
-                            <li class=""><a data-toggle="tab" href="#tab-7">Ajudantes</a></li>
+                            <li class=""><a data-toggle="tab" href="#tab-5">Ajudantes</a></li>
                             <li class=""><a data-toggle="tab" href="#tab-8">Bancos</a></li>
                             <li class=""><a data-toggle="tab" href="#tab-9">Certificados</a></li>
                             <li class=""><a data-toggle="tab" href="#tab-10">Motoristas</a></li>
@@ -82,6 +82,10 @@
                                 <div class="panel-body">
                                     @using (Html.BeginForm("EditarPrestador", "Prestador", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", @id = "pwd-container1" }))
                                     {
+                                        <div class="form-group">
+                                            @Html.ButtonActionSubmit(text: "Confirma edição de Prestador", htmlAttributes: new { id = "basictoast", style = "margin-bottom: -35px;" })
+                                        </div>
+                                        <br />
                                         <div class="row">
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" id="PJ">
                                                 <div class="col-lg-2 col-md-2 col-xs-12" style="color:green; font-weight:bold">
@@ -209,8 +213,8 @@
                                                     @Html.CheckBoxFor(m => m.Rastreamento, new { @class = "checkbox i-checks", autofocus = true })
                                                 </div>                                         
                                             </div>
-                                            <h5 style="color:green; font-weight:bold">Frota Própria ----------------------------------------------------------</h5>
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" id="PJ">
+                                            <h5 style="color:green; font-weight:bold">Frota Própria ----------------------------------------------------------------------------------------</h5>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Caminhões
                                                     @Html.TextBoxFor(m => m.PRES_NR_PROPRIA_CAMINHAO, new { @class = "form-control", autofocus = true })
@@ -226,15 +230,14 @@
                                                     @Html.TextBoxFor(m => m.PRES_NR_PROPRIA_MOTO, new { @class = "form-control", autofocus = true, @id="cel" })
                                                     @Html.ValidationMessageFor(m => m.PRES_NR_PROPRIA_MOTO, "", new { @style = "color:red" })
                                                 </div>
-                                                <div class="col-lg-2 col-md-2 col-xs-12">
-                                                <div class="col-lg-2 col-md-2 col-xs-12">
+                                                <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Seguro Frota Própria
                                                     <br />
                                                     @Html.CheckBoxFor(m => m.SeguroProprio, new { @class = "checkbox i-checks", autofocus = true })
                                                 </div>                                         
                                             </div>
-                                            <h5 style="color:green; font-weight:bold">Frota Terceirizada ----------------------------------------------------------</h5>
-                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;" id="PJ">
+                                            <h5 style="color:green; font-weight:bold">Frota Terceirizada -----------------------------------------------------------------------------------</h5>
+                                            <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     Caminhões
                                                     @Html.TextBoxFor(m => m.PRES_NR_TERCEIRO_CAMINHAO, new { @class = "form-control", autofocus = true })
@@ -251,7 +254,6 @@
                                                     @Html.ValidationMessageFor(m => m.PRES_NR_TERCEIRO_MOTO, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
-                                                <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Seguro Terceirizado
                                                     <br />
                                                     @Html.CheckBoxFor(m => m.TerceiroSeguro, new { @class = "checkbox i-checks", autofocus = true })
@@ -260,13 +262,11 @@
                                             <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
                                                 <div class="col-lg-12 col-md-12 col-xs-12">
                                                     Observações
-                                                    @Html.TextAreaFor(m => m.PRES_TX_OBSERVACOES, new { @class = "form-control", style = "width: 100%; height: 100px;", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.PRES_TX_OBSERVACOES, "", new { @style = "color:red" })
+                                                    @Html.TextAreaFor(m => m.PRES_TX_OBSERVACAO, new { @class = "form-control", style = "width: 100%; height: 100px;", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.PRES_TX_OBSERVACAO, "", new { @style = "color:red" })
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
                                         <div class="form-group">
                                             @Html.ButtonActionSubmit(text: "Confirma edição de Prestador", htmlAttributes: new { id = "basictoast", style = "margin-bottom: -35px;" })
                                         </div>
@@ -500,7 +500,7 @@
                             </div>
                         
                             @*Ajudantes*@
-                            <div id="tab-7" class="tab-pane">
+                            <div id="tab-5" class="tab-pane">
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="form-group" style=" margin-left: -15px; margin-right: -15px;">
@@ -593,6 +593,7 @@
                                                         <thead style="background-color:lightsteelblue">
                                                             <tr>
                                                                 <th>Tipo</th>
+                                                                <th>Nome</th>
                                                                 <th>Emissão</th>
                                                                 <th>Validade</th>
                                                                 <th class="td-one-action">Ações</th>
@@ -603,8 +604,9 @@
                                                             {
                                                                 <tr>
                                                                     <td>@cond.TIPO_CERTIFICADO.TICE_NM_NOME</td>
-                                                                    <td>@cond.PRDE_DT_EMISSAO.ToShortDateString()</td>
-                                                                    <td>@cond.PRCE_DT_VALIDADE.ToShortDateString()</td>
+                                                                    <td>@cond.PRCE_AQ_ARQUIVO</td>
+                                                                    <td>@cond.PRDE_DT_EMISSAO.Value.ToShortDateString()</td>
+                                                                    <td>@cond.PRCE_DT_VALIDADE.Value.ToShortDateString()</td>
                                                                     <td class="td-one-action">
                                                                         @Html.TableLinkDetails(cond.PRCE_CD_ID, "EditarCertificado", "fa-edit", "Editar/Consultar")
                                                                         @if (cond.PRCE_IN_ATIVO == 1)
@@ -812,7 +814,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        @Html.ButtonLinkIndex(text: "Incluir NovaRegiaoRegião", action: "IncluirMotorista", controller: "Prestador")
+                                        @Html.ButtonLinkIndex(text: "Incluir Nova Reagião", action: "IncluirRegiao", controller: "Prestador")
                                     </div>
                                 </div>
                             </div>
@@ -960,24 +962,45 @@
 
 
 @section Styles {
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
     <link href="~/Content/themes/base/all.css" rel="stylesheet" />
+    <link href="~/Content/jquery.datetimepicker.css" rel="stylesheet" />
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
     @Styles.Render("~/plugins/jasnyBootstrapStyles")
     @Styles.Render("~/plugins/toastrStyles")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
 }
 @section Scripts {
+    <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.datetimepicker"></script>
+
     @Scripts.Render("~/plugins/toastr")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     @Scripts.Render("~/plugins/dataTables")
     @Scripts.Render("~/bundles/inputmask")
     @Scripts.Render("~/plugins/jasnyBootstrap")
-    @Scripts.Render("~/plugins/sparkline")
+    @Scripts.Render("~/plugins/iCheck")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    <script src="~/Scripts/uploadAnexo.js"></script>
+
 
     <script>
         function mostrarDesc(desc) {
             $('#modalDescBody').html(desc);
             $('#modalDesc').modal('show');
         }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+
+        });
     </script>
     <script>
         $(function () {

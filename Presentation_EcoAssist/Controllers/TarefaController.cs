@@ -1382,7 +1382,7 @@ namespace ERP_CRM_Solution.Controllers
             vm.TAAC_DT_ACOMPANHAMENTO = DateTime.Now;
             vm.TAAC_IN_ATIVO = 1;
             vm.TARE_CD_ID = item.TARE_CD_ID;
-            vm.USUARIO = usuarioLogado;
+            vm.USUARIO_SUGESTAO = usuarioLogado;
             vm.USUA_CD_ID = usuarioLogado.USUA_CD_ID;
             return View(vm);
         }

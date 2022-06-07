@@ -47,7 +47,7 @@ namespace ERP_CRM_Solution.ViewModels
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREFA_NOTIFICACAO> TAREFA_NOTIFICACAO { get; set; }
         public virtual TIPO_TAREFA TIPO_TAREFA { get; set; }
-        public virtual USUARIO_SUGESTAO USUARIO { get; set; }
+        public virtual USUARIO_SUGESTAO USUARIO_SUGESTAO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAREFA_VINCULO> TAREFA_VINCULO { get; set; }
         public virtual PERIODICIDADE_TAREFA PERIODICIDADE_TAREFA { get; set; }

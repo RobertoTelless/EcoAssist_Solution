@@ -1305,7 +1305,7 @@
           <Property Name="PRES_IN_UNIFORME_ECOASSIST" Type="int" Nullable="false" />
           <Property Name="PRES_NR_FUNCIONARIOS_CLT" Type="int" Nullable="false" />
           <Property Name="PRES_NR_FUNCIONARIOS_TERCEIROS" Type="int" Nullable="false" />
-          <Property Name="PRES_DT_INICIO_ATIVIDADE" Type="date" Nullable="false" />
+          <Property Name="PRES_DT_INICIO_ATIVIDADE" Type="date" />
           <Property Name="PRES_NR_PROPRIA_CAMINHAO" Type="int" Nullable="false" />
           <Property Name="PRES_NR_PROPRIA_UTILITARIO" Type="int" Nullable="false" />
           <Property Name="PRES_NR_PROPRIA_MOTO" Type="int" Nullable="false" />
@@ -1318,6 +1318,7 @@
           <Property Name="PRES_DT_DATA_CADASTRO" Type="date" Nullable="false" />
           <Property Name="PRES_TX_OBSERVACOES" Type="image" />
           <Property Name="PRES_IN_FLAG_ATIVO" Type="int" Nullable="false" />
+          <Property Name="PRES_TX_OBSERVACAO" Type="text" />
         </EntityType>
         <EntityType Name="PRESTADOR_AJUDANTE">
           <Key>
@@ -1386,8 +1387,8 @@
           <Property Name="PRCE_CD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PRES_CD_ID" Type="int" Nullable="false" />
           <Property Name="TICE_CD_ID" Type="int" Nullable="false" />
-          <Property Name="PRDE_DT_EMISSAO" Type="date" Nullable="false" />
-          <Property Name="PRCE_DT_VALIDADE" Type="date" Nullable="false" />
+          <Property Name="PRDE_DT_EMISSAO" Type="date" />
+          <Property Name="PRCE_DT_VALIDADE" Type="date" />
           <Property Name="PRCE_AQ_ARQUIVO" Type="varchar" MaxLength="250" />
           <Property Name="PRCE_IN_ATIVO" Type="int" Nullable="false" />
         </EntityType>
@@ -1479,6 +1480,7 @@
           <Property Name="USUA_CD_ID" Type="int" Nullable="false" />
           <Property Name="PRMA_TX_ANOTACAO" Type="image" Nullable="false" />
           <Property Name="PRMA_TX_TEXTO" Type="text" Nullable="false" />
+          <Property Name="PRMA_TX_ANOTACOES" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="PRESTADOR_QUADRO_SOCIETARIO">
           <Key>
@@ -7410,7 +7412,7 @@
           <Property Name="PRES_IN_UNIFORME_ECOASSIST" Type="Int32" Nullable="false" />
           <Property Name="PRES_NR_FUNCIONARIOS_CLT" Type="Int32" Nullable="false" />
           <Property Name="PRES_NR_FUNCIONARIOS_TERCEIROS" Type="Int32" Nullable="false" />
-          <Property Name="PRES_DT_INICIO_ATIVIDADE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PRES_DT_INICIO_ATIVIDADE" Type="DateTime" Precision="0" />
           <Property Name="PRES_NR_PROPRIA_CAMINHAO" Type="Int32" Nullable="false" />
           <Property Name="PRES_NR_PROPRIA_UTILITARIO" Type="Int32" Nullable="false" />
           <Property Name="PRES_NR_PROPRIA_MOTO" Type="Int32" Nullable="false" />
@@ -7437,6 +7439,7 @@
           <NavigationProperty Name="PRESTADOR_MOTORISTA" Relationship="Self.FKPRESTADOR_830422" FromRole="PRESTADOR" ToRole="PRESTADOR_MOTORISTA" />
           <NavigationProperty Name="PRESTADOR_BANCO" Relationship="Self.FKPRESTADOR_880708" FromRole="PRESTADOR" ToRole="PRESTADOR_BANCO" />
           <NavigationProperty Name="PRESTADOR_QUADRO_SOCIETARIO" Relationship="DB_EcoBaseModel.FK_PRESTADOR_QUADRO_SOCIETARIO_PRESTADOR" FromRole="PRESTADOR" ToRole="PRESTADOR_QUADRO_SOCIETARIO" />
+          <Property Name="PRES_TX_OBSERVACAO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRESTADOR_AJUDANTE">
           <Key>
@@ -7517,8 +7520,8 @@
           <Property Name="PRCE_CD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PRES_CD_ID" Type="Int32" Nullable="false" />
           <Property Name="TICE_CD_ID" Type="Int32" Nullable="false" />
-          <Property Name="PRDE_DT_EMISSAO" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PRCE_DT_VALIDADE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PRDE_DT_EMISSAO" Type="DateTime" Precision="0" />
+          <Property Name="PRCE_DT_VALIDADE" Type="DateTime" Precision="0" />
           <Property Name="PRCE_AQ_ARQUIVO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="PRCE_IN_ATIVO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PRESTADOR" Relationship="Self.FKPRESTADOR_487732" FromRole="PRESTADOR_CERTIFICADO" ToRole="PRESTADOR" />
@@ -7628,6 +7631,7 @@
           <NavigationProperty Name="PRESTADOR_MOTORISTA" Relationship="Self.FKPRESTADOR_552750" FromRole="PRESTADOR_MOTORISTA_ANOTACOES" ToRole="PRESTADOR_MOTORISTA" />
           <NavigationProperty Name="USUARIO_SUGESTAO" Relationship="Self.FK_PRESTADOR_MOTORISTA_ANOTACOES_USUARIO_SUGESTAO" FromRole="PRESTADOR_MOTORISTA_ANOTACOES" ToRole="USUARIO_SUGESTAO" />
           <Property Name="PRMA_TX_TEXTO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PRMA_TX_ANOTACOES" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRESTADOR_REGIAO">
           <Key>
@@ -13521,6 +13525,7 @@
           <EntitySetMapping Name="PRESTADOR">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.PRESTADOR">
               <MappingFragment StoreEntitySet="PRESTADOR">
+                <ScalarProperty Name="PRES_TX_OBSERVACAO" ColumnName="PRES_TX_OBSERVACAO" />
                 <ScalarProperty Name="PRES_CD_ID" ColumnName="PRES_CD_ID" />
                 <ScalarProperty Name="PRES_NM_NOME" ColumnName="PRES_NM_NOME" />
                 <ScalarProperty Name="PRES_NM_RAZAO_SOCIAL" ColumnName="PRES_NM_RAZAO_SOCIAL" />
@@ -13718,6 +13723,7 @@
           <EntitySetMapping Name="PRESTADOR_MOTORISTA_ANOTACOES">
             <EntityTypeMapping TypeName="DB_EcoBaseModel.PRESTADOR_MOTORISTA_ANOTACOES">
               <MappingFragment StoreEntitySet="PRESTADOR_MOTORISTA_ANOTACOES">
+                <ScalarProperty Name="PRMA_TX_ANOTACOES" ColumnName="PRMA_TX_ANOTACOES" />
                 <ScalarProperty Name="PRMA_TX_TEXTO" ColumnName="PRMA_TX_TEXTO" />
                 <ScalarProperty Name="PRMA_CD_ID" ColumnName="PRMA_CD_ID" />
                 <ScalarProperty Name="PRMO_CD_ID" ColumnName="PRMO_CD_ID" />

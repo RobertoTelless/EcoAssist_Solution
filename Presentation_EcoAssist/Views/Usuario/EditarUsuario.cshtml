@@ -175,6 +175,7 @@
                                                     @Html.HiddenFor(m => m.USUA_NR_FALHAS)
                                                     @Html.HiddenFor(m => m.USUA_NR_TELEFONE)
                                                     @Html.HiddenFor(m => m.USUA_TX_OBSERVACOES)
+                                                    @Html.HiddenFor(m => m.CAUS_CD_ID)
                                                     @if (!String.IsNullOrEmpty(Model.USUA_AQ_FOTO))
                                                     {
                                                         <img src="@Url.Content(Model.USUA_AQ_FOTO)" style="width: auto; height: auto; max-height: 110px; max-width: 90px;" data-toggle="modal" data-target="#fotoModal" onclick="CriaModal('@Model.USUA_NM_NOME', '@Url.Content(Model.USUA_AQ_FOTO)')">
@@ -211,14 +212,15 @@
                                                         @Html.HiddenFor(m => m.USUA_NR_ACESSOS)
                                                         @Html.HiddenFor(m => m.USUA_NR_FALHAS)
                                                         @Html.HiddenFor(m => m.PERF_CD_ID)                                                        
+                                                        @Html.HiddenFor(m => m.CAUS_CD_ID)
                                                         Nome*
                                                         @Html.TextBoxFor(m => m.USUA_NM_NOME, new { @class = "form-control", autofocus = true })
                                                         @Html.ValidationMessageFor(m => m.USUA_NM_NOME, "", new { @style = "color:red" })
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-xs-12">
                                                         E-Mail*
-                                                        @Html.TextBoxFor(m => m.USUA_NM_EMAIL, new { @class = "form-control", autofocus = true })
-                                                        @Html.ValidationMessageFor(m => m.USUA_NM_EMAIL, "", new { @style = "color:red" })
+                                                        @Html.TextBoxFor(m => m.USUA_EM_EMAIL, new { @class = "form-control", autofocus = true })
+                                                        @Html.ValidationMessageFor(m => m.USUA_EM_EMAIL, "", new { @style = "color:red" })
                                                     </div>
                                                     <div class="col-lg-2 col-md-2 col-xs-12">
                                                         Login*
@@ -390,7 +392,7 @@
                                                     @Html.HiddenFor(m => m.USUA_IN_PROVISORIO)
                                                     @Html.HiddenFor(m => m.USUA_IN_SISTEMA)
                                                     @Html.HiddenFor(m => m.CARG_CD_ID)
-                                                    @Html.HiddenFor(m => m.USUA_NM_EMAIL)
+                                                    @Html.HiddenFor(m => m.USUA_EM_EMAIL)
                                                     @Html.HiddenFor(m => m.USUA_NM_LOGIN)
                                                     @Html.HiddenFor(m => m.USUA_NM_NOME)
                                                     @Html.HiddenFor(m => m.USUA_NM_NOVA_SENHA)
@@ -473,7 +475,7 @@
                                                     @Html.HiddenFor(m => m.USUA_IN_LOGIN_PROVISORIO)
                                                     @Html.HiddenFor(m => m.USUA_IN_PROVISORIO)
                                                     @Html.HiddenFor(m => m.USUA_IN_SISTEMA)
-                                                    @Html.HiddenFor(m => m.USUA_NM_EMAIL)
+                                                    @Html.HiddenFor(m => m.USUA_EM_EMAIL)
                                                     @Html.HiddenFor(m => m.USUA_NM_LOGIN)
                                                     @Html.HiddenFor(m => m.USUA_NM_NOME)
                                                     @Html.HiddenFor(m => m.USUA_NM_NOVA_SENHA)

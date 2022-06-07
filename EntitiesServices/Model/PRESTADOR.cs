@@ -50,7 +50,7 @@ namespace EntitiesServices.Model
         public int PRES_IN_UNIFORME_ECOASSIST { get; set; }
         public int PRES_NR_FUNCIONARIOS_CLT { get; set; }
         public int PRES_NR_FUNCIONARIOS_TERCEIROS { get; set; }
-        public System.DateTime PRES_DT_INICIO_ATIVIDADE { get; set; }
+        public Nullable<System.DateTime> PRES_DT_INICIO_ATIVIDADE { get; set; }
         public int PRES_NR_PROPRIA_CAMINHAO { get; set; }
         public int PRES_NR_PROPRIA_UTILITARIO { get; set; }
         public int PRES_NR_PROPRIA_MOTO { get; set; }
@@ -63,6 +63,7 @@ namespace EntitiesServices.Model
         public System.DateTime PRES_DT_DATA_CADASTRO { get; set; }
         public byte[] PRES_TX_OBSERVACOES { get; set; }
         public int PRES_IN_FLAG_ATIVO { get; set; }
+        public string PRES_TX_OBSERVACAO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONTA_PAGAR> CONTA_PAGAR { get; set; }

@@ -19,6 +19,7 @@ namespace ERP_CRM_Solution.ViewModels
         public byte[] PRMA_TX_ANOTACAO { get; set; }
         [StringLength(5000, MinimumLength = 1, ErrorMessage = "A ANOTAÇÃO deve conter no minimo 1 caracteres e no máximo 5000.")]
         public string PRMA_TX_TEXTO { get; set; }
+        public string PRMA_TX_ANOTACOES { get; set; }
 
         public virtual PRESTADOR_MOTORISTA PRESTADOR_MOTORISTA { get; set; }
         public virtual USUARIO_SUGESTAO USUARIO_SUGESTAO { get; set; }

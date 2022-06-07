@@ -129,6 +129,7 @@ namespace ERP_CRM_Solution.Controllers
             Int32 volta = baseApp.ValidateEdit(item, objetoAntes);
 
             NotificacaoViewModel vm = Mapper.Map<NOTIFICACAO, NotificacaoViewModel>(item);
+            vm.USUARIO = usuApp.GetItemById(vm.USUA_CD_ID);
             return View(vm);
         }
 
@@ -609,6 +610,7 @@ namespace ERP_CRM_Solution.Controllers
             Session["Notificacao"] = item;
             Session["IdVolta"] = id;
             NotificacaoViewModel vm = Mapper.Map<NOTIFICACAO, NotificacaoViewModel>(item);
+            vm.USUARIO = usuApp.GetItemById(vm.USUA_CD_ID);
             return View(vm);
         }
 

@@ -2626,8 +2626,8 @@ namespace Presentation_EcoAssist.Controllers
             }
             // Prepara view
             ViewBag.Tipo = new SelectList(baseApp.GetAllTipoVeiculo(), "TIVE_CD_ID", "TIVE_NM_NOME");
-            ViewBag.Marca = new SelectList(baseApp.GetAllMarcaVeiculo(), "MAVE_CD_ID", "MAVE_NM_CIDADE");
-            ViewBag.Modelo = new SelectList(baseApp.GetAllModeloVeiculo(), "MOVE_CD_ID", "MOVE_NM_CIDADE");
+            ViewBag.Marca = new SelectList(baseApp.GetAllMarcaVeiculo(), "MAVE_CD_ID", "MAVE_NM_NOME");
+            ViewBag.Modelo = new SelectList(baseApp.GetAllModeloVeiculo(), "MOVE_CD_ID", "MOVE_NM_NOME");
 
             PRESTADOR_VEICULO item = baseApp.GetVeiculoById(id);
             objetoAntes = (PRESTADOR)Session["Prestador"];
@@ -2640,8 +2640,8 @@ namespace Presentation_EcoAssist.Controllers
         public ActionResult EditarVeiculo(PrestadorVeiculoViewModel vm)
         {
             ViewBag.Tipo = new SelectList(baseApp.GetAllTipoVeiculo(), "TIVE_CD_ID", "TIVE_NM_NOME");
-            ViewBag.Marca = new SelectList(baseApp.GetAllMarcaVeiculo(), "MAVE_CD_ID", "MAVE_NM_CIDADE");
-            ViewBag.Modelo = new SelectList(baseApp.GetAllModeloVeiculo(), "MOVE_CD_ID", "MOVE_NM_CIDADE");
+            ViewBag.Marca = new SelectList(baseApp.GetAllMarcaVeiculo(), "MAVE_CD_ID", "MAVE_NM_NOME");
+            ViewBag.Modelo = new SelectList(baseApp.GetAllModeloVeiculo(), "MOVE_CD_ID", "MOVE_NM_NOME");
             if ((String)Session["Ativa"] == null)
             {
                 return RedirectToAction("Login", "ControleAcesso");
@@ -2708,8 +2708,8 @@ namespace Presentation_EcoAssist.Controllers
 
             // Prepara view
             ViewBag.Tipo = new SelectList(baseApp.GetAllTipoVeiculo(), "TIVE_CD_ID", "TIVE_NM_NOME");
-            ViewBag.Marca = new SelectList(baseApp.GetAllMarcaVeiculo(), "MAVE_CD_ID", "MAVE_NM_CIDADE");
-            ViewBag.Modelo = new SelectList(baseApp.GetAllModeloVeiculo(), "MOVE_CD_ID", "MOVE_NM_CIDADE");
+            ViewBag.Marca = new SelectList(baseApp.GetAllMarcaVeiculo(), "MAVE_CD_ID", "MAVE_NM_NOME");
+            ViewBag.Modelo = new SelectList(baseApp.GetAllModeloVeiculo(), "MOVE_CD_ID", "MOVE_NM_NOME");
 
             PRESTADOR_VEICULO item = new PRESTADOR_VEICULO();
             PrestadorVeiculoViewModel vm = Mapper.Map<PRESTADOR_VEICULO, PrestadorVeiculoViewModel>(item);
@@ -2723,8 +2723,8 @@ namespace Presentation_EcoAssist.Controllers
         public ActionResult IncluirVeiculo(PrestadorVeiculoViewModel vm)
         {
             ViewBag.Tipo = new SelectList(baseApp.GetAllTipoVeiculo(), "TIVE_CD_ID", "TIVE_NM_NOME");
-            ViewBag.Marca = new SelectList(baseApp.GetAllMarcaVeiculo(), "MAVE_CD_ID", "MAVE_NM_CIDADE");
-            ViewBag.Modelo = new SelectList(baseApp.GetAllModeloVeiculo(), "MOVE_CD_ID", "MOVE_NM_CIDADE");
+            ViewBag.Marca = new SelectList(baseApp.GetAllMarcaVeiculo(), "MAVE_CD_ID", "MAVE_NM_NOME");
+            ViewBag.Modelo = new SelectList(baseApp.GetAllModeloVeiculo(), "MOVE_CD_ID", "MOVE_NM_NOME");
             if (ModelState.IsValid)
             {
                 try

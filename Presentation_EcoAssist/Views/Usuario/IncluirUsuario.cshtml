@@ -59,6 +59,8 @@
                                                     @Html.HiddenFor(m => m.USUA_IN_PROVISORIO)
                                                     @Html.HiddenFor(m => m.USUA_NR_ACESSOS)
                                                     @Html.HiddenFor(m => m.USUA_NR_FALHAS)
+                                                    @Html.HiddenFor(m => m.USUA_NR_MATRICULA)
+                                                    @Html.HiddenFor(m => m.CAUS_CD_ID)
                                                     Perfil de Acesso*
                                                     @Html.DropDownListFor(m => m.PERF_CD_ID, (SelectList)ViewBag.Perfis, "Selecionar", new { @class = "form-control", autofocus = true, @style = "color:green; font-weight:bold"  })
                                                     @Html.ValidationMessageFor(m => m.PERF_CD_ID, "", new { @style = "color:red" })
@@ -77,8 +79,8 @@
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-xs-12">
                                                     E-Mail*
-                                                    @Html.TextBoxFor(m => m.USUA_NM_EMAIL, new { @class = "form-control", autofocus = true })
-                                                    @Html.ValidationMessageFor(m => m.USUA_NM_EMAIL, "", new { @style = "color:red" })
+                                                    @Html.TextBoxFor(m => m.USUA_EM_EMAIL, new { @class = "form-control", autofocus = true })
+                                                    @Html.ValidationMessageFor(m => m.USUA_EM_EMAIL, "", new { @style = "color:red" })
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-12">
                                                     Login*
@@ -365,7 +367,7 @@
     </script>
 
     <script>
-        SendFilesV2('imgUsuario', 'Administracao', 'UploadFileToSession');
+        SendFilesV2('imgUsuario', 'Usuario', 'UploadFileToSession');
     </script>
 
 

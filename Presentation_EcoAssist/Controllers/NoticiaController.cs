@@ -48,6 +48,7 @@ namespace ERP_CRM_Solution.Controllers
             NOTICIA item = new NOTICIA();
             NoticiaViewModel vm = Mapper.Map<NOTICIA, NoticiaViewModel>(item);
             return View(vm);
+
         }
 
         public ActionResult VerNoticia(Int32 id)
@@ -81,7 +82,7 @@ namespace ERP_CRM_Solution.Controllers
             vm.NOCO_DT_COMENTARIO = DateTime.Now;
             vm.NOCO_IN_ATIVO = 1;
             vm.NOTC_CD_ID = item.NOTC_CD_ID;
-            vm.USUARIO = usuarioLogado;
+            vm.USUARIO_SUGESTAO = usuarioLogado;
             vm.USUA_CD_ID = usuarioLogado.USUA_CD_ID;
             return View(vm);
         }

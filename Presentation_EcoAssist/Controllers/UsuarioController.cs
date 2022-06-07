@@ -366,6 +366,8 @@ namespace ERP_CRM_Solution.Controllers
             vm.USUA_IN_SISTEMA = 1;
             vm.USUA_NR_ACESSOS = 0;
             vm.USUA_NR_FALHAS = 0;
+            vm.USUA_NR_MATRICULA = "1";
+            vm.CAUS_CD_ID = 1;
             return View(vm);
         }
 

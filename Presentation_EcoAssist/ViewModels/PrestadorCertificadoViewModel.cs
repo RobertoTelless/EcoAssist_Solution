@@ -17,10 +17,10 @@ namespace ERP_CRM_Solution.ViewModels
         public int TICE_CD_ID { get; set; }
         [Required(ErrorMessage = "Campo DATA EMISSÃO obrigatorio")]
         [DataType(DataType.Date, ErrorMessage = "Deve ser uma data válida")]
-        public System.DateTime PRDE_DT_EMISSAO { get; set; }
+        public Nullable<System.DateTime> PRDE_DT_EMISSAO { get; set; }
         [Required(ErrorMessage = "Campo DATA DE VALIDADE obrigatorio")]
         [DataType(DataType.Date, ErrorMessage = "Deve ser uma data válida")]
-        public System.DateTime PRCE_DT_VALIDADE { get; set; }
+        public Nullable<System.DateTime> PRCE_DT_VALIDADE { get; set; }
         public string PRCE_AQ_ARQUIVO { get; set; }
         public int PRCE_IN_ATIVO { get; set; }
 

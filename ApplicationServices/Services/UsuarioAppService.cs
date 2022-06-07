@@ -105,13 +105,13 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica Email
-                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_NM_EMAIL))
+                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_EM_EMAIL))
                 {
                     return 2;
                 }
 
                 // Verifica existencia prévia
-                if (_usuarioService.GetByEmail(usuario.USUA_NM_EMAIL) != null)
+                if (_usuarioService.GetByEmail(usuario.USUA_EM_EMAIL) != null)
                 {
                     return 3;
                 }
@@ -167,13 +167,13 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica Email
-                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_NM_EMAIL))
+                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_EM_EMAIL))
                 {
                     return 2;
                 }
 
                 // Verifica existencia prévia
-                if (_usuarioService.GetByEmail(usuario.USUA_NM_EMAIL) != null)
+                if (_usuarioService.GetByEmail(usuario.USUA_EM_EMAIL) != null)
                 {
                     return 3;
                 }
@@ -229,7 +229,7 @@ namespace ApplicationServices.Services
                 }
 
                 // Verifica existencia prévia
-                USUARIO_SUGESTAO usu = _usuarioService.GetByEmail(usuario.USUA_NM_EMAIL);
+                USUARIO_SUGESTAO usu = _usuarioService.GetByEmail(usuario.USUA_EM_EMAIL);
                 if (usu != null)
                 {
                     if (usu.USUA_CD_ID != usuario.USUA_CD_ID)
@@ -277,7 +277,7 @@ namespace ApplicationServices.Services
             try
             {
                 // Verifica Email
-                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_NM_EMAIL))
+                if (!ValidarItensDiversos.IsValidEmail(usuario.USUA_EM_EMAIL))
                 {
                     return 1;
                 }
@@ -678,7 +678,7 @@ namespace ApplicationServices.Services
             mensagem.ASSUNTO = "Geração de Nova Senha";
             mensagem.CORPO = emailBody;
             mensagem.DEFAULT_CREDENTIALS = false;
-            mensagem.EMAIL_DESTINO = usuario.USUA_NM_EMAIL;
+            mensagem.EMAIL_DESTINO = usuario.USUA_EM_EMAIL;
             mensagem.EMAIL_EMISSOR = conf.CONF_NM_EMAIL_EMISSOO;
             mensagem.ENABLE_SSL = true;
             mensagem.NOME_EMISSOR = "Sistema";

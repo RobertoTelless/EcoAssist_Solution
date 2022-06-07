@@ -43,9 +43,9 @@
                             <div class="form-group">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <br />
-                                    @if (!String.IsNullOrEmpty(Model.USUARIO.USUA_AQ_FOTO))
+                                    @if (!String.IsNullOrEmpty(Model.USUARIO_SUGESTAO.USUA_AQ_FOTO))
 	                                {
-                                        <img src="@Url.Content(Model.USUARIO.USUA_AQ_FOTO)" style = "width: auto; height: auto; max-height: 110px; max-width: 90px;">
+                                        <img src="@Url.Content(Model.USUARIO_SUGESTAO.USUA_AQ_FOTO)" style = "width: auto; height: auto; max-height: 110px; max-width: 90px;">
                                     }
                                     else
                                     {
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-lg-5 col-md-5 col-sm-12">
                                         Nome 
-                                        @Html.TextBoxFor(m => m.USUARIO.USUA_NM_NOME, new { @class = "form-control", autofocus = true , @readonly="readonly"})
+                                        @Html.TextBoxFor(m => m.USUARIO_SUGESTAO.USUA_NM_NOME, new { @class = "form-control", autofocus = true , @readonly="readonly"})
                                     </div>
                                 </div>
                             </div>

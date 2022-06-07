@@ -164,6 +164,7 @@
     <Compile Include="Repositories\AgendaRepository.cs" />
     <Compile Include="Repositories\BancoRepository.cs" />
     <Compile Include="Repositories\CargoRepository.cs" />
+    <Compile Include="Repositories\DepartamentoRepository.cs" />
     <Compile Include="Repositories\ModeloVeiculoRepository.cs" />
     <Compile Include="Repositories\PrestadorCnpjRepository.cs" />
     <Compile Include="Repositories\RegiaoCoberturaRepository.cs" />
