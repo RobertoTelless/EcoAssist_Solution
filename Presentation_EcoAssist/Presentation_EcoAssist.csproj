@@ -632,7 +632,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagens\1\Ajudantes\3\Fotos\image_2021-04-08_13-28-54.png" />
+    <Content Include="Imagens\1\Motoristas\3\Fotos\Foto.jpg" />
+    <Content Include="Imagens\1\Noticias\1\Fotos\Foto.jpg" />
+    <Content Include="Imagens\1\Noticias\2\Fotos\Foto1.jpg" />
+    <Content Include="Imagens\1\Notificacao\3\Anexos\285455304_5493919060653293_5898573939608275531_n.jpg" />
+    <Content Include="Imagens\1\Tarefa\2\Anexos\Foto.jpg" />
     <Content Include="Imagens\1\Usuario\1\Fotos\FotoOficial_2.jpeg" />
+    <Content Include="Imagens\1\Usuario\3\Fotos\image_2021-04-08_13-28-54.png" />
+    <Content Include="Imagens\1\Usuario\4\Fotos\Foto.jpg" />
     <Content Include="Imagens\Base\FotoBase.jpg" />
     <Content Include="Imagens\Base\FotoOficial_2.jpeg" />
     <Content Include="Imagens\Base\icone_imagem.jpg" />
@@ -2026,6 +2034,12 @@
     <Content Include="Scripts\api\typehead_collection.json" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Imagens\1\Agenda\1\Anexos\dprag.pdf" />
+    <Content Include="Imagens\1\Notificacao\4\Anexos\CEE_PRAG.pdf" />
+    <Content Include="Imagens\1\Prestadores\5\Anexos\Medium_voltage_products %281%29.pdf" />
+    <Content Include="Imagens\1\Tarefa\1\Anexos\Medium_voltage_products.pdf" />
+    <Content Include="Imagens\1\Usuario\4\Anexos\NPAG.pdf" />
+    <None Include="Properties\PublishProfiles\EcoAssistWeb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\characterCount.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -3077,7 +3091,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
+    <Folder Include="Imagens\1\Agenda\2\Anexos\" />
+    <Folder Include="Imagens\1\Agenda\3\Anexos\" />
+    <Folder Include="Imagens\1\Agenda\4\Anexos\" />
+    <Folder Include="Imagens\1\Agenda\5\Anexos\" />
+    <Folder Include="Imagens\1\Notificacao\1\Anexos\" />
+    <Folder Include="Imagens\1\Notificacao\2\Anexos\" />
+    <Folder Include="Imagens\1\Prestadores\4\Anexos\" />
     <Folder Include="Imagens\1\Usuario\1\Anexos\" />
+    <Folder Include="Imagens\1\Usuario\3\Anexos\" />
+    <Folder Include="Imagens\1\Veiculos\4\Fotos\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
